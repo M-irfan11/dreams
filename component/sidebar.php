@@ -8,7 +8,7 @@
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>productlist.php">Product List</a></li>
+<li><a href="<?= $base_url ?>product/list.php">Product List</a></li>
 <li><a href="<?= $base_url ?>addproduct.php">Add Product</a></li>
 <li><a href="<?= $base_url ?>categories/list.php">Category</a></li>
 
