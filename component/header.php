@@ -1,5 +1,5 @@
 <?php
-$base_url = "http://localhost/heshebpro/";
+$base_url = "http://localhost/dreams/";
 ?>
 <link rel="stylesheet" href="<?= $base_url ?><?= $base_url ?>assets/css/style.css">
 
@@ -39,10 +39,10 @@ $base_url = "http://localhost/heshebpro/";
 
 <div class="header-left active">
 <a href="index.html" class="logo">
-<img src="<?= $base_url ?>assets/img/logo.png" alt="">
+    <img src="<?= $base_url ?>assets/img/logo.png" alt="">
 </a>
 <a href="index.html" class="logo-small">
-<img src="<?= $base_url ?>assets/img/logo-small.png" alt="">
+    <img src="<?= $base_url ?>assets/img/logo-small.png" alt="">
 </a>
 <a id="toggle_btn" href="javascript:void(0);">
 </a>
@@ -67,7 +67,7 @@ $base_url = "http://localhost/heshebpro/";
 <div class="searchinputs">
 <input type="text" placeholder="Search Here ...">
 <div class="search-addon">
-<span><img src="<?= $base_url ?>assets/img/icons/closes.svg" alt="img"></span>
+    <span><img src="<?= $base_url ?>assets/img/icons/closes.svg" alt="img"></span>
 </div>
 </div>
 <a class="btn" id="searchdiv"><img src="<?= $base_url ?>assets/img/icons/search.svg" alt="img"></a>
