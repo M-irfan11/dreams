@@ -1,6 +1,6 @@
 <?php
 require_once('../component/header.php');
-require_once('../component/header_auth.php');
+
 require_once('../component/sidebar.php');
 
 $customers = $crud->common_select("customers");

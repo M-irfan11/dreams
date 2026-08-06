@@ -1,6 +1,6 @@
 <?php
-require_once('../component/header_auth.php');
-require_once('../component/connection.php');
+
+require_once('component/connection.php');
 
 $id = $_GET['id'];
 
