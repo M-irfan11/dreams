@@ -1,9 +1,8 @@
 <?php
 
-require_once('component/header.php');
-require_once('component/sidebar.php');
 
-require_once('component/connection.php');
+
+require_once('../component/connection.php');
 
 if($_POST){
     $data = [
@@ -22,6 +21,8 @@ if($_POST){
         exit;
     }
 }
+require_once('../component/header.php');
+require_once('../component/sidebar.php');
 ?>
 
 <div class="page-wrapper">
@@ -80,4 +81,4 @@ if($_POST){
     </div>
 </div>
 
-<?php require_once('component/footer.php');?>
+<?php require_once('../component/footer.php');?>
