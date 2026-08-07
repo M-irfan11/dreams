@@ -1,5 +1,5 @@
 <?php require_once('component/header.php');?>
-<?php require_once('component/header_auth.php');?>
+
 <?php require_once('component/sidebar.php');?>
 
 <div class="page-wrapper">
