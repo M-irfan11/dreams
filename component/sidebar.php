@@ -69,8 +69,8 @@
 <li><a href="<?= $base_url ?>addcustomer.php">Add Customer </a></li>
 <li><a href="<?= $base_url ?>supplierlist.php">Supplier List</a></li>
 <li><a href="<?= $base_url ?>addsupplier.php">Add Supplier </a></li>
-<li><a href="<?= $base_url ?>userlist.php">User List</a></li>
-<li><a href="<?= $base_url ?>adduser.php">Add User</a></li>
+<li><a href="<?= $base_url ?>users/list.php">User List</a></li>
+<li><a href="<?= $base_url ?>users/add.php">Add User</a></li>
 <li><a href="<?= $base_url ?>storelist.php">Store List</a></li>
 <li><a href="<?= $base_url ?>addstore.php">Add Store</a></li>
 </ul>
@@ -187,8 +187,8 @@
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>newuser.php">New User </a></li>
-<li><a href="<?= $base_url ?>userlists.php">Users List</a></li>
+
+<li><a href="<?= $base_url ?>users/list.php">Users List</a></li>
 </ul>
 </li>
 <li class="submenu">
