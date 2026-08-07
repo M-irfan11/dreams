@@ -9,7 +9,7 @@
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>product/list.php">Product List</a></li>
-<li><a href="<?= $base_url ?>addproduct.php">Add Product</a></li>
+
 <li><a href="<?= $base_url ?>categories/list.php">Category</a></li>
 
 </ul>
@@ -18,8 +18,6 @@
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/sales1.svg" alt="img"><span> Sales</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>saleslist.php">Sales List</a></li>
-<li><a href="<?= $base_url ?>pos.php">POS</a></li>
-<li><a href="<?= $base_url ?>pos.php">New Sales</a></li>
 <li><a href="<?= $base_url ?>salesreturnlists.php">Sales Return List</a></li>
 <li><a href="<?= $base_url ?>createsalesreturns.php">New Sales Return</a></li>
 </ul>
@@ -29,7 +27,7 @@
 <ul>
 <li><a href="<?= $base_url ?>purchaselist.php">Purchase List</a></li>
 <li><a href="<?= $base_url ?>addpurchase.php">Add Purchase</a></li>
-<li><a href="<?= $base_url ?>importpurchase.php">Import Purchase</a></li>
+
 </ul>
 </li>
 <li class="submenu">
@@ -44,7 +42,7 @@
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/quotation1.svg" alt="img"><span> Customer</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>customer/list.php">Customer List</a></li>
- <li><a href="<?= $base_url ?>addquotation.php">Add Quotation</a></li>
+ <li><a href="<?= $base_url ?>supplier/list.php">Supplier</a></li>
 </ul>
 </li>
 <li class="submenu">
