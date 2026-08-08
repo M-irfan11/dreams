@@ -1,8 +1,8 @@
 <?php
 require_once('../component/header.php');
-require_once('../component/header_auth.php');
+
 require_once('../component/sidebar.php');
-require_once('../component/connection.php');
+
 
 $categories = $crud->common_select("categories");
 ?>
