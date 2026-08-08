@@ -84,7 +84,7 @@
 </ul>
 </li>
 <li>
-<a href="<?= $base_url ?>components.php"><i data-feather="layers"></i><span> Components</span> </a>
+<a href="<?= $base_url ?>warehouse/list.php"><i data-feather="layers"></i><span> warehouse</span> </a>
 </li>
 <li>
 <a href="<?= $base_url ?>blankpage.php"><i data-feather="file"></i><span> Blank Page</span> </a>
