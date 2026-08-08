@@ -56,12 +56,13 @@ class crud_class{
         }
 
         $rs = $this->conn->query($sql);
-        if($rs->num_rows > 0){
-            $result["status"] = true;
-            $result["message"] = "Records found";
-            while($row = $rs->fetch_object()){
-                $result["data"][] = $row;
-            }
+
+if($rs === false){
+    $result["message"] = "SQL Error: " . $this->conn->error;
+    return $result;
+}
+
+if($rs->num_rows > 0){
             return $result; 
         } else {
             $result["message"] = "No records found";
