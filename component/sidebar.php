@@ -33,10 +33,10 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="box"></i> <span>stocks</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="box"></i> <span>Stocks</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>stock/list.php">stock list</a></li>
-<li><a href="<?= $base_url ?>stock_transfer/list.php">stock_transfer</a></li>
+<li><a href="<?= $base_url ?>stock/list.php">Stock list</a></li>
+<li><a href="<?= $base_url ?>stock_transfer/list.php">Stock Transfer</a></li>
 
 </ul>
 </li>
