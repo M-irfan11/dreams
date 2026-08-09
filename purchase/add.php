@@ -75,7 +75,7 @@ $products   = $product_result["data"] ?? [];
              PURCHASE FORM
         ====================================================== -->
 
-        <form action="store.php" method="POST" id="purchaseForm">
+       <form action="<?php echo $base_url; ?>purchase/store.php" method="POST">
 
             <div class="card">
 
@@ -131,9 +131,6 @@ $products   = $product_result["data"] ?? [];
                         </div>
 
 
-                        <!-- ==============================
-                             SUPPLIER
-                        =============================== -->
 
                         <div class="col-lg-4 col-sm-6 col-12">
 
@@ -179,9 +176,7 @@ $products   = $product_result["data"] ?? [];
                         </div>
 
 
-                        <!-- ==============================
-                             PURCHASE DATE
-                        =============================== -->
+                       
 
                         <div class="col-lg-4 col-sm-6 col-12">
 
@@ -205,9 +200,7 @@ $products   = $product_result["data"] ?? [];
                         </div>
 
 
-                        <!-- ==============================
-                             REFERENCE
-                        =============================== -->
+                        
 
                         <div class="col-lg-4 col-sm-6 col-12">
 
@@ -233,9 +226,7 @@ $products   = $product_result["data"] ?? [];
             </div>
 
 
-            <!-- =====================================================
-                 PRODUCT TABLE
-            ====================================================== -->
+         
 
             <div class="card">
 
@@ -337,7 +328,7 @@ $products   = $product_result["data"] ?? [];
                                     </td>
 
 
-                                    <!-- QUANTITY -->
+                                
 
                                     <td>
 
@@ -354,7 +345,7 @@ $products   = $product_result["data"] ?? [];
                                     </td>
 
 
-                                    <!-- PURCHASE PRICE -->
+                                   
 
                                     <td>
 
@@ -371,7 +362,6 @@ $products   = $product_result["data"] ?? [];
                                     </td>
 
 
-                                    <!-- SUBTOTAL -->
 
                                     <td>
 
@@ -386,7 +376,7 @@ $products   = $product_result["data"] ?? [];
                                     </td>
 
 
-                                    <!-- REMOVE -->
+                                   
 
                                     <td class="text-center">
 
@@ -408,7 +398,6 @@ $products   = $product_result["data"] ?? [];
                     </div>
 
 
-                    <!-- ADD PRODUCT -->
 
                     <button
                         type="button"
@@ -424,9 +413,7 @@ $products   = $product_result["data"] ?? [];
             </div>
 
 
-            <!-- =====================================================
-                 TOTAL SECTION
-            ====================================================== -->
+          
 
             <div class="card">
 
@@ -462,7 +449,7 @@ $products   = $product_result["data"] ?? [];
                             </div>
 
 
-                            <!-- DISCOUNT TYPE -->
+                         
 
                             <div class="form-group row">
 
@@ -962,11 +949,7 @@ document.addEventListener("DOMContentLoaded", function () {
     calculateTotal();
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Form Validation
-    |--------------------------------------------------------------------------
-    */
+
 
     document
         .getElementById("purchaseForm")
