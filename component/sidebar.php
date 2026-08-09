@@ -17,7 +17,8 @@
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/sales1.svg" alt="img"><span> Sales</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>saleslist.php">Sales List</a></li>
+<li><a href="<?= $base_url ?>sales/list.php">Sales List</a></li>
+<li><a href="<?= $base_url ?>sales/create.php">Add Sale</a></li>
 <li><a href="<?= $base_url ?>salesreturnlists.php">Sales Return List</a></li>
 <li><a href="<?= $base_url ?>createsalesreturns.php">New Sales Return</a></li>
 </ul>
