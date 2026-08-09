@@ -99,6 +99,9 @@
 <li>
 <a href="<?= $base_url ?>blankpage.php"><i data-feather="file"></i><span> Blank Page</span> </a>
 </li>
+<li>
+<a href="<?= $base_url ?>payment/list.php"><i data-feather="layers"></i><span> payment</span> </a>
+</li>
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><i data-feather="alert-octagon"></i> <span> Error Pages </span> <span class="menu-arrow"></span></a>
 <ul>
