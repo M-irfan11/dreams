@@ -27,7 +27,16 @@
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/purchase1.svg" alt="img"><span> Purchase</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>purchase/list.php">Purchase List</a></li>
+<li><a href="<?= $base_url ?>supplier/list.php">Supplier</a></li>
 <li><a href="<?= $base_url ?>addpurchase.php">Add Purchase</a></li>
+
+</ul>
+</li>
+<li class="submenu">
+<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="box"></i> <span>stocks</span> <span class="menu-arrow"></span></a>
+<ul>
+<li><a href="<?= $base_url ?>stock/list.php">stock list</a></li>
+<li><a href="<?= $base_url ?>stock_transfer/list.php">stock_transfer</a></li>
 
 </ul>
 </li>
@@ -43,7 +52,7 @@
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/quotation1.svg" alt="img"><span> Customer</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>customer/list.php">Customer List</a></li>
- <li><a href="<?= $base_url ?>supplier/list.php">Supplier</a></li>
+ 
 </ul>
 </li>
 <li class="submenu">
@@ -97,29 +106,7 @@
 <li><a href="<?= $base_url ?>error-500.php">500 Error </a></li>
 </ul>
 </li>
-<li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="box"></i> <span>Elements </span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>sweetalerts.php">Sweet Alerts</a></li>
-<li><a href="<?= $base_url ?>tooltip.php">Tooltip</a></li>
-<li><a href="<?= $base_url ?>popover.php">Popover</a></li>
-<li><a href="<?= $base_url ?>ribbon.php">Ribbon</a></li>
-<li><a href="<?= $base_url ?>clipboard.php">Clipboard</a></li>
-<li><a href="<?= $base_url ?>drag-drop.php">Drag & Drop</a></li>
-<li><a href="<?= $base_url ?>rangeslider.php">Range Slider</a></li>
-<li><a href="<?= $base_url ?>rating.php">Rating</a></li>
-<li><a href="<?= $base_url ?>toastr.php">Toastr</a></li>
-<li><a href="<?= $base_url ?>text-editor.php">Text Editor</a></li>
-<li><a href="<?= $base_url ?>counter.php">Counter</a></li>
-<li><a href="<?= $base_url ?>scrollbar.php">Scrollbar</a></li>
-<li><a href="<?= $base_url ?>spinner.php">Spinner</a></li>
-<li><a href="<?= $base_url ?>notification.php">Notification</a></li>
-<li><a href="<?= $base_url ?>lightbox.php">Lightbox</a></li>
-<li><a href="<?= $base_url ?>stickynote.php">Sticky Note</a></li>
-<li><a href="<?= $base_url ?>timeline.php">Timeline</a></li>
-<li><a href="<?= $base_url ?>form-wizard.php">Form Wizard</a></li>
-</ul>
-</li>
+
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><i data-feather="bar-chart-2"></i> <span> Charts </span> <span class="menu-arrow"></span></a>
 <ul>
