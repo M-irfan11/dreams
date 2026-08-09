@@ -1,494 +1,194 @@
 <?php
 
-class crud_class
-{
+class crud_class{
+    
     private $host = "localhost";
     private $username = "root";
     private $password = "";
     private $database = "dreams";
-
     public $conn;
 
-
-    /* =========================================================
-       DATABASE CONNECTION
-       ========================================================= */
-
-    public function __construct()
-    {
-        $this->conn = new mysqli(
-            $this->host,
-            $this->username,
-            $this->password,
-            $this->database
-        );
-
-        if ($this->conn->connect_error) {
+    public function __construct(){
+        $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database);
+        if($this->conn->connect_error){
             die("Connection failed: " . $this->conn->connect_error);
         }
-
-        // Set UTF-8
-        $this->conn->set_charset("utf8mb4");
     }
 
-
-    /* =========================================================
-       SELECT
-       ========================================================= */
-
-    public function common_select(
-        $table,
-        $columns = "*",
-        $where = [],
-        $where_condition = "AND",
-        $order_by = "",
-        $sort_order = "ASC",
-        $limit = "",
-        $offset = ""
-    ) {
-        $result = [
-            "status" => false,
-            "data" => [],
-            "message" => ""
+    public function common_select($table, $columns = "*", $where = [],$where_condition = "AND", $order_by = "",
+        $sort_order = "ASC",$limit = "",$offset = ""){
+        $result=[
+            "status"=>false,
+            "data"=>[],
+            "message"=>""
         ];
-
+    
         $sql = "SELECT $columns FROM $table";
-
-
-        /* ---------- WHERE ---------- */
-
-        if (!empty($where)) {
-
+        //$where=[id=>1, name=>'John'];
+        if(!empty($where)){
             $where_clauses = [];
-
-            foreach ($where as $column => $value) {
-
-                $escaped_value = $this->conn->real_escape_string($value);
-
-                $where_clauses[] =
-                    "$table.$column = '$escaped_value'";
+            foreach($where as $column => $value){
+                $where_clauses[] = "$table" . "." . "$column = '" . $this->conn->real_escape_string($value) . "'";
+                //$where_clauses[] = "id='1'"
+                //$where_clauses[] = "name='kamal'"
             }
 
-            $sql .= " WHERE " . implode(
-                " $where_condition ",
-                $where_clauses
-            );
+            $sql .= " WHERE " . implode(" $where_condition ", $where_clauses);
+            $sql .= " AND deleted_at IS NULL";
+            // "SELECT * FROM users WHERE id='1' AND name='kamal'" and deleted_at IS NULL
+        }else{
+            $sql .= " WHERE deleted_at IS NULL";
         }
+        
 
-
-        /* ---------- ORDER BY ---------- */
-
-        if (!empty($order_by)) {
-
-            $sort_order = strtoupper($sort_order);
-
-            if ($sort_order !== "ASC" && $sort_order !== "DESC") {
-                $sort_order = "ASC";
-            }
-
+        if(!empty($order_by)){
             $sql .= " ORDER BY $order_by $sort_order";
+             // "SELECT * FROM users WHERE id='1' AND name='kamal' ORDER BY name ASC"
         }
 
-
-        /* ---------- LIMIT ---------- */
-
-        if ($limit !== "" && is_numeric($limit)) {
-
-            $sql .= " LIMIT " . (int)$limit;
-
-            if ($offset !== "" && is_numeric($offset)) {
-                $sql .= " OFFSET " . (int)$offset;
+        if(!empty($limit)){
+            $sql .= " LIMIT $limit";
+            if(!empty($offset)){
+                $sql .= " OFFSET $offset";
             }
+
+            // "SELECT * FROM users WHERE id='1' AND name='kamal' ORDER BY name ASC LIMIT 10 OFFSET 5"
         }
-
-
-        /* ---------- EXECUTE QUERY ---------- */
 
         $rs = $this->conn->query($sql);
-
-
-        if ($rs === false) {
-
-            $result["message"] =
-                "SQL Error: " . $this->conn->error;
-
-            return $result;
-        }
-
-
-        /* ---------- FETCH DATA ---------- */
-
-        if ($rs->num_rows > 0) {
-
-            while ($row = $rs->fetch_object()) {
-
-                $result["data"][] = $row;
-            }
-
+        if($rs->num_rows > 0){
             $result["status"] = true;
             $result["message"] = "Records found";
-
+            while($row = $rs->fetch_object()){
+                $result["data"][] = $row;
+            }
+            return $result; 
         } else {
-
             $result["message"] = "No records found";
+            return $result;
         }
-
-
-        return $result;
     }
 
-
-    /* =========================================================
-       NUMBER OF RECORDS
-       ========================================================= */
-
-    public function number_of_records($table)
-    {
-        $sql = "SELECT COUNT(*) AS total FROM $table";
-
+    public function number_of_records($table){
+        $sql = "SELECT COUNT(*) as total FROM $table";
         $rs = $this->conn->query($sql);
-
-        if ($rs === false) {
+        if($rs->num_rows > 0){
+            $row = $rs->fetch_object();
+            return $row->total;
+        } else {
             return 0;
         }
-
-        if ($rs->num_rows > 0) {
-
-            $row = $rs->fetch_object();
-
-            return $row->total;
-        }
-
-        return 0;
     }
 
-
-    /* =========================================================
-       CUSTOM QUERY
-       ========================================================= */
-
-    public function common_query(
-        $sql,
-        $limit = "",
-        $offset = ""
-    ) {
-        $result = [
-            "status" => false,
-            "data" => [],
-            "message" => ""
+    public function common_query($sql){
+        $result=[
+            "status"=>false,
+            "data"=>[],
+            "message"=>""
         ];
-
-
-        /* ---------- LIMIT ---------- */
-
-        if ($limit !== "" && is_numeric($limit)) {
-
-            $sql .= " LIMIT " . (int)$limit;
-
-            if ($offset !== "" && is_numeric($offset)) {
-
-                $sql .= " OFFSET " . (int)$offset;
-            }
-        }
-
-
-        /* ---------- EXECUTE ---------- */
 
         $rs = $this->conn->query($sql);
 
-
-        if ($rs === false) {
-
-            $result["message"] =
-                "SQL Error: " . $this->conn->error;
-
-            return $result;
-        }
-
-
-        /* ---------- FETCH DATA ---------- */
-
-        if ($rs->num_rows > 0) {
-
-            while ($row = $rs->fetch_object()) {
-
-                $result["data"][] = $row;
-            }
-
+        if($rs->num_rows > 0){
             $result["status"] = true;
             $result["message"] = "Records found";
-
+            while($row = $rs->fetch_object()){
+                $result["data"][] = $row;
+            }
+            return $result; 
         } else {
-
             $result["message"] = "No records found";
-        }
-
-
-        return $result;
-    }
-
-
-    /* =========================================================
-       INSERT
-       ========================================================= */
-
-    public function common_insert($table, $data)
-    {
-        $result = [
-            "status" => false,
-            "data" => [],
-            "message" => ""
-        ];
-
-
-        if (empty($data)) {
-
-            $result["message"] = "No data provided";
-
             return $result;
         }
+        
+    }
 
+    public function common_insert($table, $data){
+        $result=[
+            "status"=>false,
+            "data"=>[],
+            "message"=>""
+        ];
 
-        /* ---------- COLUMNS ---------- */
-
-        $columns = implode(
-            ", ",
-            array_keys($data)
-        );
-
-
-        /* ---------- VALUES ---------- */
-
-        $values_array = [];
-
-        foreach ($data as $value) {
-
-            $values_array[] =
-                "'" .
-                $this->conn->real_escape_string($value) .
-                "'";
-        }
-
-
-        $values = implode(
-            ", ",
-            $values_array
-        );
-
-
-        /* ---------- QUERY ---------- */
-
-        $sql =
-            "INSERT INTO $table ($columns)
-             VALUES ($values)";
-
-
-        /* ---------- EXECUTE ---------- */
-
-        if ($this->conn->query($sql)) {
-
+        $columns = implode(", ", array_keys($data));
+        $values = implode("', '", array_map([$this->conn, 'real_escape_string'], array_values($data)));
+        $sql = "INSERT INTO $table ($columns) VALUES ('$values')";
+        echo $sql; // Debugging line to check the generated SQL query
+        if($this->conn->query($sql)){
             $result["status"] = true;
-
-            $result["data"] =
-                $this->conn->insert_id;
-
-            $result["message"] =
-                "Record inserted successfully";
-
+            $result["data"] = $this->conn->insert_id;
+            $result["message"] = "Record inserted successfully";
+            return $result;
         } else {
-
-            $result["message"] =
-                "Error: " . $this->conn->error;
+            $result["message"] = "Error: " . $this->conn->error;
+            return $result;
         }
-
-
-        return $result;
     }
 
 
-    /* =========================================================
-       UPDATE
-       ========================================================= */
-
-    public function common_update(
-        $table,
-        $data,
-        $where = [],
-        $where_condition = "AND"
-    ) {
-        $result = [
-            "status" => false,
-            "data" => [],
-            "message" => ""
+    public function common_update($table, $data, $where = [], $where_condition = "AND"){
+        $result=[
+            "status"=>false,
+            "data"=>[],
+            "message"=>""
         ];
-
-
-        if (empty($data)) {
-
-            $result["message"] =
-                "No data provided";
-
-            return $result;
-        }
-
-
-        /* ---------- SET ---------- */
-
+       
+        
+        $sql = "UPDATE $table SET ";
         $set_clauses = [];
-
-        foreach ($data as $column => $value) {
-
-            $escaped_value =
-                $this->conn->real_escape_string($value);
-
-            $set_clauses[] =
-                "$column = '$escaped_value'";
+        foreach($data as $column => $value){
+            $set_clauses[] = "$column = '$value'";
         }
+        $sql .= implode(", ", $set_clauses);
 
-
-        $sql =
-            "UPDATE $table SET " .
-            implode(", ", $set_clauses);
-
-
-        /* ---------- WHERE ---------- */
-
-        if (!empty($where)) {
-
+        if(!empty($where)){
             $where_clauses = [];
-
-            foreach ($where as $column => $value) {
-
-                $escaped_value =
-                    $this->conn->real_escape_string($value);
-
-                $where_clauses[] =
-                    "$column = '$escaped_value'";
+            foreach($where as $column => $value){
+                $where_clauses[] = "$column = '" . $this->conn->real_escape_string($value) . "'";
             }
-
-            $sql .=
-                " WHERE " .
-                implode(
-                    " $where_condition ",
-                    $where_clauses
-                );
+            $sql .= " WHERE " . implode(" $where_condition ", $where_clauses);
         }
-
-
-        /* ---------- EXECUTE ---------- */
-
-        if ($this->conn->query($sql)) {
-
+        if($this->conn->query($sql)){
             $result["status"] = true;
-
-            $result["data"] =
-                $this->conn->affected_rows;
-
-            $result["message"] =
-                "Record updated successfully";
-
+            $result["data"] = $this->conn->affected_rows;
+            $result["message"] = "Record updated successfully";
+            return $result;
         } else {
-
-            $result["message"] =
-                "Error: " . $this->conn->error;
-        }
-
-
-        return $result;
-    }
-
-
-    /* =========================================================
-       DELETE
-       ========================================================= */
-
-    public function common_delete(
-        $table,
-        $where = [],
-        $where_condition = "AND"
-    ) {
-        $result = [
-            "status" => false,
-            "data" => [],
-            "message" => ""
-        ];
-
-
-        /* ---------- DELETE QUERY ---------- */
-
-        $sql =
-            "DELETE FROM $table";
-
-
-        /* ---------- WHERE ---------- */
-
-        if (!empty($where)) {
-
-            $where_clauses = [];
-
-            foreach ($where as $column => $value) {
-
-                $escaped_value =
-                    $this->conn->real_escape_string($value);
-
-                $where_clauses[] =
-                    "$column = '$escaped_value'";
-            }
-
-            $sql .=
-                " WHERE " .
-                implode(
-                    " $where_condition ",
-                    $where_clauses
-                );
-
-        } else {
-
-            /*
-             * Safety protection.
-             * Do not allow DELETE without WHERE.
-             */
-
-            $result["message"] =
-                "Delete requires a WHERE condition";
-
+            $result["message"] = "Error: " . $this->conn->error;
             return $result;
         }
+    }
 
+    public function common_delete($table, $where = [], $where_condition = "AND"){
+        $result=[
+            "status"=>false,
+            "data"=>[],
+            "message"=>""
+        ];
 
-        /* ---------- EXECUTE ---------- */
-
-        if ($this->conn->query($sql)) {
-
-            $result["status"] = true;
-
-            $result["data"] =
-                $this->conn->affected_rows;
-
-            $result["message"] =
-                "Record deleted successfully";
-
-        } else {
-
-            $result["message"] =
-                "Error: " . $this->conn->error;
+        $sql = "DELETE FROM $table";
+        if(!empty($where)){
+            $where_clauses = [];
+            foreach($where as $column => $value){
+                $where_clauses[] = "$column = '" . $this->conn->real_escape_string($value) . "'";
+            }
+            $sql .= " WHERE " . implode(" $where_condition ", $where_clauses);
         }
 
-
-        return $result;
+        if($this->conn->query($sql)){
+            $result["status"] = true;
+            $result["data"] = $this->conn->affected_rows;
+            $result["message"] = "Record deleted successfully";
+            return $result;
+        } else {
+            $result["message"] = "Error: " . $this->conn->error;
+            return $result;
+        }
     }
 
 
-    /* =========================================================
-       DATABASE DISCONNECT
-       ========================================================= */
-
-    public function __destruct()
-    {
-        if ($this->conn) {
-            $this->conn->close();
-        }
+    public function __destruct(){
+        $this->conn->close();
     }
 }
 
-?>
