@@ -31,9 +31,9 @@
 <link rel="stylesheet" href="<?= $base_url ?>assets/css/style.css">
 </head>
 <body>
-<div id="global-loader">
+<!-- <div id="global-loader">
 <div class="whirly-loader"> </div>
-</div>
+</div> -->
 
 <div class="main-wrapper">
 

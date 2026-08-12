@@ -8,9 +8,9 @@ require_once '../component/connection.php';
         "user_id" => $_SESSION['user_id'],
         "sale_date" => $_POST['sale_date'],
         "total_amount" => $_POST['total_amount'],
-        "discount" => $_POST['discount'],
-        "tax" => $_POST['tax'],
-        "status" => $_POST['status'],
+        "discount" => $_POST['discount_amount'],
+        "tax" => $_POST['vat'],
+        "status" => 1,
         "created_at" => date('Y-m-d H:i:s'),
         "created_by" => $_SESSION['user_id']
     ];
@@ -30,7 +30,7 @@ require_once '../component/connection.php';
                 "sale_id" => $result['data'],
                 "product_id" => $product_id,
                 "quantity" => $_POST['quantity'][$index],
-                "unit_price" => $_POST['unit_price'][$index],
+                "unit_price" => $_POST['selling_price'][$index],
                 "subtotal" => $_POST['subtotal'][$index],
                 "created_at" => date('Y-m-d H:i:s'),
                 "created_by" => $_SESSION['user_id']
@@ -40,14 +40,13 @@ require_once '../component/connection.php';
                 $error++;
             }
             // remove stock in stock_transfers table (status 0 = out)
-            $st=$crud->common_insert('stock_transfers', [
+            $st=$crud->common_insert('stocks', [
                 "product_id" => $product_id,
-                "quantity" => $_POST['quantity'][$index],
-                "status" => 0,
-                "transfer_date" => $_POST['sale_date'],
+                "quantity" => "-".$_POST['quantity'][$index],
+                "warehouse_id" => $_POST['warehouse_id'],
+                "stock_date" => $_POST['sale_date'],
                 "sale_id" => $result['data'],
-                "created_at" => date('Y-m-d H:i:s'),
-                "created_by" => $_SESSION['user_id']
+                "created_at" => date('Y-m-d H:i:s')
             ]);
             if(!$st['status']){
                 $error++;
