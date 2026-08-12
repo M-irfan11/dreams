@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2026 at 09:12 AM
+-- Generation Time: Aug 11, 2026 at 10:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -83,7 +83,9 @@ INSERT INTO `customers` (`customer_id`, `name`, `gender`, `phone`, `email`, `add
 (1, 'Araf Rahman', 'Male', '+8801589756', 'araf0505@yahoo.com', 'Hider Ali Musir Bari, Fatehabed', 'Regular', '2026-08-02 03:50:28', NULL, NULL, NULL, NULL),
 (2, 'Muhammad Al Junayed', 'Male', '+6849213547', 'junayed684@gmail.com', 'Bagdad,iraq', 'Regular', '2026-08-02 04:11:25', NULL, NULL, NULL, NULL),
 (3, 'Sultan ibn Adel', 'Male', '+6483215645', 'SultanAdel@gmail.com', 'al hudayed,yaman', 're', '2026-08-02 04:12:50', NULL, NULL, NULL, NULL),
-(4, 'Belel ibn rabah al habasi', 'Male', '+6478215465', 'BelelRabah@gmail.com', 'Abhi-Siniya(eithopia)', 'R', '2026-08-02 04:14:07', NULL, NULL, NULL, NULL);
+(4, 'Belel ibn rabah al habasi', 'Male', '+6478215465', 'BelelRabah@gmail.com', 'Abhi-Siniya(eithopia)', 'R', '2026-08-02 04:14:07', NULL, NULL, NULL, NULL),
+(6, 'Rahim', 'Male', '444', 'ff@dd.com', 'Ctg', 'Vip', '2026-08-08 14:15:34', NULL, NULL, NULL, NULL),
+(7, 'Rahim', 'Male', '444', 'ff@dd.com', '', 'Vip', '2026-08-08 14:15:51', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -152,6 +154,7 @@ INSERT INTO `products` (`id`, `category_id`, `supplier_id`, `product_name`, `bra
 CREATE TABLE `purchases` (
   `id` int(11) NOT NULL,
   `supplier_id` int(11) NOT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
   `purchase_date` date NOT NULL,
   `total_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
   `discount_amount` decimal(10,2) DEFAULT NULL,
@@ -171,15 +174,15 @@ CREATE TABLE `purchases` (
 -- Dumping data for table `purchases`
 --
 
-INSERT INTO `purchases` (`id`, `supplier_id`, `purchase_date`, `total_amount`, `discount_amount`, `discount_type`, `vat`, `grand_total`, `ref`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(5, 0, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:04', '2026-08-07 03:45:04', NULL, 1, NULL),
-(6, 0, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:11', '2026-08-07 03:45:11', NULL, 1, NULL),
-(7, 0, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:14', '2026-08-07 03:45:14', NULL, 1, NULL),
-(8, 2, '2026-04-08', 250.00, 2.00, 2, 15.00, 281.75, 'jaber ibrahim', 1, '2026-08-07 06:11:49', '2026-08-07 10:11:49', NULL, 1, NULL),
-(9, 1, '2026-08-09', 19565000.00, 0.00, 0, 0.00, 19565000.00, 'dd', 1, '2026-08-09 02:25:26', '2026-08-09 06:25:26', NULL, 7, NULL),
-(10, 1, '2026-08-09', 500.00, 0.00, 1, 0.00, 500.00, '88', 1, '2026-08-09 02:32:28', '2026-08-09 02:32:56', NULL, 7, 7),
-(11, 1, '2026-08-09', 108900.00, 0.00, 0, 0.00, 108900.00, '88', 1, '2026-08-09 02:36:37', '2026-08-09 06:36:37', NULL, 7, NULL),
-(12, 1, '2026-08-09', 32500000.00, 0.00, 0, 0.00, 32500000.00, '88', 1, '2026-08-09 02:39:25', '2026-08-09 06:39:25', NULL, 7, NULL);
+INSERT INTO `purchases` (`id`, `supplier_id`, `warehouse_id`, `purchase_date`, `total_amount`, `discount_amount`, `discount_type`, `vat`, `grand_total`, `ref`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
+(5, 0, NULL, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:04', '2026-08-07 03:45:04', NULL, 1, NULL),
+(6, 0, NULL, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:11', '2026-08-07 03:45:11', NULL, 1, NULL),
+(7, 0, NULL, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:14', '2026-08-07 03:45:14', NULL, 1, NULL),
+(8, 2, NULL, '2026-04-08', 250.00, 2.00, 2, 15.00, 281.75, 'jaber ibrahim', 1, '2026-08-07 06:11:49', '2026-08-07 10:11:49', NULL, 1, NULL),
+(9, 1, NULL, '2026-08-09', 19565000.00, 0.00, 0, 0.00, 19565000.00, 'dd', 1, '2026-08-09 02:25:26', '2026-08-09 06:25:26', NULL, 7, NULL),
+(10, 1, NULL, '2026-08-09', 500.00, 0.00, 1, 0.00, 500.00, '88', 1, '2026-08-09 02:32:28', '2026-08-09 02:32:56', NULL, 7, 7),
+(11, 1, NULL, '2026-08-09', 108900.00, 0.00, 0, 0.00, 108900.00, '88', 1, '2026-08-09 02:36:37', '2026-08-09 06:36:37', NULL, 7, NULL),
+(12, 1, NULL, '2026-08-09', 32500000.00, 0.00, 0, 0.00, 32500000.00, '88', 1, '2026-08-09 02:39:25', '2026-08-09 06:39:25', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -245,6 +248,7 @@ CREATE TABLE `sales` (
   `sale_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
   `sale_date` date NOT NULL,
   `total_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
   `discount` decimal(10,2) NOT NULL DEFAULT 0.00,
@@ -295,9 +299,8 @@ INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_pri
 (2, 2, 12, 6, 280.00, 1680.00, '2026-08-09 00:40:50', '2026-08-09 04:40:50', NULL, 7, NULL);
 
 -- --------------------------------------------------------
-
 --
--- Table structure for table `stocks`
+-- Dumping data for table `sale_details`
 --
 
 CREATE TABLE `stocks` (
@@ -345,6 +348,8 @@ CREATE TABLE `stock_transfers` (
 -- Dumping data for table `stock_transfers`
 --
 
+INSERT INTO `stock_transfers` (`id`, `product_id`, `quantity`, `transfer_date`, `sale_id`, `purchase_id`, `sale_return_id`, `purchase_return_id`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
+(21, 12, 1, '2026-04-08', NULL, 8, NULL, NULL, 1, '2026-08-07 06:11:49', '2026-08-07 10:11:49', NULL, 1, NULL),
 INSERT INTO `stock_transfers` (`id`, `product_id`, `quantity`, `transfer_date`, `sale_id`, `purchase_id`, `sale_return_id`, `purchase_return_id`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
 (21, 12, 1, '2026-04-08', NULL, 8, NULL, NULL, 1, '2026-08-07 06:11:49', '2026-08-07 10:11:49', NULL, 1, NULL),
 (22, 2, 6, '2026-08-12', 1, NULL, NULL, NULL, 0, '2026-08-09 00:40:24', '2026-08-09 04:40:24', NULL, 7, NULL),
@@ -416,7 +421,8 @@ INSERT INTO `users` (`id`, `role_id`, `full_name`, `email`, `password`, `phone`,
 (1, 1, 'Araf Rahman', 'araf@yahoo.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '01565985', 'Active', '2026-07-26 06:47:39', '2026-08-07 20:50:26', NULL, NULL, 1),
 (2, 2, 'Pritom Hasan', 'pritam@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'Active', '2026-08-05 05:17:34', '2026-08-07 20:48:00', '2026-08-07 16:48:00', NULL, 1),
 (7, 2, 'usama al surafa', 'surafa@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '+9654213', 'Active', '2026-08-05 05:43:45', '2026-08-07 20:51:44', NULL, NULL, 1),
-(9, 1, 'Pritom Hasan', 'pritam@yahoo.com', '$2y$10$Ef8a8DqE2E4vsHIz4dACTO9ExZEtGj70968WYxuKdBVBdIv2ZUtgO', '+880189654', 'Active', '2026-08-07 20:47:44', '2026-08-07 20:50:36', NULL, 1, 1);
+(9, 1, 'Pritom Hasan', 'pritam@yahoo.com', '$2y$10$Ef8a8DqE2E4vsHIz4dACTO9ExZEtGj70968WYxuKdBVBdIv2ZUtgO', '+880189654', 'Active', '2026-08-07 20:47:44', '2026-08-07 20:50:36', NULL, 1, 1),
+(10, 2, 'Mazharul Haque Pritam', 'mazhar.pritam@gmail.com', '$2y$10$/6LDHiLvpBIwO9vpkeOO8OyAcy01SiFbaqx2CotBiHeYp3zXAqp4C', NULL, 'Active', '2026-08-08 13:49:40', '2026-08-08 13:49:40', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -511,14 +517,6 @@ ALTER TABLE `sale_details`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `stocks`
---
-ALTER TABLE `stocks`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_stock` (`product_id`,`warehouse_id`),
-  ADD KEY `warehouse_id` (`warehouse_id`);
-
---
 -- Indexes for table `stock_transfers`
 --
 ALTER TABLE `stock_transfers`
@@ -557,7 +555,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -600,7 +598,6 @@ ALTER TABLE `sales`
 --
 ALTER TABLE `sale_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `stocks`
 --
@@ -623,18 +620,13 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `warehouses`
 --
-
---
--- Constraints for table `stocks`
---
-ALTER TABLE `stocks`
-  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `stocks_ibfk_2` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`);
+ALTER TABLE `warehouses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
