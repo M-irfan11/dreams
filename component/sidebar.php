@@ -28,8 +28,9 @@
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/purchase1.svg" alt="img"><span> Purchase</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>purchase/list.php">Purchase List</a></li>
+<li><a href="<?= $base_url ?>purchase/create.php">Add Purchase</a></li>
 <li><a href="<?= $base_url ?>supplier/list.php">Supplier</a></li>
-<li><a href="<?= $base_url ?>purchase/add.php">Add Purchase</a></li>
+
 
 </ul>
 </li>
