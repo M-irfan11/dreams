@@ -24,7 +24,7 @@ require_once '../component/connection.php';
 
     if($result['status']){
         // reduce stock for each product sold via stock_transfers table
-       // <!-- `id`, `product_id`, `warehouse_id`, `quantity`, `transfer_date`, `sale_id`, `purchase_id`, `sale_return_id`, `purchase_return_id`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by` -->
+       // <!-- `id`, `product_id`, `warehouse_id`, `quantity`, `transfer_date`, `sale_id`, `sales_id`, `sale_return_id`, `sales_return_id`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by` -->
        foreach($_POST['product_id'] as $index => $product_id){
             $stock_data = [
                 "sale_id" => $result['data'],

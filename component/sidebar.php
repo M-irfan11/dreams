@@ -6,7 +6,8 @@
 <a href="<?= $base_url ?>dashboard.php"><img src="<?= $base_url ?>assets/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
+    
+<a href="<?= $base_url ?>product/list.php"><img src="<?= $base_url ?>assets/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>product/list.php">Product List</a></li>
 
