@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2026 at 07:10 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Aug 12, 2026 at 09:26 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,7 +61,7 @@ INSERT INTO `categories` (`categories_id`, `name`, `description`, `created_at`, 
 --
 
 CREATE TABLE `customers` (
-  `customer_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `gender` enum('Male','Female','Other') DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`customer_id`, `name`, `gender`, `phone`, `email`, `address`, `membership_type`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
+INSERT INTO `customers` (`id`, `name`, `gender`, `phone`, `email`, `address`, `membership_type`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
 (1, 'Araf Rahman', 'Male', '+8801589756', 'araf0505@yahoo.com', 'Hider Ali Musir Bari, Fatehabed', 'Regular', '2026-08-02 03:50:28', NULL, NULL, NULL, NULL),
 (2, 'Muhammad Al Junayed', 'Male', '+6849213547', 'junayed684@gmail.com', 'Bagdad,iraq', 'Regular', '2026-08-02 04:11:25', NULL, NULL, NULL, NULL),
 (3, 'Sultan ibn Adel', 'Male', '+6483215645', 'SultanAdel@gmail.com', 'al hudayed,yaman', 're', '2026-08-02 04:12:50', NULL, NULL, NULL, NULL),
@@ -132,19 +132,19 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `supplier_id`, `product_name`, `brand`, `purchase_price`, `selling_price`, `barcode`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(2, 1, 1, 'akrot', 'Tibbat', 750.00, 810.00, '254587', '2026-08-02 04:20:09', NULL, NULL, NULL, NULL),
-(3, 1, 1, 'Dumur', 'Tibbat', 1100.00, 1250.00, '145898', '2026-08-02 04:20:34', NULL, NULL, NULL, NULL),
-(7, 10, 1, 'pencil', 'STAR', 6.50, 10.00, '1122', '2026-08-06 13:51:22', NULL, '2026-08-06 09:51:38', NULL, NULL),
-(9, 1, 1, 'pencil', 'STAR', 7.00, 10.00, '9878', '2026-08-06 18:38:36', NULL, NULL, NULL, NULL),
-(10, 1, 1, 'pencil', 'STAR', 7.00, 10.00, '3252', '2026-08-06 18:40:18', NULL, NULL, NULL, NULL),
-(11, 1, 1, 'pencil', 'STAR', 7.00, 10.00, '2552', '2026-08-06 18:42:24', NULL, NULL, NULL, NULL),
-(12, 0, 2, 'book', 'mkd', 250.00, 280.00, '1258', '2026-08-06 19:04:26', NULL, NULL, NULL, NULL),
-(13, 2, 44, 'Mi', 'Miaw ', 65000.00, 850.00, '55', '2026-08-09 04:34:26', NULL, NULL, NULL, NULL),
-(14, 666, 420, 'Cat Food', 'Miaw ', 450.00, 800.00, '', '2026-08-09 04:41:58', NULL, NULL, NULL, NULL),
-(15, 55, 555, 'dd', 'ddfd', 500.00, 600.00, 'sdd', '2026-08-09 04:56:52', NULL, NULL, NULL, NULL),
-(16, 1, 1, 'Dumur', 'roja', 1200.00, 1400.00, '0212', '2026-08-09 05:06:34', NULL, NULL, NULL, NULL),
-(17, 4, 4, 'akrot', 'roja', 1200.00, 1350.00, 'khl', '2026-08-09 05:08:54', NULL, NULL, NULL, NULL),
-(18, 4, 4, 'cumin', 'fdsf', 128.00, 135.00, '1365', '2026-08-12 04:38:45', NULL, NULL, NULL, NULL);
+(2, 1, 1, 'akrot', 'Tibbat', '750.00', '810.00', '254587', '2026-08-02 04:20:09', NULL, NULL, NULL, NULL),
+(3, 1, 1, 'Dumur', 'Tibbat', '1100.00', '1250.00', '145898', '2026-08-02 04:20:34', NULL, NULL, NULL, NULL),
+(7, 10, 1, 'pencil', 'STAR', '6.50', '10.00', '1122', '2026-08-06 13:51:22', NULL, '2026-08-06 09:51:38', NULL, NULL),
+(9, 1, 1, 'pencil', 'STAR', '7.00', '10.00', '9878', '2026-08-06 18:38:36', NULL, NULL, NULL, NULL),
+(10, 1, 1, 'pencil', 'STAR', '7.00', '10.00', '3252', '2026-08-06 18:40:18', NULL, NULL, NULL, NULL),
+(11, 1, 1, 'pencil', 'STAR', '7.00', '10.00', '2552', '2026-08-06 18:42:24', NULL, NULL, NULL, NULL),
+(12, 0, 2, 'book', 'mkd', '250.00', '280.00', '1258', '2026-08-06 19:04:26', NULL, NULL, NULL, NULL),
+(13, 2, 44, 'Mi', 'Miaw ', '65000.00', '850.00', '55', '2026-08-09 04:34:26', NULL, NULL, NULL, NULL),
+(14, 666, 420, 'Cat Food', 'Miaw ', '450.00', '800.00', '', '2026-08-09 04:41:58', NULL, NULL, NULL, NULL),
+(15, 55, 555, 'dd', 'ddfd', '500.00', '600.00', 'sdd', '2026-08-09 04:56:52', NULL, NULL, NULL, NULL),
+(16, 1, 1, 'Dumur', 'roja', '1200.00', '1400.00', '0212', '2026-08-09 05:06:34', NULL, NULL, NULL, NULL),
+(17, 4, 4, 'akrot', 'roja', '1200.00', '1350.00', 'khl', '2026-08-09 05:08:54', NULL, NULL, NULL, NULL),
+(18, 4, 4, 'cumin', 'fdsf', '128.00', '135.00', '1365', '2026-08-12 04:38:45', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -175,14 +175,9 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id`, `supplier_id`, `purchase_date`, `total_amount`, `discount_amount`, `discount_type`, `vat`, `grand_total`, `ref`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(5, 0, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:04', '2026-08-07 03:45:04', NULL, 1, NULL),
-(6, 0, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:11', '2026-08-07 03:45:11', NULL, 1, NULL),
-(7, 0, '0000-00-00', 0.00, 0.00, 0, 0.00, 0.00, '', 1, '2026-08-06 23:45:14', '2026-08-07 03:45:14', NULL, 1, NULL),
-(8, 2, '2026-04-08', 250.00, 2.00, 2, 15.00, 281.75, 'jaber ibrahim', 1, '2026-08-07 06:11:49', '2026-08-07 10:11:49', NULL, 1, NULL),
-(9, 3, '2026-08-09', 5500.00, 0.00, 0, 0.00, 5500.00, 'fhd', 0, '2026-08-09 07:10:08', '2026-08-09 07:10:08', NULL, NULL, NULL),
-(10, 2, '2026-08-09', 7.00, 0.00, 0, 0.00, 7.00, 'hdf', 0, '2026-08-09 07:14:15', '2026-08-09 07:14:15', NULL, NULL, NULL),
-(11, 3, '2026-08-10', 900.00, 7.00, 2, 0.00, 837.00, '', 1, '2026-08-12 00:48:01', '2026-08-12 04:48:01', NULL, 7, NULL),
-(12, 2, '2026-08-11', 1200.00, 5.00, 2, 2.00, 1162.80, 'rfeds', 1, '2026-08-12 00:53:02', '2026-08-12 04:53:02', NULL, 7, NULL);
+(1, 1, '2026-08-12', '110700.00', '0.00', 1, '0.00', '110700.00', '', 1, '2026-08-12 02:28:21', '2026-08-12 06:28:21', NULL, 7, NULL),
+(3, 1, '2026-08-12', '110700.00', '0.00', 1, '0.00', '110700.00', '', 1, '2026-08-12 02:34:54', '2026-08-12 06:34:54', NULL, 7, NULL),
+(4, 1, '2026-08-12', '12500.00', '0.00', 1, '0.00', '12500.00', '', 1, '2026-08-12 03:23:30', '2026-08-12 07:23:30', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,9 +204,11 @@ CREATE TABLE `purchase_details` (
 --
 
 INSERT INTO `purchase_details` (`id`, `purchase_id`, `product_id`, `quantity`, `purchase_price`, `subtotal`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(20, 8, 12, 1, 250.00, 250.00, '2026-08-07 06:11:49', '2026-08-07 10:11:49', NULL, 1, NULL),
-(21, 11, 14, 2, 450.00, 900.00, '2026-08-12 00:48:01', '2026-08-12 04:48:01', NULL, 7, NULL),
-(22, 12, 17, 1, 1200.00, 1200.00, '2026-08-12 00:53:02', '2026-08-12 04:53:02', NULL, 7, NULL);
+(1, 1, 11, 100, '7.00', '700.00', '2026-08-12 02:28:21', '2026-08-12 06:28:21', NULL, 7, NULL),
+(2, 1, 3, 100, '1100.00', '110000.00', '2026-08-12 02:28:21', '2026-08-12 06:28:21', NULL, 7, NULL),
+(4, 3, 11, 100, '7.00', '700.00', '2026-08-12 02:34:54', '2026-08-12 06:34:54', NULL, 7, NULL),
+(5, 3, 3, 100, '1100.00', '110000.00', '2026-08-12 02:34:54', '2026-08-12 06:34:54', NULL, 7, NULL),
+(6, 4, 12, 50, '250.00', '12500.00', '2026-08-12 03:23:30', '2026-08-12 07:23:30', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -243,7 +240,7 @@ INSERT INTO `roles` (`id`, `role_name`, `access`, `status`, `created_at`, `updat
 --
 
 CREATE TABLE `sales` (
-  `sale_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `sale_date` date NOT NULL,
@@ -263,12 +260,9 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`sale_id`, `customer_id`, `user_id`, `sale_date`, `total_amount`, `discount`, `tax`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `warehouse_id`) VALUES
-(1, 1, 7, '2026-08-12', 4860.00, 500.00, 1.00, 2, '2026-08-09 00:40:24', '2026-08-09 04:40:24', NULL, 7, NULL, 3),
-(2, 1, 7, '2026-08-13', 1680.00, 500.00, 5.00, 2, '2026-08-09 00:40:50', '2026-08-09 04:40:50', NULL, 7, NULL, 3),
-(3, 2, 7, '2026-08-04', 2400.00, 315.00, 750.00, 2, '2026-08-09 01:38:32', '2026-08-09 05:38:32', NULL, 7, NULL, 4),
-(4, 2, 7, '2026-08-07', 2800.00, 0.00, 0.00, 2, '2026-08-09 02:23:30', '2026-08-09 06:23:30', NULL, 7, NULL, 3),
-(5, 0, 7, '0000-00-00', 1600.00, 0.00, 0.00, 0, '2026-08-12 01:04:38', '2026-08-12 05:04:38', NULL, 7, NULL, NULL);
+INSERT INTO `sales` (`id`, `customer_id`, `user_id`, `sale_date`, `total_amount`, `discount`, `tax`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `warehouse_id`) VALUES
+(3, 3, 7, '2026-08-13', '12500.00', '5.00', '0.00', 1, '2026-08-12 03:21:37', '2026-08-12 07:21:37', NULL, 7, NULL, 6),
+(4, 1, 7, '2026-08-12', '2800.00', '0.00', '0.00', 1, '2026-08-12 03:24:00', '2026-08-12 07:24:00', NULL, 7, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -295,11 +289,13 @@ CREATE TABLE `sale_details` (
 --
 
 INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_price`, `subtotal`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(1, 1, 2, 6, 810.00, 4860.00, '2026-08-09 00:40:24', '2026-08-09 04:40:24', NULL, 7, NULL),
-(2, 2, 12, 6, 280.00, 1680.00, '2026-08-09 00:40:50', '2026-08-09 04:40:50', NULL, 7, NULL),
-(3, 3, 14, 3, 800.00, 2400.00, '2026-08-09 01:38:32', '2026-08-09 05:38:32', NULL, 7, NULL),
-(4, 4, 12, 10, 280.00, 2800.00, '2026-08-09 02:23:30', '2026-08-09 06:23:30', NULL, 7, NULL),
-(5, 5, 14, 2, 0.00, 1600.00, '2026-08-12 01:04:38', '2026-08-12 05:04:38', NULL, 7, NULL);
+(1, 1, 2, 6, '810.00', '4860.00', '2026-08-09 00:40:24', '2026-08-09 04:40:24', NULL, 7, NULL),
+(2, 2, 12, 6, '280.00', '1680.00', '2026-08-09 00:40:50', '2026-08-09 04:40:50', NULL, 7, NULL),
+(3, 3, 14, 3, '800.00', '2400.00', '2026-08-09 01:38:32', '2026-08-09 05:38:32', NULL, 7, NULL),
+(4, 4, 12, 10, '280.00', '2800.00', '2026-08-09 02:23:30', '2026-08-09 06:23:30', NULL, 7, NULL),
+(5, 5, 14, 2, '0.00', '1600.00', '2026-08-12 01:04:38', '2026-08-12 05:04:38', NULL, 7, NULL),
+(11, 3, 3, 10, '1250.00', '12500.00', '2026-08-12 03:21:37', '2026-08-12 07:21:37', NULL, 7, NULL),
+(12, 4, 12, 10, '280.00', '2800.00', '2026-08-12 03:24:00', '2026-08-12 07:24:00', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -309,9 +305,14 @@ INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_pri
 
 CREATE TABLE `stocks` (
   `id` int(11) NOT NULL,
+  `stock_date` date DEFAULT NULL,
   `product_id` int(11) NOT NULL,
   `warehouse_id` int(11) NOT NULL,
   `quantity` int(11) DEFAULT 0,
+  `purchase_id` int(11) DEFAULT NULL,
+  `sale_id` int(11) DEFAULT NULL,
+  `stock_transfer_id` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -320,9 +321,14 @@ CREATE TABLE `stocks` (
 -- Dumping data for table `stocks`
 --
 
-INSERT INTO `stocks` (`id`, `product_id`, `warehouse_id`, `quantity`, `updated_at`, `deleted_at`) VALUES
-(1, 12, 4, 24, '2026-08-08 16:00:21', NULL),
-(2, 9, 3, 33, '2026-08-08 22:38:12', NULL);
+INSERT INTO `stocks` (`id`, `stock_date`, `product_id`, `warehouse_id`, `quantity`, `purchase_id`, `sale_id`, `stock_transfer_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '2026-08-12', 11, 6, 100, 1, NULL, NULL, 2026, '2026-08-12 06:28:21', NULL),
+(2, '2026-08-12', 3, 6, 100, 1, NULL, NULL, 2026, '2026-08-12 06:28:21', NULL),
+(4, '2026-08-12', 11, 6, 100, 3, NULL, NULL, 2026, '2026-08-12 06:34:54', NULL),
+(5, '2026-08-12', 3, 6, 100, 3, NULL, NULL, 2026, '2026-08-12 06:34:54', NULL),
+(6, '2026-08-13', 3, 6, -10, NULL, 3, NULL, 2026, '2026-08-12 07:21:37', NULL),
+(7, '2026-08-12', 12, 6, 50, 4, NULL, NULL, 2026, '2026-08-12 07:23:30', NULL),
+(8, '2026-08-12', 12, 6, -10, NULL, 4, NULL, 2026, '2026-08-12 07:24:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -449,12 +455,12 @@ CREATE TABLE `warehouses` (
 --
 
 INSERT INTO `warehouses` (`id`, `warehouse_name`, `location`, `manager_name`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(0, 'Fatehabad', 'same', 'ifran', '2026-08-09 04:57:18', '2026-08-09 04:57:18', NULL, NULL, NULL),
 (1, 'Main Warehouse', 'Agrabad, Chattogram', 'Md. Ibrahim', '2026-08-04 18:46:21', '2026-08-04 18:50:09', '2026-08-04 14:50:09', 1, 1),
 (2, 'Branch Warehouse', 'GEC Circle, Chattogram', 'Kamal Hossain', '2026-08-04 18:46:21', '2026-08-04 18:50:06', '2026-08-04 14:50:06', 1, 1),
 (3, 'Summit', 'Agrabad', 'Raihan', '2026-08-04 18:50:25', '2026-08-04 18:50:25', NULL, NULL, NULL),
 (4, 'Rootya', 'GEC', 'Mohibulllah', '2026-08-04 18:50:49', '2026-08-04 18:51:02', NULL, NULL, NULL),
-(5, 'Dew', 'Agrabad', 'Mohiner Ghora', '2026-08-05 17:19:08', '2026-08-05 17:19:08', NULL, NULL, NULL);
+(5, 'Dew', 'Agrabad', 'Mohiner Ghora', '2026-08-05 17:19:08', '2026-08-05 17:19:08', NULL, NULL, NULL),
+(6, 'Fatehabad', 'same', 'ifran', '2026-08-09 04:57:18', '2026-08-12 06:30:46', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -470,7 +476,7 @@ ALTER TABLE `categories`
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`customer_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `payments`
@@ -510,7 +516,7 @@ ALTER TABLE `roles`
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
-  ADD PRIMARY KEY (`sale_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sale_details`
@@ -522,9 +528,7 @@ ALTER TABLE `sale_details`
 -- Indexes for table `stocks`
 --
 ALTER TABLE `stocks`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_stock` (`product_id`,`warehouse_id`),
-  ADD KEY `warehouse_id` (`warehouse_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `stock_transfers`
@@ -565,7 +569,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -583,13 +587,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `purchase_details`
 --
 ALTER TABLE `purchase_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -601,19 +605,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sale_details`
 --
 ALTER TABLE `sale_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `stock_transfers`
@@ -634,6 +638,12 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `warehouses`
+--
+ALTER TABLE `warehouses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -641,8 +651,7 @@ ALTER TABLE `users`
 -- Constraints for table `stocks`
 --
 ALTER TABLE `stocks`
-  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `stocks_ibfk_2` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`);
+  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
