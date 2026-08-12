@@ -233,7 +233,7 @@
             const totalAmount = saleItems.reduce((sum, item) => sum + item.subtotal, 0);
             totalAmountInput.value = totalAmount.toFixed(2);
             const discountAmount = parseFloat(discountAmountInput.value) || 0;
-            const taxAmount = parseFloat(taxAmountInput.value) || 0;
+            const taxAmount = parseFloat(taxAmountInput.value) || (totalAmount * 0.05);
             const grandTotal = totalAmount - discountAmount + taxAmount;
             grandTotalInput.value = grandTotal.toFixed(2);
         }
