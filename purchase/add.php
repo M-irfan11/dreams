@@ -520,7 +520,7 @@ $products   = $product_result["data"] ?? [];
                                         name="vat"
                                         id="vat"
                                         class="form-control"
-                                        value="0"
+                                        value="5"
                                         min="0"
                                         step="0.01"
                                     >
