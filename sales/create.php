@@ -212,6 +212,7 @@
         function calculateTotals() {
             const totalAmount = salesItems.reduce((sum, item) => sum + item.subtotal, 0);
             totalAmountInput.value = totalAmount.toFixed(2);
+<<<<<<< HEAD
             let discountAmount = parseFloat(discountAmountInput.value) || 0;
             if(discountType.value === '2') { // Percentage
                 discountAmount = (discountAmount / 100) * totalAmount;
@@ -220,6 +221,12 @@
             const vatAmount = (parseFloat(vatAmountInput.value) / 100 * (totalAmount - discountAmount)) || 0;
             const subTotal = totalAmount - discountAmount + vatAmount;
             subTotalInput.value = subTotal.toFixed(2);
+=======
+            const discountAmount = parseFloat(discountAmountInput.value) || 0;
+            const taxAmount = parseFloat(taxAmountInput.value) || (totalAmount * 0.05);
+            const grandTotal = totalAmount - discountAmount + taxAmount;
+            grandTotalInput.value = grandTotal.toFixed(2);
+>>>>>>> b909d02b82be3b4237510179e503cd15ac547ac9
         }
 
         discountAmountInput.addEventListener('input', calculateTotals);
