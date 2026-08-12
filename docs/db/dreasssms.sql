@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2026 at 12:44 AM
+-- Generation Time: Aug 07, 2026 at 10:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -269,29 +269,6 @@ CREATE TABLE `sale_details` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stocks`
---
-
-CREATE TABLE `stocks` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `warehouse_id` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT 0,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `stocks`
---
-
-INSERT INTO `stocks` (`id`, `product_id`, `warehouse_id`, `quantity`, `updated_at`, `deleted_at`) VALUES
-(1, 12, 4, 24, '2026-08-08 16:00:21', NULL),
-(2, 9, 3, 33, '2026-08-08 22:38:12', NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `stock_transfers`
 --
 
@@ -382,35 +359,6 @@ INSERT INTO `users` (`id`, `role_id`, `full_name`, `email`, `password`, `phone`,
 (7, 2, 'usama al surafa', 'surafa@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '+9654213', 'Active', '2026-08-05 05:43:45', '2026-08-07 20:51:44', NULL, NULL, 1),
 (9, 1, 'Pritom Hasan', 'pritam@yahoo.com', '$2y$10$Ef8a8DqE2E4vsHIz4dACTO9ExZEtGj70968WYxuKdBVBdIv2ZUtgO', '+880189654', 'Active', '2026-08-07 20:47:44', '2026-08-07 20:50:36', NULL, 1, 1);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `warehouses`
---
-
-CREATE TABLE `warehouses` (
-  `id` int(11) NOT NULL,
-  `warehouse_name` varchar(100) NOT NULL,
-  `location` text DEFAULT NULL,
-  `manager_name` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL,
-  `updated_by` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `warehouses`
---
-
-INSERT INTO `warehouses` (`id`, `warehouse_name`, `location`, `manager_name`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(1, 'Main Warehouse', 'Agrabad, Chattogram', 'Md. Ibrahim', '2026-08-04 18:46:21', '2026-08-04 18:50:09', '2026-08-04 14:50:09', 1, 1),
-(2, 'Branch Warehouse', 'GEC Circle, Chattogram', 'Kamal Hossain', '2026-08-04 18:46:21', '2026-08-04 18:50:06', '2026-08-04 14:50:06', 1, 1),
-(3, 'Summit', 'Agrabad', 'Raihan', '2026-08-04 18:50:25', '2026-08-04 18:50:25', NULL, NULL, NULL),
-(4, 'Rootya', 'GEC', 'Mohibulllah', '2026-08-04 18:50:49', '2026-08-04 18:51:02', NULL, NULL, NULL),
-(5, 'Dew', 'Agrabad', 'Mohiner Ghora', '2026-08-05 17:19:08', '2026-08-05 17:19:08', NULL, NULL, NULL);
-
 --
 -- Indexes for dumped tables
 --
@@ -474,14 +422,6 @@ ALTER TABLE `sale_details`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `stocks`
---
-ALTER TABLE `stocks`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_stock` (`product_id`,`warehouse_id`),
-  ADD KEY `warehouse_id` (`warehouse_id`);
-
---
 -- Indexes for table `stock_transfers`
 --
 ALTER TABLE `stock_transfers`
@@ -499,12 +439,6 @@ ALTER TABLE `suppliers`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `warehouses`
---
-ALTER TABLE `warehouses`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -565,12 +499,6 @@ ALTER TABLE `sale_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `stocks`
---
-ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `stock_transfers`
 --
 ALTER TABLE `stock_transfers`
@@ -587,17 +515,6 @@ ALTER TABLE `suppliers`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `stocks`
---
-ALTER TABLE `stocks`
-  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `stocks_ibfk_2` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
