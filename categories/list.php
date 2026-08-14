@@ -19,7 +19,7 @@
                             }
 
                             // Fetch all categories, latest first
-                            $categories = $crud->common_select('categories', "*", [], "AND", "categories_id", "DESC");
+                            $categories = $crud->common_select('categories', "*", [], "AND", "id", "DESC");
                         ?>
 
                         <div class="row">
@@ -54,13 +54,13 @@
                                                             <td class="text-end">
                                                                 <button type="button" class="btn btn-sm btn-warning"
                                                                     data-bs-toggle="modal" data-bs-target="#editCategoryModal"
-                                                                    data-id="<?php echo $cat->categories_id; ?>"
+                                                                    data-id="<?php echo $cat->id; ?>"
                                                                     data-name="<?php echo htmlspecialchars($cat->name); ?>"
                                                                     data-description="<?php echo htmlspecialchars($cat->description); ?>"
                                                                     onclick="fillEditForm(this)">
                                                                     <i class="feather icon-edit"></i>
                                                                 </button>
-                                                                <a href="delete.php?id=<?php echo $cat->categories_id; ?>"
+                                                                <a href="delete.php?id=<?php echo $cat->id; ?>"
                                                                     class="btn btn-sm btn-danger"
                                                                     onclick="return confirm('Delete this category?');">
                                                                     <i class="feather icon-trash-2"></i>
