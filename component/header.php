@@ -31,9 +31,9 @@
 <link rel="stylesheet" href="<?= $base_url ?>assets/css/style.css">
 </head>
 <body>
-<div id="global-loader">
+<!-- <div id="global-loader">
 <div class="whirly-loader"> </div>
-</div>
+</div> -->
 
 <div class="main-wrapper">
 
@@ -202,7 +202,7 @@
 <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My Profile</a>
 <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
 <hr class="m-0">
-<a class="dropdown-item logout pb-0" href="logout.php"><img src="<?= $base_url ?>assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+<a class="dropdown-item logout pb-0" href="<?= $base_url ?>logout.php"><img src="<?= $base_url ?>assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
 </div>
 </div>
 </li>
@@ -214,7 +214,7 @@
 <div class="dropdown-menu dropdown-menu-right">
 <a class="dropdown-item" href="profile.html">My Profile</a>
 <a class="dropdown-item" href="generalsettings.html">Settings</a>
-<a class="dropdown-item" href="logout.php">Logout</a>
+<a class="dropdown-item" href="<?= $base_url ?>logout.php">Logout</a>
 </div>
 </div>
 

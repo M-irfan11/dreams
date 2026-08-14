@@ -6,7 +6,8 @@
 <a href="<?= $base_url ?>dashboard.php"><img src="<?= $base_url ?>assets/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
+    
+<a href="<?= $base_url ?>product/list.php"><img src="<?= $base_url ?>assets/img/icons/product.svg" alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>product/list.php">Product List</a></li>
 
@@ -15,7 +16,7 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/sales1.svg" alt="img"><span> Sales</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>sales/list.php"><img src="<?= $base_url ?>assets/img/icons/sales1.svg" alt="img"><span> Sales</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>sales/list.php">Sales List</a></li>
 <li><a href="<?= $base_url ?>sales/create.php">Add Sale</a></li>
@@ -24,16 +25,17 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/purchase1.svg" alt="img"><span> Purchase</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>purchase/list.php"><img src="<?= $base_url ?>assets/img/icons/purchase1.svg" alt="img"><span> Purchase</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>purchase/list.php">Purchase List</a></li>
+<li><a href="<?= $base_url ?>purchase/create.php">Add Purchase</a></li>
 <li><a href="<?= $base_url ?>supplier/list.php">Supplier</a></li>
-<li><a href="<?= $base_url ?>purchase/add.php">Add Purchase</a></li>
+
 
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="box"></i> <span>Stocks</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>stock/list.php"><i data-feather="box"></i> <span>Stocks</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>stock/list.php">Stock list</a></li>
 <li><a href="<?= $base_url ?>stock_transfer/list.php">Stock Transfer</a></li>
@@ -41,7 +43,7 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/expense1.svg" alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>expense/list.php"><img src="<?= $base_url ?>assets/img/icons/expense1.svg" alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>expenselist.php">Expense List</a></li>
 <li><a href="<?= $base_url ?>createexpense.php">Add Expense</a></li>
@@ -49,14 +51,14 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/quotation1.svg" alt="img"><span> Customer</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>customer/list.php"><img src="<?= $base_url ?>assets/img/icons/quotation1.svg" alt="img"><span> Customer</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>customer/list.php">Customer List</a></li>
  
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/transfer1.svg" alt="img"><span> Transfer</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>transfer/list.php"><img src="<?= $base_url ?>assets/img/icons/transfer1.svg" alt="img"><span> Transfer</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>transferlist.php">Transfer List</a></li>
 <li><a href="<?= $base_url ?>addtransfer.php">Add Transfer </a></li>
@@ -64,7 +66,7 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/return1.svg" alt="img"><span> Return</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>sales return/list.php"><img src="<?= $base_url ?>assets/img/icons/return1.svg" alt="img"><span> Return</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>salesreturnlist.php">Sales Return List</a></li>
 <li><a href="<?= $base_url ?>createsalesreturn.php">Add Sales Return </a></li>

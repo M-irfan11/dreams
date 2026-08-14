@@ -7,12 +7,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/sidebar.php";
 // NOTE: change `products.product_name` / `warehouse.name` below
 // if your actual column names are different.
 // -----------------------------------------------------------------
-$sql = "SELECT stocks.id, stocks.product_id, stocks.warehouse_id, stocks.quantity, stocks.updated_at,
+$sql = "SELECT stocks.id, stocks.product_id, stocks.warehouse_id, SUM(stocks.quantity) AS quantity, stocks.updated_at,
                products.product_name AS product_name,
                warehouses.warehouse_name AS warehouse_name
         FROM stocks
         JOIN products   ON products.id   = stocks.product_id
-        JOIN warehouses ON warehouses.id = stocks.warehouse_id";
+        JOIN warehouses ON warehouses.id = stocks.warehouse_id
+        GROUP BY stocks.product_id, stocks.warehouse_id
+        ";
 
 $stock_result = $crud->common_query($sql);
 $stocks = $stock_result['data'];
@@ -54,7 +56,7 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
                                 <th>Warehouse</th>
                                 <th>Quantity</th>
                                 <th>Last Updated</th>
-                                <th class="text-end">Action</th>
+                                <!-- <th class="text-end">Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -66,7 +68,7 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
                                         <td><?= htmlspecialchars($row->warehouse_name) ?></td>
                                         <td><?= (int)$row->quantity ?></td>
                                         <td><?= htmlspecialchars($row->updated_at) ?></td>
-                                        <td class="text-end">
+                                        <!-- <td class="text-end">
                                             <a href="<?= $base_url ?>stock/edit.php?id=<?= (int)$row->id ?>" class="me-2">
                                                 <i data-feather="edit" class="feather-edit"></i>
                                             </a>
@@ -74,7 +76,7 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
                                                onclick="return confirm('Are you sure you want to delete this stock record?');">
                                                 <i data-feather="trash-2" class="feather-trash-2"></i>
                                             </a>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>

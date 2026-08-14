@@ -1,6 +1,13 @@
 <?php require_once '../component/header.php'; ?>
 <?php require_once '../component/sidebar.php'; ?>
-
+<?php
+    $warehouses = $crud->common_select('warehouses');
+    if(!$warehouses['status']){
+        $warehouses = [];
+    } else {
+        $warehouses = $warehouses['data'];
+    }
+?>
 <div class="page-wrapper">
     <div class="content">
 
@@ -13,24 +20,48 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="<?php echo $base_url; ?>purchase/add.php" method="POST">
+                <form action="<?php echo $base_url; ?>purchase/store.php" method="POST">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Warehouse <span class="text-danger">*</span></label>
+                                <select
+                                    name="warehouse_id"
+                                    id="warehouse_id"
+                                    class="form-control"
+                                    required
+                                >
+                                    <option value="">
+                                        Select Warehouse
+                                    </option>
+                                    <?php if (!empty($warehouses)) { ?>
+                                        <?php foreach ($warehouses as $warehouse) { ?>
+                                            <option value="<?= (int)$warehouse->id ?>">
+                                                <?= htmlspecialchars($warehouse->warehouse_name) ?>
+                                            </option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </select>
+                                <?php if (empty($warehouses)) { ?>
+                                    <small class="text-danger">
+                                        No warehouses available.
+                                    </small>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Purchase Date</label>
                                 <input autocomplete="off" name="purchase_date" type="date" class="form-control">
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Reference</label>
                                 <input autocomplete="off" name="ref" type="text" class="form-control" placeholder="Reference">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Supplier</label>
                                 <select name="supplier_id" class="select form-control">
@@ -48,7 +79,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="col-12">
                             <div class="form-group">
                                 <label>Product Name</label>
                                 <select name="product_id" class="select form-control">

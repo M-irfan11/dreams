@@ -4,7 +4,7 @@ require_once('../component/connection.php');
 
 $id = $_GET['id'];
 
-$category = $crud->common_select("categories", "*", ["categories_id"=>$id]);
+$category = $crud->common_select("categories", "*", ["id"=>$id]);
 
 if($_POST){
     $data = [
@@ -16,7 +16,7 @@ if($_POST){
         $data["updated_by"] = $_SESSION['user_id'];
     }
 
-    $crud->common_update("categories", $data, ["categories_id"=>$id]);
+    $crud->common_update("categories", $data, ["id"=>$id]);
 
     header("Location: list.php");
     exit;

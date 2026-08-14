@@ -28,13 +28,13 @@ $customers = $crud->common_select("customers");
 <?php if($customers['status']): ?>
 <?php foreach($customers['data'] as $row): ?>
 <tr>
-<td><?= $row->customer_id ?></td>
+<td><?= $row->id ?></td>
 <td><?= $row->name ?></td>
 <td><?= $row->phone ?></td>
 <td><?= $row->email ?></td>
 <td>
-<a href="edit.php?id=<?= $row->customer_id ?>" class="btn btn-warning btn-sm">Edit</a>
-<a href="delete.php?id=<?= $row->customer_id ?>" class="btn btn-danger btn-sm">Delete</a>
+<a href="edit.php?id=<?= $row->id ?>" class="btn btn-warning btn-sm">Edit</a>
+<a href="delete.php?id=<?= $row->id ?>" class="btn btn-danger btn-sm">Delete</a>
 </td>
 </tr>
 <?php endforeach; ?>
