@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2026 at 10:02 PM
+-- Generation Time: Aug 15, 2026 at 06:15 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,6 +59,47 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chart_of_accounts`
+--
+
+CREATE TABLE `chart_of_accounts` (
+  `account_id` int(11) NOT NULL,
+  `account_code` varchar(100) NOT NULL,
+  `account_name` varchar(100) NOT NULL,
+  `account_type` enum('Asset','Liability','Income','Expense','Equity','VAT') NOT NULL,
+  `account_subtype` varchar(50) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `opening_balance` decimal(12,2) DEFAULT 0.00,
+  `current_balance` decimal(12,2) DEFAULT 0.00,
+  `total_debit` decimal(12,2) DEFAULT 0.00,
+  `total_credit` decimal(12,2) DEFAULT 0.00,
+  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `last_transaction_date` date DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chart_of_accounts`
+--
+
+INSERT INTO `chart_of_accounts` (`account_id`, `account_code`, `account_name`, `account_type`, `account_subtype`, `parent_id`, `opening_balance`, `current_balance`, `total_debit`, `total_credit`, `status`, `last_transaction_date`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '1000', 'Assets', 'Asset', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(2, '1100', 'Cash in Hand', 'Asset', NULL, 1, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(3, '1200', 'Accounts Receivable', 'Asset', NULL, 1, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(4, '1300', 'Inventory / Stock', 'Asset', NULL, 1, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(5, '2000', 'Accounts Payable', 'Liability', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(6, '2100', 'VAT Payable (Output)', 'VAT', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(7, '2200', 'VAT Receivable (Input)', 'VAT', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(8, '4000', 'Sales Revenue', 'Income', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(9, '5000', 'Purchase / COGS', 'Expense', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
+(10, '1232', 'account reciaveable', 'Equity', '', 3, 100000.00, 100000.00, 0.00, 0.00, 'Active', NULL, '', '2026-08-15 16:07:17', '2026-08-15 16:07:17', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customers`
 --
 
@@ -88,6 +129,25 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `phone`, `email`, `address`, `m
 (4, 'Belel ibn rabah al habasi', 'Male', '+6478215465', 'BelelRabah@gmail.com', 'Abhi-Siniya(eithopia)', 'R', '2026-08-02 04:14:07', NULL, NULL, NULL, NULL),
 (6, 'shah sultan', 'Male', '0658545', '', 'hathazari', 'regular', '2026-08-14 05:34:46', NULL, NULL, NULL, NULL),
 (7, 'amir hamza', 'Male', '6598', 'hamza@gmail.com', 'sdfjh', 'regular', '2026-08-14 06:03:56', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `journal_entries`
+--
+
+CREATE TABLE `journal_entries` (
+  `entry_id` bigint(20) NOT NULL,
+  `entry_date` date NOT NULL,
+  `reference_type` enum('Sales','Purchase','Stock','Payment','Receipt','Manual') NOT NULL,
+  `reference_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `debit` decimal(12,2) DEFAULT 0.00,
+  `credit` decimal(12,2) DEFAULT 0.00,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -268,7 +328,9 @@ CREATE TABLE `sales` (
 INSERT INTO `sales` (`id`, `customer_id`, `user_id`, `sale_date`, `total_amount`, `discount`, `tax`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `warehouse_id`) VALUES
 (3, 3, 7, '2026-08-13', 12500.00, 5.00, 0.00, 1, '2026-08-12 03:21:37', '2026-08-12 07:21:37', NULL, 7, NULL, 6),
 (4, 1, 7, '2026-08-12', 2800.00, 0.00, 0.00, 1, '2026-08-12 03:24:00', '2026-08-12 07:24:00', NULL, 7, NULL, 6),
-(5, 3, 7, '2026-08-11', 135.00, 0.00, 0.00, 1, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL, 4);
+(5, 3, 7, '2026-08-11', 135.00, 0.00, 0.00, 1, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL, 4),
+(6, 2, 7, '2026-08-15', 270.00, 0.00, 0.00, 1, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL, 3),
+(7, 1, 7, '2026-08-15', 6250.00, 0.00, 0.00, 1, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -302,7 +364,50 @@ INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_pri
 (5, 5, 14, 2, 0.00, 1600.00, '2026-08-12 01:04:38', '2026-08-12 05:04:38', NULL, 7, NULL),
 (11, 3, 3, 10, 1250.00, 12500.00, '2026-08-12 03:21:37', '2026-08-12 07:21:37', NULL, 7, NULL),
 (12, 4, 12, 10, 280.00, 2800.00, '2026-08-12 03:24:00', '2026-08-12 07:24:00', NULL, 7, NULL),
-(13, 5, 18, 1, 135.00, 135.00, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL);
+(13, 5, 18, 1, 135.00, 135.00, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL),
+(14, 6, 18, 2, 135.00, 270.00, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL),
+(15, 7, 3, 5, 1250.00, 6250.00, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stocks`
+--
+
+CREATE TABLE `stocks` (
+  `id` int(11) NOT NULL,
+  `stock_date` date DEFAULT NULL,
+  `product_id` int(11) NOT NULL,
+  `warehouse_id` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT 0,
+  `purchase_id` int(11) DEFAULT NULL,
+  `sale_id` int(11) DEFAULT NULL,
+  `stock_transfer_id` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `stocks`
+--
+
+INSERT INTO `stocks` (`id`, `stock_date`, `product_id`, `warehouse_id`, `quantity`, `purchase_id`, `sale_id`, `stock_transfer_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '2026-08-12', 11, 6, 100, 1, NULL, NULL, 2026, '2026-08-12 06:28:21', NULL),
+(2, '2026-08-12', 3, 6, 100, 1, NULL, NULL, 2026, '2026-08-12 06:28:21', NULL),
+(4, '2026-08-12', 11, 6, 100, 3, NULL, NULL, 2026, '2026-08-12 06:34:54', NULL),
+(5, '2026-08-12', 3, 6, 100, 3, NULL, NULL, 2026, '2026-08-12 06:34:54', NULL),
+(6, '2026-08-13', 3, 6, -10, NULL, 3, NULL, 2026, '2026-08-12 07:21:37', NULL),
+(7, '2026-08-12', 12, 6, 50, 4, NULL, NULL, 2026, '2026-08-12 07:23:30', NULL),
+(8, '2026-08-12', 12, 6, -10, NULL, 4, NULL, 2026, '2026-08-12 07:24:00', NULL),
+(9, '2026-08-09', 18, 4, 2, 5, NULL, NULL, 2026, '2026-08-12 16:12:44', NULL),
+(10, '2026-08-10', 18, 3, 5, 6, NULL, NULL, 2026, '2026-08-12 16:53:01', NULL),
+(11, '2026-08-11', 18, 4, -1, NULL, 5, NULL, 2026, '2026-08-12 16:53:58', NULL),
+(12, NULL, 18, 3, 12, NULL, NULL, NULL, 0, '2026-08-13 14:11:46', NULL),
+(13, '2026-08-13', 18, 3, 2, 7, NULL, NULL, 2026, '2026-08-14 05:31:47', NULL),
+(14, NULL, 3, 4, 25, NULL, NULL, NULL, 0, '2026-08-14 06:03:08', NULL),
+(15, '2026-08-15', 18, 3, -2, NULL, 6, NULL, 2026, '2026-08-15 13:32:11', NULL),
+(16, '2026-08-15', 3, 6, -5, NULL, 7, NULL, 2026, '2026-08-15 13:42:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -452,10 +557,25 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `chart_of_accounts`
+--
+ALTER TABLE `chart_of_accounts`
+  ADD PRIMARY KEY (`account_id`),
+  ADD UNIQUE KEY `account_code` (`account_code`),
+  ADD KEY `parent_id` (`parent_id`);
+
+--
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `journal_entries`
+--
+ALTER TABLE `journal_entries`
+  ADD PRIMARY KEY (`entry_id`),
+  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `payments`
@@ -504,6 +624,13 @@ ALTER TABLE `sale_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `stocks_ibfk_1` (`product_id`);
+
+--
 -- Indexes for table `stock_transfers`
 --
 ALTER TABLE `stock_transfers`
@@ -539,10 +666,22 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `chart_of_accounts`
+--
+ALTER TABLE `chart_of_accounts`
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `journal_entries`
+--
+ALTER TABLE `journal_entries`
+  MODIFY `entry_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -578,13 +717,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sale_details`
 --
 ALTER TABLE `sale_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `stocks`
+--
+ALTER TABLE `stocks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `stock_transfers`
@@ -609,6 +754,28 @@ ALTER TABLE `users`
 --
 ALTER TABLE `warehouses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `chart_of_accounts`
+--
+ALTER TABLE `chart_of_accounts`
+  ADD CONSTRAINT `chart_of_accounts_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `chart_of_accounts` (`account_id`);
+
+--
+-- Constraints for table `journal_entries`
+--
+ALTER TABLE `journal_entries`
+  ADD CONSTRAINT `journal_entries_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `chart_of_accounts` (`account_id`);
+
+--
+-- Constraints for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
