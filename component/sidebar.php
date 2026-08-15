@@ -66,12 +66,12 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>sales return/list.php"><img src="<?= $base_url ?>assets/img/icons/return1.svg" alt="img"><span> Return</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>sales_return/list.php"><img src="<?= $base_url ?>assets/img/icons/return1.svg" alt="img"><span> Return</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>salesreturnlist.php">Sales Return List</a></li>
-<li><a href="<?= $base_url ?>createsalesreturn.php">Add Sales Return </a></li>
+<li><a href="<?= $base_url ?>sales_return/list.php">Sales Return List</a></li>
+<li><a href="<?= $base_url ?>sales_return/create.php">Add Sales Return </a></li>
 <li><a href="<?= $base_url ?>purchasereturnlist.php">Purchase Return List</a></li>
-<li><a href="<?= $base_url ?>createpurchasereturn.php">Add Purchase Return </a></li>
+<li><a href="<?= $base_url ?>purchasereturn/create.php">Add Purchase Return </a></li>
 </ul>
 </li>
 <li class="submenu">
