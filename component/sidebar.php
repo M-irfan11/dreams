@@ -75,16 +75,11 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> People</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Accounts</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>customerlist.php">Customer List</a></li>
-<li><a href="<?= $base_url ?>addcustomer.php">Add Customer </a></li>
-<li><a href="<?= $base_url ?>supplierlist.php">Supplier List</a></li>
-<li><a href="<?= $base_url ?>addsupplier.php">Add Supplier </a></li>
-<li><a href="<?= $base_url ?>users/list.php">User List</a></li>
-<li><a href="<?= $base_url ?>users/add.php">Add User</a></li>
-<li><a href="<?= $base_url ?>storelist.php">Store List</a></li>
-<li><a href="<?= $base_url ?>addstore.php">Add Store</a></li>
+<li><a href="<?= $base_url ?>accounts/list.php">Accounts List</a></li>
+<li><a href="<?= $base_url ?>accounts/create.php">Add accounts </a></li>
+
 </ul>
 
 <li>
