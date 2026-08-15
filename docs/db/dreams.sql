@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2026 at 10:02 PM
+-- Generation Time: Aug 15, 2026 at 03:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -88,6 +88,61 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `phone`, `email`, `address`, `m
 (4, 'Belel ibn rabah al habasi', 'Male', '+6478215465', 'BelelRabah@gmail.com', 'Abhi-Siniya(eithopia)', 'R', '2026-08-02 04:14:07', NULL, NULL, NULL, NULL),
 (6, 'shah sultan', 'Male', '0658545', '', 'hathazari', 'regular', '2026-08-14 05:34:46', NULL, NULL, NULL, NULL),
 (7, 'amir hamza', 'Male', '6598', 'hamza@gmail.com', 'sdfjh', 'regular', '2026-08-14 06:03:56', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expenses`
+--
+
+CREATE TABLE `expenses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `expense_date` date NOT NULL,
+  `amount` decimal(12,2) NOT NULL,
+  `payment_method` varchar(50) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `created_by` int(10) UNSIGNED DEFAULT NULL,
+  `updated_by` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`id`, `category_id`, `expense_date`, `amount`, `payment_method`, `description`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
+(1, 2, '2026-08-15', 652000.00, 'Cash', '', '2026-08-15 07:01:17', NULL, NULL, 7, NULL),
+(2, 3, '2026-08-14', 5000.00, 'Cash', '', '2026-08-15 08:12:57', NULL, NULL, 7, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expense_categories`
+--
+
+CREATE TABLE `expense_categories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `category_name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `created_by` int(10) UNSIGNED DEFAULT NULL,
+  `updated_by` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expense_categories`
+--
+
+INSERT INTO `expense_categories` (`id`, `category_name`, `description`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
+(1, 'Salary', 'Salaries of the staffs', 1, '2026-08-15 05:28:08', NULL, NULL, 7, NULL),
+(2, 'Rent', 'rent', 1, '2026-08-15 07:01:01', NULL, NULL, 7, NULL),
+(3, 'Bonus', 'Bonuses', 1, '2026-08-15 08:07:47', NULL, NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,7 +235,8 @@ INSERT INTO `purchases` (`id`, `supplier_id`, `purchase_date`, `total_amount`, `
 (3, 1, '2026-08-12', 110700.00, 0.00, 1, 0.00, 110700.00, '', 1, '2026-08-12 02:34:54', '2026-08-12 06:34:54', NULL, 7, NULL),
 (4, 1, '2026-08-12', 12500.00, 0.00, 1, 0.00, 12500.00, '', 1, '2026-08-12 03:23:30', '2026-08-12 07:23:30', NULL, 7, NULL),
 (5, 2, '2026-08-09', 256.00, 5.00, 2, 15.00, 279.68, '', 1, '2026-08-12 12:12:44', '2026-08-12 16:12:44', NULL, 7, NULL),
-(6, 1, '2026-08-10', 640.00, 0.00, 1, 0.00, 640.00, '', 1, '2026-08-12 12:53:01', '2026-08-12 16:53:01', NULL, 7, NULL);
+(6, 1, '2026-08-10', 640.00, 0.00, 1, 0.00, 640.00, '', 1, '2026-08-12 12:53:01', '2026-08-12 16:53:01', NULL, 7, NULL),
+(11, 1, '2026-08-19', 1350.00, 0.00, 1, 0.00, 1350.00, '', 1, '2026-08-15 02:19:33', '2026-08-15 06:19:33', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -213,7 +269,8 @@ INSERT INTO `purchase_details` (`id`, `purchase_id`, `product_id`, `quantity`, `
 (5, 3, 3, 100, 1100.00, 110000.00, '2026-08-12 02:34:54', '2026-08-12 06:34:54', NULL, 7, NULL),
 (6, 4, 12, 50, 250.00, 12500.00, '2026-08-12 03:23:30', '2026-08-12 07:23:30', NULL, 7, NULL),
 (7, 5, 18, 2, 128.00, 256.00, '2026-08-12 12:12:44', '2026-08-12 16:12:44', NULL, 7, NULL),
-(8, 6, 18, 5, 128.00, 640.00, '2026-08-12 12:53:01', '2026-08-12 16:53:01', NULL, 7, NULL);
+(8, 6, 18, 5, 128.00, 640.00, '2026-08-12 12:53:01', '2026-08-12 16:53:01', NULL, 7, NULL),
+(13, 11, 19, 10, 135.00, 1350.00, '2026-08-15 02:19:33', '2026-08-15 06:19:33', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -268,7 +325,49 @@ CREATE TABLE `sales` (
 INSERT INTO `sales` (`id`, `customer_id`, `user_id`, `sale_date`, `total_amount`, `discount`, `tax`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `warehouse_id`) VALUES
 (3, 3, 7, '2026-08-13', 12500.00, 5.00, 0.00, 1, '2026-08-12 03:21:37', '2026-08-12 07:21:37', NULL, 7, NULL, 6),
 (4, 1, 7, '2026-08-12', 2800.00, 0.00, 0.00, 1, '2026-08-12 03:24:00', '2026-08-12 07:24:00', NULL, 7, NULL, 6),
-(5, 3, 7, '2026-08-11', 135.00, 0.00, 0.00, 1, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL, 4);
+(5, 3, 7, '2026-08-11', 135.00, 0.00, 0.00, 1, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL, 4),
+(6, 1, 7, '2026-08-15', 845.00, 87.00, 0.00, 1, '2026-08-15 02:20:51', '2026-08-15 06:20:51', NULL, 7, NULL, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales_returns`
+--
+
+CREATE TABLE `sales_returns` (
+  `id` int(11) NOT NULL,
+  `sale_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `return_date` date NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `reason` text DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1 = Active, 2 = Cancelled',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales_return_details`
+--
+
+CREATE TABLE `sales_return_details` (
+  `id` int(11) NOT NULL,
+  `sale_return_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `subtotal` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -302,7 +401,36 @@ INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_pri
 (5, 5, 14, 2, 0.00, 1600.00, '2026-08-12 01:04:38', '2026-08-12 05:04:38', NULL, 7, NULL),
 (11, 3, 3, 10, 1250.00, 12500.00, '2026-08-12 03:21:37', '2026-08-12 07:21:37', NULL, 7, NULL),
 (12, 4, 12, 10, 280.00, 2800.00, '2026-08-12 03:24:00', '2026-08-12 07:24:00', NULL, 7, NULL),
-(13, 5, 18, 1, 135.00, 135.00, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL);
+(13, 5, 18, 1, 135.00, 135.00, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL),
+(14, 6, 19, 5, 169.00, 845.00, '2026-08-15 02:20:51', '2026-08-15 06:20:51', NULL, 7, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stocks`
+--
+
+CREATE TABLE `stocks` (
+  `id` int(11) NOT NULL,
+  `stock_date` date DEFAULT NULL,
+  `product_id` int(11) NOT NULL,
+  `warehouse_id` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT 0,
+  `purchase_id` int(11) DEFAULT NULL,
+  `sale_id` int(11) DEFAULT NULL,
+  `stock_transfer_id` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `stocks`
+--
+
+INSERT INTO `stocks` (`id`, `stock_date`, `product_id`, `warehouse_id`, `quantity`, `purchase_id`, `sale_id`, `stock_transfer_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '2026-08-19', 19, 3, 10, 11, NULL, NULL, 2026, '2026-08-15 06:19:33', NULL),
+(2, '2026-08-15', 19, 3, -5, NULL, 6, NULL, 2026, '2026-08-15 06:20:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -458,6 +586,18 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `expenses`
+--
+ALTER TABLE `expenses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expense_categories`
+--
+ALTER TABLE `expense_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `payments`
 --
 ALTER TABLE `payments`
@@ -498,10 +638,29 @@ ALTER TABLE `sales`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sales_returns`
+--
+ALTER TABLE `sales_returns`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sales_return_details`
+--
+ALTER TABLE `sales_return_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sale_details`
 --
 ALTER TABLE `sale_details`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `stocks_ibfk_1` (`product_id`);
 
 --
 -- Indexes for table `stock_transfers`
@@ -545,6 +704,18 @@ ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `expenses`
+--
+ALTER TABLE `expenses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `expense_categories`
+--
+ALTER TABLE `expense_categories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
@@ -560,13 +731,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `purchase_details`
 --
 ALTER TABLE `purchase_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -578,13 +749,31 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `sales_returns`
+--
+ALTER TABLE `sales_returns`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sales_return_details`
+--
+ALTER TABLE `sales_return_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sale_details`
 --
 ALTER TABLE `sale_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `stocks`
+--
+ALTER TABLE `stocks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `stock_transfers`
@@ -609,6 +798,16 @@ ALTER TABLE `users`
 --
 ALTER TABLE `warehouses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
