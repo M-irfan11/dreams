@@ -20,6 +20,12 @@ try {
     }
     $sale = $sale_result['data'][0];
 
+    // stock returns go back to whichever warehouse the original sale was made from
+    if(empty($sale->warehouse_id)){
+        throw new Exception("This sale has no warehouse assigned - cannot process a stock return.");
+    }
+    $warehouse_id = $sale->warehouse_id;
+
 
     // -------------------------
     // VALIDATE + BUILD RETURN ITEMS
@@ -124,23 +130,19 @@ try {
             throw new Exception($detail_result['message']);
         }
 
-        // STOCK IN - status = 1 means IN
+        // STOCK IN - positive quantity adds back to the stocks ledger
+        // (mirrors add.php, which inserts a NEGATIVE quantity into `stocks` for a sale)
         $stock_data = [
             "product_id" => $item['product_id'],
             "quantity" => $item['quantity'],
-            "status" => 1,
-            "transfer_date" => $return_date,
+            "warehouse_id" => $warehouse_id,
+            "stock_date" => $return_date,
+            "sale_id" => $sale_id,
             "sale_return_id" => $sale_return_id,
-            "created_at" => date('Y-m-d H:i:s'),
-            "created_by" => $_SESSION['user_id']
+            "created_at" => date('Y-m-d H:i:s')
         ];
 
-        // match existing sales/store.php behavior - warehouse optional
-        if(!empty($_POST['warehouse_id'])){
-            $stock_data["warehouse_id"] = $_POST['warehouse_id'];
-        }
-
-        $stock_result = $crud->common_insert('stock_transfers', $stock_data);
+        $stock_result = $crud->common_insert('stocks', $stock_data);
 
         if(!$stock_result['status']){
             throw new Exception($stock_result['message']);
