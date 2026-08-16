@@ -9,9 +9,11 @@
     $items = [];
 
     if($selected_sale_id > 0){
-        // get sale + customer info
-        $sale_result = $crud->common_query("SELECT sales.*, customers.name as customer_name FROM sales
+        // get sale + customer + warehouse info
+        // (returned stock always goes back to the warehouse the sale was made from)
+        $sale_result = $crud->common_query("SELECT sales.*, customers.name as customer_name, warehouses.warehouse_name FROM sales
             JOIN customers on customers.id = sales.customer_id
+            LEFT JOIN warehouses on warehouses.id = sales.warehouse_id
             WHERE sales.id = $selected_sale_id AND sales.deleted_at IS NULL");
         $sale = $sale_result['status'] ? $sale_result['data'][0] : null;
 
@@ -45,6 +47,18 @@
 
 <div class="page-wrapper">
     <div class="content">
+
+        <?php
+            // Session message (set by store.php on failure - was silently lost before)
+            if(isset($_SESSION['message'])){
+                $msg = $_SESSION['message'];
+                $alert_class = $msg['type'] === 'success' ? 'alert-success' : 'alert-danger';
+                echo '<div class="alert ' . $alert_class . '">
+                        <strong>' . $msg['title'] . '</strong> ' . $msg['message'] . '
+                      </div>';
+                unset($_SESSION['message']);
+            }
+        ?>
 
         <div class="page-header">
             <div class="page-title">
@@ -95,6 +109,13 @@
                 <div class="alert alert-danger">That sale could not be found.</div>
             <?php endif; ?>
 
+        <?php elseif(empty($sale->warehouse_id)): ?>
+            <!-- can't process a stock return without knowing which warehouse to return it to -->
+            <div class="alert alert-danger">
+                Sale #<?php echo $sale->id; ?> has no warehouse assigned, so returned stock cannot be placed anywhere. Please contact an administrator.
+            </div>
+            <a href="create.php" class="btn btn-cancel">Choose Another Sale</a>
+
         <?php elseif(empty($items)): ?>
             <!-- sale found but nothing left to return -->
             <div class="alert alert-danger">
@@ -122,10 +143,19 @@
                                     <input type="text" class="form-control" value="<?php echo htmlspecialchars($sale->sale_date); ?>" readonly>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Return Date <span class="text-danger">*</span></label>
                                     <input autocomplete="off" name="return_date" type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Returning To Warehouse</label>
+                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($sale->warehouse_name); ?>" readonly>
                                 </div>
                             </div>
                         </div>

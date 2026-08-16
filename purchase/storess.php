@@ -9,8 +9,6 @@ function getAccountId($crud, $code) {
 
 $crud->conn->begin_transaction();
 $error = 0;
-$error_messages = []; // collect the REAL reason for any failure, instead of reusing $result['message']
-
 $data = [
     "supplier_id" => $_POST['supplier_id'],
     "purchase_date" => $_POST['purchase_date'],
@@ -46,7 +44,6 @@ if ($result['status']) {
         $pd = $crud->common_insert('purchase_details', $stock_data);
         if (!$pd['status']) {
             $error++;
-            $error_messages[] = "Purchase detail: " . $pd['message'];
         }
         // add stock in stocks table
         $st = $crud->common_insert('stocks', [
@@ -59,19 +56,14 @@ if ($result['status']) {
         ]);
         if (!$st['status']) {
             $error++;
-            $error_messages[] = "Stock: " . $st['message'];
         }
     }
 
     // -------------------------
-    // JOURNAL ENTRIES (accounting posting) - OPTIONAL
+    // JOURNAL ENTRIES (accounting posting)
     // Dr Inventory  = grand_total - vat
     // Dr VAT Input  = vat
     // Cr Accounts Payable = grand_total
-    //
-    // If the Accounts module (chart_of_accounts) isn't set up yet,
-    // we simply SKIP posting journal entries - the purchase itself
-    // must still save successfully. This does NOT count as an error.
     // -------------------------
 
     $grand_total = (float) $_POST['grand_total'];
@@ -94,10 +86,7 @@ if ($result['status']) {
             "description" => "Purchase #$purchase_id - Inventory",
             "created_by" => $_SESSION['user_id']
         ]);
-        if (!$je1['status']) {
-            $error++;
-            $error_messages[] = "Journal (Inventory): " . $je1['message'];
-        }
+        if (!$je1['status']) $error++;
 
         if ($vat > 0 && $vat_input_acc) {
             $je2 = $crud->common_insert('journal_entries', [
@@ -110,10 +99,7 @@ if ($result['status']) {
                 "description" => "Purchase #$purchase_id - VAT Input",
                 "created_by" => $_SESSION['user_id']
             ]);
-            if (!$je2['status']) {
-                $error++;
-                $error_messages[] = "Journal (VAT): " . $je2['message'];
-            }
+            if (!$je2['status']) $error++;
         }
 
         $je3 = $crud->common_insert('journal_entries', [
@@ -126,27 +112,26 @@ if ($result['status']) {
             "description" => "Purchase #$purchase_id - Payable",
             "created_by" => $_SESSION['user_id']
         ]);
-        if (!$je3['status']) {
-            $error++;
-            $error_messages[] = "Journal (Payable): " . $je3['message'];
-        }
+        if (!$je3['status']) $error++;
 
+    } else {
+        // account setup na thakle journal skip hobe, kintu purchase save thambe na
+        $error++;
     }
-    // else: chart_of_accounts not set up yet - journal entries skipped, purchase still proceeds
 
-    if ($error == 0) {
+    if ($result['status'] && $error == 0) {
         $crud->conn->commit();
         $_SESSION['message'] = array(
             "type" => "success",
             "title" => "Success",
-            "message" => "Purchase added successfully."
+            "message" => "Product added successfully."
         );
     } else {
         $crud->conn->rollback();
         $_SESSION['message'] = array(
             "type" => "danger",
             "title" => "Error",
-            "message" => implode(" | ", $error_messages)
+            "message" => $result['message']
         );
     }
 
