@@ -75,7 +75,7 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Accounts</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>accounts/list.php">accounts List</a></li>
 <li><a href="<?= $base_url ?>accounts/create.php">Add accounts </a></li>
