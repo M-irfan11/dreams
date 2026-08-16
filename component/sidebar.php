@@ -69,8 +69,8 @@
 <ul>
 <li><a href="<?= $base_url ?>sales_return/list.php">Sales Return List</a></li>
 <li><a href="<?= $base_url ?>sales_return/create.php">Add Sales Return </a></li>
-<li><a href="<?= $base_url ?>purchasereturnlist.php">Purchase Return List</a></li>
-<li><a href="<?= $base_url ?>purchasereturn/create.php">Add Purchase Return </a></li>
+<li><a href="<?= $base_url ?>purchase_return/list.php">Purchase Return List</a></li>
+<li><a href="<?= $base_url ?>purchase_return/create.php">Add Purchase Return </a></li>
 </ul>
 </li>
 <li class="submenu">
