@@ -35,7 +35,7 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="box"></i> <span>Stocks</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>stock/list.php"><i data-feather="box"></i> <span>Stocks</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>stock/list.php">Stock list</a></li>
 <li><a href="<?= $base_url ?>stock_transfer/list.php">Stock Transfer</a></li>
@@ -43,22 +43,22 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/expense1.svg" alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>expense/list.php"><img src="<?= $base_url ?>assets/img/icons/expense1.svg" alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>expenselist.php">Expense List</a></li>
-<li><a href="<?= $base_url ?>createexpense.php">Add Expense</a></li>
-<li><a href="<?= $base_url ?>expensecategory.php">Expense Category</a></li>
+<li><a href="<?= $base_url ?>expense/list.php">Expense List</a></li>
+<li><a href="<?= $base_url ?>expense/create.php">Add Expense</a></li>
+<li><a href="<?= $base_url ?>expense_categories/list.php">Expense Category</a></li>
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/quotation1.svg" alt="img"><span> Customer</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>customer/list.php"><img src="<?= $base_url ?>assets/img/icons/quotation1.svg" alt="img"><span> Customer</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>customer/list.php">Customer List</a></li>
  
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/transfer1.svg" alt="img"><span> Transfer</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>transfer/list.php"><img src="<?= $base_url ?>assets/img/icons/transfer1.svg" alt="img"><span> Transfer</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>transferlist.php">Transfer List</a></li>
 <li><a href="<?= $base_url ?>addtransfer.php">Add Transfer </a></li>
@@ -66,100 +66,32 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/return1.svg" alt="img"><span> Return</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>sales_return/list.php"><img src="<?= $base_url ?>assets/img/icons/return1.svg" alt="img"><span> Return</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>salesreturnlist.php">Sales Return List</a></li>
-<li><a href="<?= $base_url ?>createsalesreturn.php">Add Sales Return </a></li>
+<li><a href="<?= $base_url ?>sales_return/list.php">Sales Return List</a></li>
+<li><a href="<?= $base_url ?>sales_return/create.php">Add Sales Return </a></li>
 <li><a href="<?= $base_url ?>purchasereturnlist.php">Purchase Return List</a></li>
-<li><a href="<?= $base_url ?>createpurchasereturn.php">Add Purchase Return </a></li>
+<li><a href="<?= $base_url ?>purchasereturn/create.php">Add Purchase Return </a></li>
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> People</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>customerlist.php">Customer List</a></li>
-<li><a href="<?= $base_url ?>addcustomer.php">Add Customer </a></li>
-<li><a href="<?= $base_url ?>supplierlist.php">Supplier List</a></li>
-<li><a href="<?= $base_url ?>addsupplier.php">Add Supplier </a></li>
-<li><a href="<?= $base_url ?>users/list.php">User List</a></li>
-<li><a href="<?= $base_url ?>users/add.php">Add User</a></li>
-<li><a href="<?= $base_url ?>storelist.php">Store List</a></li>
-<li><a href="<?= $base_url ?>addstore.php">Add Store</a></li>
+<li><a href="<?= $base_url ?>accounts/list.php">accounts List</a></li>
+<li><a href="<?= $base_url ?>accounts/create.php">Add accounts </a></li>
+
 </ul>
-</li> <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/places.svg" alt="img"><span> Places</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>newcountry.php">New Country</a></li>
-<li><a href="<?= $base_url ?>countrieslist.php">Countries list</a></li>
-<li><a href="<?= $base_url ?>newstate.php">New State </a></li>
-<li><a href="<?= $base_url ?>statelist.php">State list</a></li>
-</ul>
-</li>
+
 <li>
 <a href="<?= $base_url ?>warehouse/list.php"><i data-feather="layers"></i><span> warehouse</span> </a>
 </li>
-<li>
-<a href="<?= $base_url ?>blankpage.php"><i data-feather="file"></i><span> Blank Page</span> </a>
-</li>
-<li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="alert-octagon"></i> <span> Error Pages </span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>error-404.php">404 Error </a></li>
-<li><a href="<?= $base_url ?>error-500.php">500 Error </a></li>
-</ul>
-</li>
 
-<li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="bar-chart-2"></i> <span> Charts </span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>chart-apex.php">Apex Charts</a></li>
-<li><a href="<?= $base_url ?>chart-js.php">Chart Js</a></li>
-<li><a href="<?= $base_url ?>chart-morris.php">Morris Charts</a></li>
-<li><a href="<?= $base_url ?>chart-flot.php">Flot Charts</a></li>
-<li><a href="<?= $base_url ?>chart-peity.php">Peity Charts</a></li>
-</ul>
-</li>
-<li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="award"></i><span> Icons </span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>icon-fontawesome.php">Fontawesome Icons</a></li>
-<li><a href="<?= $base_url ?>icon-feather.php">Feather Icons</a></li>
-<li><a href="<?= $base_url ?>icon-ionic.php">Ionic Icons</a></li>
-<li><a href="<?= $base_url ?>icon-material.php">Material Icons</a></li>
-<li><a href="<?= $base_url ?>icon-pe7.php">Pe7 Icons</a></li>
-<li><a href="<?= $base_url ?>icon-simpleline.php">Simpleline Icons</a></li>
-<li><a href="<?= $base_url ?>icon-themify.php">Themify Icons</a></li>
-<li><a href="<?= $base_url ?>icon-weather.php">Weather Icons</a></li>
-<li><a href="<?= $base_url ?>icon-typicon.php">Typicon Icons</a></li>
-<li><a href="<?= $base_url ?>icon-flag.php">Flag Icons</a></li>
-</ul>
-</li>
-<li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="columns"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>form-basic-inputs.php">Basic Inputs </a></li>
-<li><a href="<?= $base_url ?>form-input-groups.php">Input Groups </a></li>
-<li><a href="<?= $base_url ?>form-horizontal.php">Horizontal Form </a></li>
-<li><a href="<?= $base_url ?>form-vertical.php"> Vertical Form </a></li>
-<li><a href="<?= $base_url ?>form-mask.php">Form Mask </a></li>
-<li><a href="<?= $base_url ?>form-validation.php">Form Validation </a></li>
-<li><a href="<?= $base_url ?>form-select2.php">Form Select2 </a></li>
-<li><a href="<?= $base_url ?>form-fileupload.php">File Upload </a></li>
-</ul>
-</li>
+
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>tables-basic.php">Basic Tables </a></li>
 <li><a href="<?= $base_url ?>data-tables.php">Data Table </a></li>
-</ul>
-</li>
-<li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/product.svg" alt="img"><span> Application</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>chat.php">Chat</a></li>
-<li><a href="<?= $base_url ?>calendar.php">Calendar</a></li>
-<li><a href="<?= $base_url ?>email.php">Email</a></li>
 </ul>
 </li>
 <li class="submenu">

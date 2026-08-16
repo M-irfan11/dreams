@@ -2,6 +2,12 @@
 
 require_once '../component/connection.php';
 
+// account_code diye account_id ber kora
+function getAccountId($crud, $code) {
+    $r = $crud->common_select('chart_of_accounts', '*', ["account_code" => $code]);
+    return $r['status'] ? $r['data'][0]->account_id : null;
+}
+
 $crud->conn->begin_transaction();
 
 try {
@@ -111,6 +117,72 @@ try {
         }
     }
 
+
+    // -------------------------
+    // JOURNAL ENTRIES (accounting posting)
+    // Dr Accounts Receivable = total_amount - discount + tax
+    // Cr Sales Revenue       = total_amount - discount
+    // Cr VAT Payable         = tax
+    // -------------------------
+
+    $total_amount = (float) $_POST['total_amount'];
+    $discount = (float) ($_POST['discount'] ?: 0);
+    $tax = (float) ($_POST['tax'] ?: 0);
+
+    $revenue_amount = $total_amount - $discount;
+    $receivable_amount = $revenue_amount + $tax;
+
+    $receivable_acc = getAccountId($crud, '1200');
+    $revenue_acc    = getAccountId($crud, '4000');
+    $vat_output_acc = getAccountId($crud, '2100');
+
+    if (!$receivable_acc || !$revenue_acc) {
+        throw new Exception("Accounting accounts not set up. Please add accounts 1200 and 4000 first.");
+    }
+
+    $je1 = $crud->common_insert('journal_entries', [
+        "entry_date" => $_POST['sale_date'],
+        "reference_type" => "Sales",
+        "reference_id" => $sale_id,
+        "account_id" => $receivable_acc,
+        "debit" => $receivable_amount,
+        "credit" => 0,
+        "description" => "Sale #$sale_id - Receivable",
+        "created_by" => $_SESSION['user_id']
+    ]);
+    if (!$je1['status']) {
+        throw new Exception($je1['message']);
+    }
+
+    $je2 = $crud->common_insert('journal_entries', [
+        "entry_date" => $_POST['sale_date'],
+        "reference_type" => "Sales",
+        "reference_id" => $sale_id,
+        "account_id" => $revenue_acc,
+        "debit" => 0,
+        "credit" => $revenue_amount,
+        "description" => "Sale #$sale_id - Revenue",
+        "created_by" => $_SESSION['user_id']
+    ]);
+    if (!$je2['status']) {
+        throw new Exception($je2['message']);
+    }
+
+    if ($tax > 0 && $vat_output_acc) {
+        $je3 = $crud->common_insert('journal_entries', [
+            "entry_date" => $_POST['sale_date'],
+            "reference_type" => "Sales",
+            "reference_id" => $sale_id,
+            "account_id" => $vat_output_acc,
+            "debit" => 0,
+            "credit" => $tax,
+            "description" => "Sale #$sale_id - VAT Output",
+            "created_by" => $_SESSION['user_id']
+        ]);
+        if (!$je3['status']) {
+            throw new Exception($je3['message']);
+        }
+    }
 
 
     $crud->conn->commit();

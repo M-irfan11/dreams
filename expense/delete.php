@@ -1,20 +1,21 @@
 <?php
 require_once '../component/connection.php';
 
-if($_POST){
+if(isset($_GET['id'])){
 
-    $data = [
-        "name"        => $_POST['name'],
-        "description" => $_POST['description'],
-    ];
+    $id = $_GET['id'];
 
-    $result = $crud->common_insert('categories', $data);
+    // soft delete - set deleted_at instead of removing the row
+    $result = $crud->common_update('expenses', [
+        "deleted_at" => date('Y-m-d H:i:s'),
+        "updated_by" => $_SESSION['user_id']
+    ], ["id" => $id]);
 
     if($result['status']){
         $_SESSION['message'] = array(
             "type" => "success",
-            "title" => "Success",
-            "message" => "Category added successfully."
+            "title" => "Deleted",
+            "message" => "Expense deleted successfully."
         );
     } else {
         $_SESSION['message'] = array(

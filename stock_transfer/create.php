@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status       = (int)($_POST['status'] ?? 1);
 
     // Optional reference fields
-    $sale_id             = !empty($_POST['sale_id']) ? (int)$_POST['sale_id'] : null;
+    $id             = !empty($_POST['id']) ? (int)$_POST['id'] : null;
     $purchase_id         = !empty($_POST['purchase_id']) ? (int)$_POST['purchase_id'] : null;
     $sale_return_id      = !empty($_POST['sale_return_id']) ? (int)$_POST['sale_return_id'] : null;
     $purchase_return_id  = !empty($_POST['purchase_return_id']) ? (int)$_POST['purchase_return_id'] : null;
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "status"        => $status
         ];
 
-        if ($sale_id !== null)            $data["sale_id"] = $sale_id;
+        if ($id !== null)            $data["id"] = $id;
         if ($purchase_id !== null)        $data["purchase_id"] = $purchase_id;
         if ($sale_return_id !== null)     $data["sale_return_id"] = $sale_return_id;
         if ($purchase_return_id !== null) $data["purchase_return_id"] = $purchase_return_id;
@@ -60,7 +60,7 @@ $products_result = $crud->common_select("products", "id, product_name");
 $products = $products_result['data'];
 
 // Data for optional sale / purchase reference dropdowns
-$sales_result     = $crud->common_select("sales", "sale_id, sale_date, total_amount", [], "AND", "sale_id", "DESC");
+$sales_result     = $crud->common_select("sales", "id, sale_date, total_amount", [], "AND", "id", "DESC");
 $purchases_result = $crud->common_select("purchases", "id, purchase_date, total_amount", [], "AND", "id", "DESC");
 $sales     = $sales_result['data'];
 $purchases = $purchases_result['data'];
@@ -121,12 +121,12 @@ $purchases = $purchases_result['data'];
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Sale (optional)</label>
-                            <select name="sale_id" class="form-control">
+                            <select name="id" class="form-control">
                                 <option value="">-- None --</option>
                                 <?php foreach ($sales as $s): ?>
-                                    <option value="<?= (int)$s->sale_id ?>"
-                                        <?= (isset($_POST['sale_id']) && $_POST['sale_id'] == $s->sale_id) ? 'selected' : '' ?>>
-                                        Sale #<?= (int)$s->sale_id ?> - <?= htmlspecialchars($s->sale_date) ?> (<?= htmlspecialchars($s->total_amount) ?>)
+                                    <option value="<?= (int)$s->id ?>"
+                                        <?= (isset($_POST['id']) && $_POST['id'] == $s->id) ? 'selected' : '' ?>>
+                                        Sale #<?= (int)$s->id ?> - <?= htmlspecialchars($s->sale_date) ?> (<?= htmlspecialchars($s->total_amount) ?>)
                                     </option>
                                 <?php endforeach; ?>
                             </select>
