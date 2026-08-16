@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2026 at 08:59 AM
+-- Generation Time: Aug 16, 2026 at 05:29 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,45 @@ SET time_zone = "+00:00";
 --
 -- Database: `dreams`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_heads`
+--
+
+CREATE TABLE `account_heads` (
+  `id` int(11) NOT NULL,
+  `account_code` varchar(100) NOT NULL,
+  `account_name` varchar(100) NOT NULL,
+  `account_type` enum('Asset','Liability','Income','Expense','Equity','VAT') NOT NULL,
+  `account_subtype` varchar(50) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `opening_balance` decimal(12,2) DEFAULT 0.00,
+  `current_balance` decimal(12,2) DEFAULT 0.00,
+  `total_debit` decimal(12,2) DEFAULT 0.00,
+  `total_credit` decimal(12,2) DEFAULT 0.00,
+  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `last_transaction_date` date DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `account_heads`
+--
+
+INSERT INTO `account_heads` (`id`, `account_code`, `account_name`, `account_type`, `account_subtype`, `parent_id`, `opening_balance`, `current_balance`, `total_debit`, `total_credit`, `status`, `last_transaction_date`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'CASH', 'Cash in Hand', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL),
+(2, 'BANK', 'Bank Account', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL),
+(3, 'AR', 'Accounts Receivable', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL),
+(4, 'AP', 'Accounts Payable', 'Liability', 'Current Liability', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL),
+(5, 'SALES', 'Sales Income', 'Income', 'Operating Income', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL),
+(6, 'PURCHASE', 'Purchase / COGS', 'Expense', 'Cost of Goods Sold', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL),
+(7, 'VAT_OUTPUT', 'VAT Payable (Output VAT)', 'VAT', 'Output VAT', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL),
+(8, 'VAT_INPUT', 'VAT Receivable (Input VAT)', 'VAT', 'Input VAT', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -55,47 +94,6 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at
 (12, 'food', 'daily nutrition food', '2026-08-06 10:19:09', '2026-08-06 10:19:09', NULL, NULL, NULL),
 (13, 'Computer Accecories', 'dsjfkl', '2026-08-14 05:29:51', '2026-08-14 05:29:51', NULL, NULL, NULL),
 (14, 'jkj', 'udio', '2026-08-14 06:02:39', '2026-08-14 06:02:39', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `chart_of_accounts`
---
-
-CREATE TABLE `chart_of_accounts` (
-  `account_id` int(11) NOT NULL,
-  `account_code` varchar(100) NOT NULL,
-  `account_name` varchar(100) NOT NULL,
-  `account_type` enum('Asset','Liability','Income','Expense','Equity','VAT') NOT NULL,
-  `account_subtype` varchar(50) DEFAULT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  `opening_balance` decimal(12,2) DEFAULT 0.00,
-  `current_balance` decimal(12,2) DEFAULT 0.00,
-  `total_debit` decimal(12,2) DEFAULT 0.00,
-  `total_credit` decimal(12,2) DEFAULT 0.00,
-  `status` enum('Active','Inactive') DEFAULT 'Active',
-  `last_transaction_date` date DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `chart_of_accounts`
---
-
-INSERT INTO `chart_of_accounts` (`account_id`, `account_code`, `account_name`, `account_type`, `account_subtype`, `parent_id`, `opening_balance`, `current_balance`, `total_debit`, `total_credit`, `status`, `last_transaction_date`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '1000', 'Assets', 'Asset', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(2, '1100', 'Cash in Hand', 'Asset', NULL, 1, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(3, '1200', 'Accounts Receivable', 'Asset', NULL, 1, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(4, '1300', 'Inventory / Stock', 'Asset', NULL, 1, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(5, '2000', 'Accounts Payable', 'Liability', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(6, '2100', 'VAT Payable (Output)', 'VAT', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(7, '2200', 'VAT Receivable (Input)', 'VAT', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(8, '4000', 'Sales Revenue', 'Income', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(9, '5000', 'Purchase / COGS', 'Expense', NULL, NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-15 12:08:24', '2026-08-15 12:08:24', NULL),
-(10, '1232', 'account reciaveable', 'Equity', '', 3, 100000.00, 100000.00, 0.00, 0.00, 'Active', NULL, '', '2026-08-15 16:07:17', '2026-08-15 16:07:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -156,8 +154,6 @@ CREATE TABLE `expenses` (
 
 INSERT INTO `expenses` (`id`, `category_id`, `expense_date`, `amount`, `payment_method`, `description`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
 (1, 2, '2026-08-15', 652000.00, 'Cash', '', '2026-08-15 07:01:17', NULL, NULL, 7, NULL),
-(2, 3, '2026-08-14', 5000.00, 'Cash', '', '2026-08-15 08:12:57', NULL, NULL, 7, NULL),
-(1, 2, '2026-08-15', 652000.00, 'Cash', '', '2026-08-15 07:01:17', NULL, NULL, 7, NULL),
 (2, 3, '2026-08-14', 5000.00, 'Cash', '', '2026-08-15 08:12:57', NULL, NULL, 7, NULL);
 
 -- --------------------------------------------------------
@@ -185,43 +181,61 @@ CREATE TABLE `expense_categories` (
 INSERT INTO `expense_categories` (`id`, `category_name`, `description`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
 (1, 'Salary', 'Salaries of the staffs', 1, '2026-08-15 05:28:08', NULL, NULL, 7, NULL),
 (2, 'Rent', 'rent', 1, '2026-08-15 07:01:01', NULL, NULL, 7, NULL),
-(3, 'Bonus', 'Bonuses', 1, '2026-08-15 08:07:47', NULL, NULL, 7, NULL),
-(1, 'Salary', 'Salaries of the staffs', 1, '2026-08-15 05:28:08', NULL, NULL, 7, NULL),
-(2, 'Rent', 'rent', 1, '2026-08-15 07:01:01', NULL, NULL, 7, NULL),
 (3, 'Bonus', 'Bonuses', 1, '2026-08-15 08:07:47', NULL, NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `journal_entries`
+-- Table structure for table `journal_vouchers`
 --
 
-CREATE TABLE `journal_entries` (
-  `entry_id` bigint(20) NOT NULL,
-  `entry_date` date NOT NULL,
-  `reference_type` enum('Sales','Purchase','Stock','Payment','Receipt','Manual') NOT NULL,
-  `reference_id` int(11) NOT NULL,
-  `account_id` int(11) NOT NULL,
-  `debit` decimal(12,2) DEFAULT 0.00,
-  `credit` decimal(12,2) DEFAULT 0.00,
-  `description` varchar(255) DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `journal_vouchers` (
+  `id` int(11) NOT NULL,
+  `invoice_no` varchar(100) NOT NULL,
+  `note` text DEFAULT NULL,
+  `date` date NOT NULL,
+  `source_type` varchar(100) DEFAULT NULL,
+  `source_id` int(11) DEFAULT NULL,
+  `dr` decimal(12,2) DEFAULT 0.00,
+  `cr` decimal(12,2) DEFAULT 0.00,
+  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `journal_entries`
+-- Table structure for table `journal_voucher_details`
 --
 
-INSERT INTO `journal_entries` (`entry_id`, `entry_date`, `reference_type`, `reference_id`, `account_id`, `debit`, `credit`, `description`, `created_by`, `created_at`) VALUES
-(1, '2026-08-04', 'Purchase', 8, 4, 119500.00, 0.00, 'Purchase #8 - Inventory', 7, '2026-08-16 06:08:44'),
-(2, '2026-08-04', 'Purchase', 8, 5, 0.00, 119500.00, 'Purchase #8 - Payable', 7, '2026-08-16 06:08:44'),
-(3, '2026-08-12', 'Purchase', 9, 4, 13500.00, 0.00, 'Purchase #9 - Inventory', 7, '2026-08-16 06:31:45'),
-(4, '2026-08-12', 'Purchase', 9, 5, 0.00, 13500.00, 'Purchase #9 - Payable', 7, '2026-08-16 06:31:45'),
-(5, '2026-08-11', 'Purchase', 10, 4, 249750.00, 0.00, 'Purchase #10 - Inventory', 7, '2026-08-16 06:50:56'),
-(6, '2026-08-11', 'Purchase', 10, 5, 0.00, 249750.00, 'Purchase #10 - Payable', 7, '2026-08-16 06:50:56'),
-(7, '2026-08-04', 'Purchase', 11, 4, 105.00, 0.00, 'Purchase #11 - Inventory', 7, '2026-08-16 06:54:39'),
-(8, '2026-08-04', 'Purchase', 11, 5, 0.00, 105.00, 'Purchase #11 - Payable', 7, '2026-08-16 06:54:39');
+CREATE TABLE `journal_voucher_details` (
+  `id` int(11) NOT NULL,
+  `journal_voucher_id` int(11) NOT NULL,
+  `account_head_id` int(11) NOT NULL,
+  `dr` decimal(12,2) DEFAULT 0.00,
+  `cr` decimal(12,2) DEFAULT 0.00,
+  `remarks` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ledgers`
+--
+
+CREATE TABLE `ledgers` (
+  `id` int(11) NOT NULL,
+  `payment_voucher_id` int(11) DEFAULT NULL,
+  `receive_voucher_id` int(11) DEFAULT NULL,
+  `journal_voucher_id` int(11) DEFAULT NULL,
+  `account_head_id` int(11) NOT NULL,
+  `dr` decimal(12,2) DEFAULT 0.00,
+  `cr` decimal(12,2) DEFAULT 0.00,
+  `remarks` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -241,6 +255,42 @@ CREATE TABLE `payments` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_vouchers`
+--
+
+CREATE TABLE `payment_vouchers` (
+  `id` int(11) NOT NULL,
+  `invoice_no` varchar(100) NOT NULL,
+  `pay_to` varchar(100) NOT NULL,
+  `note` text DEFAULT NULL,
+  `date` date NOT NULL,
+  `source_type` varchar(100) DEFAULT NULL,
+  `source_id` int(11) DEFAULT NULL,
+  `dr` decimal(12,2) DEFAULT 0.00,
+  `cr` decimal(12,2) DEFAULT 0.00,
+  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_voucher_details`
+--
+
+CREATE TABLE `payment_voucher_details` (
+  `id` int(11) NOT NULL,
+  `payment_voucher_id` int(11) NOT NULL,
+  `account_head_id` int(11) NOT NULL,
+  `dr` decimal(12,2) DEFAULT 0.00,
+  `cr` decimal(12,2) DEFAULT 0.00,
+  `remarks` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -276,7 +326,6 @@ INSERT INTO `products` (`id`, `category_id`, `supplier_id`, `product_name`, `bra
 (11, 1, 1, 'pencil', 'STAR', 7.00, 10.00, '2552', '2026-08-06 18:42:24', NULL, NULL, NULL, NULL),
 (12, 0, 2, 'book', 'mkd', 250.00, 280.00, '1258', '2026-08-06 19:04:26', NULL, NULL, NULL, NULL),
 (14, 666, 420, 'Cat Food', 'Miaw ', 450.00, 800.00, '', '2026-08-09 04:41:58', NULL, NULL, NULL, NULL),
-(16, 1, 1, 'Dumur', 'roja', 1200.00, 1400.00, '0212', '2026-08-09 05:06:34', NULL, NULL, NULL, NULL),
 (17, 4, 4, 'akrot', 'roja', 1200.00, 1350.00, 'khl', '2026-08-09 05:08:54', NULL, NULL, NULL, NULL),
 (18, 4, 4, 'cumin', 'fdsf', 128.00, 135.00, '1365', '2026-08-12 04:38:45', NULL, NULL, NULL, NULL),
 (19, 1, 1, 'black cumin', 'mkd', 135.00, 169.00, '2514', '2026-08-14 05:59:12', NULL, NULL, NULL, NULL);
@@ -315,10 +364,8 @@ INSERT INTO `purchases` (`id`, `supplier_id`, `purchase_date`, `total_amount`, `
 (4, 1, '2026-08-12', 12500.00, 0.00, 1, 0.00, 12500.00, '', 1, '2026-08-12 03:23:30', '2026-08-12 07:23:30', NULL, 7, NULL),
 (5, 2, '2026-08-09', 256.00, 5.00, 2, 15.00, 279.68, '', 1, '2026-08-12 12:12:44', '2026-08-12 16:12:44', NULL, 7, NULL),
 (6, 1, '2026-08-10', 640.00, 0.00, 1, 0.00, 640.00, '', 1, '2026-08-12 12:53:01', '2026-08-12 16:53:01', NULL, 7, NULL),
-(8, 1, '2026-08-04', 120000.00, 500.00, 1, 0.00, 119500.00, 'f', 1, '2026-08-16 02:08:44', '2026-08-16 06:08:44', NULL, 7, NULL),
-(9, 2, '2026-08-12', 13500.00, 0.00, 1, 0.00, 13500.00, 'ff', 1, '2026-08-16 02:31:45', '2026-08-16 06:31:45', NULL, 7, NULL),
-(10, 1, '2026-08-11', 249750.00, 0.00, 1, 0.00, 249750.00, 'f', 1, '2026-08-16 02:50:56', '2026-08-16 06:50:56', NULL, 7, NULL),
-(11, 1, '2026-08-04', 105.00, 0.00, 1, 0.00, 105.00, 'fdf', 1, '2026-08-16 02:54:39', '2026-08-16 06:54:39', NULL, 7, NULL);
+(18, 0, '0000-00-00', 0.00, 0.00, 1, 0.00, 0.00, '', 1, '2026-08-16 11:03:05', '2026-08-16 15:03:05', NULL, 1, NULL),
+(19, 2, '2026-08-14', 128000.00, 0.00, 1, 0.00, 128000.00, '', 1, '2026-08-16 11:19:17', '2026-08-16 15:19:17', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -352,10 +399,43 @@ INSERT INTO `purchase_details` (`id`, `purchase_id`, `product_id`, `quantity`, `
 (6, 4, 12, 50, 250.00, 12500.00, '2026-08-12 03:23:30', '2026-08-12 07:23:30', NULL, 7, NULL),
 (7, 5, 18, 2, 128.00, 256.00, '2026-08-12 12:12:44', '2026-08-12 16:12:44', NULL, 7, NULL),
 (8, 6, 18, 5, 128.00, 640.00, '2026-08-12 12:53:01', '2026-08-12 16:53:01', NULL, 7, NULL),
-(10, 8, 17, 100, 1200.00, 120000.00, '2026-08-16 02:08:44', '2026-08-16 06:08:44', NULL, 7, NULL),
-(11, 9, 19, 100, 135.00, 13500.00, '2026-08-16 02:31:45', '2026-08-16 06:31:45', NULL, 7, NULL),
-(12, 10, 14, 555, 450.00, 249750.00, '2026-08-16 02:50:56', '2026-08-16 06:50:56', NULL, 7, NULL),
-(13, 11, 9, 15, 7.00, 105.00, '2026-08-16 02:54:39', '2026-08-16 06:54:39', NULL, 7, NULL);
+(16, 19, 18, 1000, 128.00, 128000.00, '2026-08-16 11:19:17', '2026-08-16 15:19:17', NULL, 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `receive_vouchers`
+--
+
+CREATE TABLE `receive_vouchers` (
+  `id` int(11) NOT NULL,
+  `invoice_no` varchar(100) NOT NULL,
+  `receive_from` varchar(100) NOT NULL,
+  `note` text DEFAULT NULL,
+  `date` date NOT NULL,
+  `source_type` varchar(100) DEFAULT NULL,
+  `source_id` int(11) DEFAULT NULL,
+  `dr` decimal(12,2) DEFAULT 0.00,
+  `cr` decimal(12,2) DEFAULT 0.00,
+  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `receive_voucher_details`
+--
+
+CREATE TABLE `receive_voucher_details` (
+  `id` int(11) NOT NULL,
+  `receive_voucher_id` int(11) NOT NULL,
+  `account_head_id` int(11) NOT NULL,
+  `dr` decimal(12,2) DEFAULT 0.00,
+  `cr` decimal(12,2) DEFAULT 0.00,
+  `remarks` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -413,10 +493,7 @@ INSERT INTO `sales` (`id`, `customer_id`, `user_id`, `sale_date`, `total_amount`
 (5, 3, 7, '2026-08-11', 135.00, 0.00, 0.00, 1, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL, 4),
 (6, 2, 7, '2026-08-15', 270.00, 0.00, 0.00, 1, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL, 3),
 (7, 1, 7, '2026-08-15', 6250.00, 0.00, 0.00, 1, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL, 6),
-(8, 1, 7, '2026-08-16', 72900.00, 0.00, 0.00, 1, '2026-08-16 02:09:34', '2026-08-16 06:09:34', NULL, 7, NULL, 3),
-(9, 1, 7, '0000-00-00', 21600.00, 0.00, 0.00, 1, '2026-08-16 02:23:31', '2026-08-16 06:23:31', NULL, 7, NULL, 3),
-(10, 1, 7, '2026-08-13', 6760.00, 0.00, 0.00, 1, '2026-08-16 02:32:35', '2026-08-16 06:32:35', NULL, 7, NULL, 7),
-(11, 1, 7, '2026-08-12', 44000.00, 0.00, 0.00, 1, '2026-08-16 02:51:30', '2026-08-16 06:51:30', NULL, 7, NULL, 5);
+(8, 3, 1, '2026-08-15', 125000.00, 0.00, 0.00, 1, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -444,16 +521,7 @@ CREATE TABLE `sales_returns` (
 --
 
 INSERT INTO `sales_returns` (`id`, `sale_id`, `customer_id`, `return_date`, `total_amount`, `reason`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(0, 5, 3, '2026-08-16', 0.00, 'c', 1, '2026-08-16 01:07:14', '2026-08-16 05:07:14', NULL, 7, NULL),
-(0, 6, 2, '2026-08-16', 135.00, 'dddd', 1, '2026-08-16 02:05:32', '2026-08-16 06:05:32', NULL, 7, NULL),
-(0, 4, 1, '2026-08-16', 1680.00, 'ddd', 1, '2026-08-16 02:06:24', '2026-08-16 06:06:24', NULL, 7, NULL),
-(0, 8, 1, '2026-08-16', 5400.00, 'dd', 1, '2026-08-16 02:10:01', '2026-08-16 06:10:01', NULL, 7, NULL),
-(0, 8, 1, '2026-08-16', 6750.00, 'jjj', 1, '2026-08-16 02:14:21', '2026-08-16 06:14:21', NULL, 7, NULL),
-(0, 7, 1, '2026-08-16', 3750.00, 'oo', 1, '2026-08-16 02:15:56', '2026-08-16 06:15:56', NULL, 7, NULL),
-(0, 8, 1, '2026-08-16', 5400.00, 'fff', 1, '2026-08-16 02:18:12', '2026-08-16 06:18:12', NULL, 7, NULL),
-(0, 8, 1, '2026-08-16', 6750.00, 'hhh', 1, '2026-08-16 02:29:48', '2026-08-16 06:29:48', NULL, 7, NULL),
-(0, 10, 1, '2026-08-16', 3380.00, 'fff', 1, '2026-08-16 02:33:29', '2026-08-16 06:33:29', NULL, 7, NULL),
-(0, 11, 1, '2026-08-16', 14400.00, 'gg', 1, '2026-08-16 02:52:25', '2026-08-16 06:52:25', NULL, 7, NULL);
+(0, 8, 3, '2026-08-16', 62500.00, '', 1, '2026-08-16 11:18:09', '2026-08-16 15:18:09', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -480,17 +548,7 @@ CREATE TABLE `sales_return_details` (
 --
 
 INSERT INTO `sales_return_details` (`id`, `sale_return_id`, `product_id`, `quantity`, `unit_price`, `subtotal`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(0, 0, 14, 1, 0.00, 0.00, '2026-08-16 01:07:14', '2026-08-16 05:07:14', NULL, 7, NULL),
-(0, 0, 18, 1, 135.00, 135.00, '2026-08-16 02:05:32', '2026-08-16 06:05:32', NULL, 7, NULL),
-(0, 0, 12, 5, 280.00, 1400.00, '2026-08-16 02:06:24', '2026-08-16 06:06:24', NULL, 7, NULL),
-(0, 0, 12, 1, 280.00, 280.00, '2026-08-16 02:06:24', '2026-08-16 06:06:24', NULL, 7, NULL),
-(0, 0, 17, 4, 1350.00, 5400.00, '2026-08-16 02:10:01', '2026-08-16 06:10:01', NULL, 7, NULL),
-(0, 0, 17, 5, 1350.00, 6750.00, '2026-08-16 02:14:21', '2026-08-16 06:14:21', NULL, 7, NULL),
-(0, 0, 3, 3, 1250.00, 3750.00, '2026-08-16 02:15:56', '2026-08-16 06:15:56', NULL, 7, NULL),
-(0, 0, 17, 4, 1350.00, 5400.00, '2026-08-16 02:18:12', '2026-08-16 06:18:12', NULL, 7, NULL),
-(0, 0, 17, 5, 1350.00, 6750.00, '2026-08-16 02:29:48', '2026-08-16 06:29:48', NULL, 7, NULL),
-(0, 0, 19, 20, 169.00, 3380.00, '2026-08-16 02:33:29', '2026-08-16 06:33:29', NULL, 7, NULL),
-(0, 0, 14, 18, 800.00, 14400.00, '2026-08-16 02:52:25', '2026-08-16 06:52:25', NULL, 7, NULL);
+(0, 0, 3, 50, 1250.00, 62500.00, '2026-08-16 11:18:09', '2026-08-16 15:18:09', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -527,10 +585,7 @@ INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_pri
 (13, 5, 18, 1, 135.00, 135.00, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL),
 (14, 6, 18, 2, 135.00, 270.00, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL),
 (15, 7, 3, 5, 1250.00, 6250.00, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL),
-(16, 8, 17, 54, 1350.00, 72900.00, '2026-08-16 02:09:34', '2026-08-16 06:09:34', NULL, 7, NULL),
-(17, 9, 17, 16, 1350.00, 21600.00, '2026-08-16 02:23:31', '2026-08-16 06:23:31', NULL, 7, NULL),
-(18, 10, 19, 40, 169.00, 6760.00, '2026-08-16 02:32:35', '2026-08-16 06:32:35', NULL, 7, NULL),
-(19, 11, 14, 55, 800.00, 44000.00, '2026-08-16 02:51:30', '2026-08-16 06:51:30', NULL, 7, NULL);
+(16, 8, 3, 100, 1250.00, 125000.00, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -573,19 +628,9 @@ INSERT INTO `stocks` (`id`, `stock_date`, `product_id`, `warehouse_id`, `quantit
 (14, NULL, 3, 4, 25, NULL, NULL, NULL, NULL, 0, '2026-08-14 06:03:08', NULL),
 (15, '2026-08-15', 18, 3, -2, NULL, 6, NULL, NULL, 2026, '2026-08-15 13:32:11', NULL),
 (16, '2026-08-15', 3, 6, -5, NULL, 7, NULL, NULL, 2026, '2026-08-15 13:42:06', NULL),
-(17, NULL, 9, 3, 0, NULL, NULL, NULL, NULL, 0, '2026-08-16 06:07:11', NULL),
-(18, NULL, 12, 6, 5, NULL, NULL, NULL, NULL, 0, '2026-08-16 06:07:38', NULL),
-(19, '2026-08-04', 17, 3, 100, 8, NULL, NULL, NULL, 2026, '2026-08-16 06:08:44', NULL),
-(20, '2026-08-16', 17, 3, -54, NULL, 8, NULL, NULL, 2026, '2026-08-16 06:09:34', NULL),
-(21, '0000-00-00', 17, 3, -16, NULL, 9, NULL, NULL, 2026, '2026-08-16 06:23:31', NULL),
-(22, '2026-08-16', 17, 3, 5, NULL, 8, 0, NULL, 2026, '2026-08-16 06:29:48', NULL),
-(23, '2026-08-12', 19, 7, 100, 9, NULL, NULL, NULL, 2026, '2026-08-16 06:31:45', NULL),
-(24, '2026-08-13', 19, 7, -40, NULL, 10, NULL, NULL, 2026, '2026-08-16 06:32:35', NULL),
-(25, '2026-08-16', 19, 7, 20, NULL, 10, 0, NULL, 2026, '2026-08-16 06:33:29', NULL),
-(26, '2026-08-11', 14, 5, 555, 10, NULL, NULL, NULL, 2026, '2026-08-16 06:50:56', NULL),
-(27, '2026-08-12', 14, 5, -55, NULL, 11, NULL, NULL, 2026, '2026-08-16 06:51:30', NULL),
-(28, '2026-08-16', 14, 5, 18, NULL, 11, 0, NULL, 2026, '2026-08-16 06:52:25', NULL),
-(29, '2026-08-04', 9, 4, 15, 11, NULL, NULL, NULL, 2026, '2026-08-16 06:54:39', NULL);
+(23, '2026-08-15', 3, 6, -100, NULL, 8, NULL, NULL, 2026, '2026-08-16 15:10:50', NULL),
+(24, '2026-08-16', 3, 6, 50, NULL, 8, 0, NULL, 2026, '2026-08-16 15:18:09', NULL),
+(25, '2026-08-14', 18, 4, 1000, 19, NULL, NULL, NULL, 2026, '2026-08-16 15:19:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -626,15 +671,7 @@ INSERT INTO `stock_transfers` (`id`, `product_id`, `quantity`, `transfer_date`, 
 (28, 14, 2, '2026-08-10', NULL, 11, NULL, NULL, 1, '2026-08-12 00:48:01', '2026-08-12 04:48:01', NULL, 7, NULL),
 (29, 17, 1, '2026-08-11', NULL, 12, NULL, NULL, 1, '2026-08-12 00:53:02', '2026-08-12 04:53:02', NULL, 7, NULL),
 (30, 14, 2, '0000-00-00', 5, NULL, NULL, NULL, 0, '2026-08-12 01:04:38', '2026-08-12 05:04:38', NULL, 7, NULL),
-(31, 9, 2, '2026-08-14', NULL, NULL, NULL, NULL, 0, '2026-08-14 05:54:43', '2026-08-14 05:54:43', NULL, NULL, NULL),
-(32, 14, 1, '2026-08-16', 5, NULL, 0, NULL, 1, '2026-08-16 01:07:14', '2026-08-16 05:07:14', NULL, 7, NULL),
-(33, 18, 1, '2026-08-16', 6, NULL, 0, NULL, 1, '2026-08-16 02:05:32', '2026-08-16 06:05:32', NULL, 7, NULL),
-(34, 12, 5, '2026-08-16', 4, NULL, 0, NULL, 1, '2026-08-16 02:06:24', '2026-08-16 06:06:24', NULL, 7, NULL),
-(35, 12, 1, '2026-08-16', 4, NULL, 0, NULL, 1, '2026-08-16 02:06:24', '2026-08-16 06:06:24', NULL, 7, NULL),
-(36, 17, 4, '2026-08-16', 8, NULL, 0, NULL, 1, '2026-08-16 02:10:01', '2026-08-16 06:10:01', NULL, 7, NULL),
-(37, 17, 5, '2026-08-16', 8, NULL, 0, NULL, 1, '2026-08-16 02:14:21', '2026-08-16 06:14:21', NULL, 7, NULL),
-(38, 3, 3, '2026-08-16', 7, NULL, 0, NULL, 1, '2026-08-16 02:15:56', '2026-08-16 06:15:56', NULL, 7, NULL),
-(39, 17, 4, '2026-08-16', 8, NULL, 0, NULL, 1, '2026-08-16 02:18:12', '2026-08-16 06:18:12', NULL, 7, NULL);
+(31, 9, 2, '2026-08-14', NULL, NULL, NULL, NULL, 0, '2026-08-14 05:54:43', '2026-08-14 05:54:43', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -737,18 +774,19 @@ INSERT INTO `warehouses` (`id`, `warehouse_name`, `location`, `manager_name`, `c
 --
 
 --
+-- Indexes for table `account_heads`
+--
+ALTER TABLE `account_heads`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `account_code` (`account_code`),
+  ADD KEY `idx_account_type` (`account_type`),
+  ADD KEY `idx_parent_id` (`parent_id`);
+
+--
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `chart_of_accounts`
---
-ALTER TABLE `chart_of_accounts`
-  ADD PRIMARY KEY (`account_id`),
-  ADD UNIQUE KEY `account_code` (`account_code`),
-  ADD KEY `parent_id` (`parent_id`);
 
 --
 -- Indexes for table `customers`
@@ -757,17 +795,54 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `journal_entries`
+-- Indexes for table `journal_vouchers`
 --
-ALTER TABLE `journal_entries`
-  ADD PRIMARY KEY (`entry_id`),
-  ADD KEY `account_id` (`account_id`);
+ALTER TABLE `journal_vouchers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `invoice_no` (`invoice_no`),
+  ADD KEY `idx_jv_date` (`date`),
+  ADD KEY `idx_jv_source` (`source_type`,`source_id`);
+
+--
+-- Indexes for table `journal_voucher_details`
+--
+ALTER TABLE `journal_voucher_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_jvd_voucher` (`journal_voucher_id`),
+  ADD KEY `idx_jvd_account` (`account_head_id`);
+
+--
+-- Indexes for table `ledgers`
+--
+ALTER TABLE `ledgers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_ledger_account` (`account_head_id`),
+  ADD KEY `idx_ledger_payment` (`payment_voucher_id`),
+  ADD KEY `idx_ledger_receive` (`receive_voucher_id`),
+  ADD KEY `idx_ledger_journal` (`journal_voucher_id`);
 
 --
 -- Indexes for table `payments`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_vouchers`
+--
+ALTER TABLE `payment_vouchers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `invoice_no` (`invoice_no`),
+  ADD KEY `idx_pv_date` (`date`),
+  ADD KEY `idx_pv_source` (`source_type`,`source_id`);
+
+--
+-- Indexes for table `payment_voucher_details`
+--
+ALTER TABLE `payment_voucher_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_pvd_voucher` (`payment_voucher_id`),
+  ADD KEY `idx_pvd_account` (`account_head_id`);
 
 --
 -- Indexes for table `products`
@@ -789,6 +864,23 @@ ALTER TABLE `purchases`
 --
 ALTER TABLE `purchase_details`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `receive_vouchers`
+--
+ALTER TABLE `receive_vouchers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `invoice_no` (`invoice_no`),
+  ADD KEY `idx_rv_date` (`date`),
+  ADD KEY `idx_rv_source` (`source_type`,`source_id`);
+
+--
+-- Indexes for table `receive_voucher_details`
+--
+ALTER TABLE `receive_voucher_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_rvd_voucher` (`receive_voucher_id`),
+  ADD KEY `idx_rvd_account` (`account_head_id`);
 
 --
 -- Indexes for table `roles`
@@ -846,16 +938,16 @@ ALTER TABLE `warehouses`
 --
 
 --
+-- AUTO_INCREMENT for table `account_heads`
+--
+ALTER TABLE `account_heads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `chart_of_accounts`
---
-ALTER TABLE `chart_of_accounts`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -864,15 +956,39 @@ ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `journal_entries`
+-- AUTO_INCREMENT for table `journal_vouchers`
 --
-ALTER TABLE `journal_entries`
-  MODIFY `entry_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `journal_vouchers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `journal_voucher_details`
+--
+ALTER TABLE `journal_voucher_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ledgers`
+--
+ALTER TABLE `ledgers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment_vouchers`
+--
+ALTER TABLE `payment_vouchers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment_voucher_details`
+--
+ALTER TABLE `payment_voucher_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -885,13 +1001,25 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `purchase_details`
 --
 ALTER TABLE `purchase_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `receive_vouchers`
+--
+ALTER TABLE `receive_vouchers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `receive_voucher_details`
+--
+ALTER TABLE `receive_voucher_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -903,25 +1031,25 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sale_details`
 --
 ALTER TABLE `sale_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `stock_transfers`
 --
 ALTER TABLE `stock_transfers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
@@ -946,16 +1074,40 @@ ALTER TABLE `warehouses`
 --
 
 --
--- Constraints for table `chart_of_accounts`
+-- Constraints for table `account_heads`
 --
-ALTER TABLE `chart_of_accounts`
-  ADD CONSTRAINT `chart_of_accounts_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `chart_of_accounts` (`account_id`);
+ALTER TABLE `account_heads`
+  ADD CONSTRAINT `fk_account_parent` FOREIGN KEY (`parent_id`) REFERENCES `account_heads` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `journal_entries`
+-- Constraints for table `journal_voucher_details`
 --
-ALTER TABLE `journal_entries`
-  ADD CONSTRAINT `journal_entries_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `chart_of_accounts` (`account_id`);
+ALTER TABLE `journal_voucher_details`
+  ADD CONSTRAINT `fk_jvd_account` FOREIGN KEY (`account_head_id`) REFERENCES `account_heads` (`id`),
+  ADD CONSTRAINT `fk_jvd_voucher` FOREIGN KEY (`journal_voucher_id`) REFERENCES `journal_vouchers` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `ledgers`
+--
+ALTER TABLE `ledgers`
+  ADD CONSTRAINT `fk_ledger_account` FOREIGN KEY (`account_head_id`) REFERENCES `account_heads` (`id`),
+  ADD CONSTRAINT `fk_ledger_journal_voucher` FOREIGN KEY (`journal_voucher_id`) REFERENCES `journal_vouchers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_ledger_payment_voucher` FOREIGN KEY (`payment_voucher_id`) REFERENCES `payment_vouchers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_ledger_receive_voucher` FOREIGN KEY (`receive_voucher_id`) REFERENCES `receive_vouchers` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `payment_voucher_details`
+--
+ALTER TABLE `payment_voucher_details`
+  ADD CONSTRAINT `fk_pvd_account` FOREIGN KEY (`account_head_id`) REFERENCES `account_heads` (`id`),
+  ADD CONSTRAINT `fk_pvd_voucher` FOREIGN KEY (`payment_voucher_id`) REFERENCES `payment_vouchers` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `receive_voucher_details`
+--
+ALTER TABLE `receive_voucher_details`
+  ADD CONSTRAINT `fk_rvd_account` FOREIGN KEY (`account_head_id`) REFERENCES `account_heads` (`id`),
+  ADD CONSTRAINT `fk_rvd_voucher` FOREIGN KEY (`receive_voucher_id`) REFERENCES `receive_vouchers` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `stocks`

@@ -4,7 +4,7 @@ require_once '../component/connection.php';
 
 // account_code diye account_id ber kora
 function getAccountId($crud, $code) {
-    $r = $crud->common_select('chart_of_accounts', '*', ["account_code" => $code]);
+    $r = $crud->common_select('account_heads', '*', ["account_code" => $code]);
     return $r['status'] ? $r['data'][0]->account_id : null;
 }
 
