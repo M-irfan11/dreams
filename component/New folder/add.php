@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/connection.php"; // gives $crud, $base_url, session
 require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/auth.php";
 
-require_role(['Super Admin']); // only Super Admin can manage users now
+require_role(['Super Admin', 'Admin']); // per roles.access, both can manage users
 
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['error']);

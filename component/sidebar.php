@@ -56,6 +56,7 @@
  
 </ul>
 </li>
+<?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
 <a href="<?= $base_url ?>transfer/list.php"><img src="<?= $base_url ?>assets/img/icons/transfer1.svg" alt="img"><span> Transfer</span> <span class="menu-arrow"></span></a>
 <ul>
@@ -64,6 +65,7 @@
 <li><a href="<?= $base_url ?>importtransfer.php">Import Transfer </a></li>
 </ul>
 </li>
+<?php endif; ?>
 <li class="submenu">
 <a href="<?= $base_url ?>sales_return/list.php"><img src="<?= $base_url ?>assets/img/icons/return1.svg" alt="img"><span> Return</span> <span class="menu-arrow"></span></a>
 <ul>
@@ -73,6 +75,7 @@
 <li><a href="<?= $base_url ?>purchase_return/create.php">Add Purchase Return </a></li>
 </ul>
 </li>
+<?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
 <a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Accounts</span> <span class="menu-arrow"></span></a>
 <ul>
@@ -80,6 +83,7 @@
 <li><a href="<?= $base_url ?>accounts/create.php">Add Accounts </a></li>
 </ul>
 </li>
+<?php endif; ?>
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> People</span> <span class="menu-arrow"></span></a>
 <ul>
@@ -87,8 +91,10 @@
 <li><a href="<?= $base_url ?>addcustomer.php">Add Customer </a></li>
 <li><a href="<?= $base_url ?>supplierlist.php">Supplier List</a></li>
 <li><a href="<?= $base_url ?>addsupplier.php">Add Supplier </a></li>
+<?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li><a href="<?= $base_url ?>users/list.php">User List</a></li>
 <li><a href="<?= $base_url ?>users/add.php">Add User</a></li>
+<?php endif; ?>
 <li><a href="<?= $base_url ?>storelist.php">Store List</a></li>
 <li><a href="<?= $base_url ?>addstore.php">Add Store</a></li>
 </ul>
@@ -103,6 +109,7 @@
 <li><a href="<?= $base_url ?>data-tables.php">Data Table </a></li>
 </ul>
 </li>
+<?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/time.svg" alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
 <ul>
@@ -115,6 +122,8 @@
 <li><a href="<?= $base_url ?>customerreport.php">Customer Report</a></li>
 </ul>
 </li>
+<?php endif; ?>
+<?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
 <ul>
@@ -122,6 +131,7 @@
 <li><a href="<?= $base_url ?>users/list.php">Users List</a></li>
 </ul>
 </li>
+<?php endif; ?>
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
 <ul>

@@ -5,18 +5,17 @@ $error = "";
 
 if ($_POST) {
     $email = $crud->conn->real_escape_string($_POST['email']);
-    $password = $_POST['password'];
+    $password = sha1($_POST['password']);
 
-    // fetch by email only - password is checked separately with password_verify(),
-    // since it's a one-way hash and can't be matched inside the SQL query
     $rs = $crud->common_query("
         SELECT users.*, roles.role_name, roles.access
         FROM `users`
         JOIN roles ON roles.id = users.role_id
         WHERE users.email = '$email'
+        AND users.password = '$password'
     ");
 
-    if ($rs['status'] && password_verify($password, $rs['data'][0]->password)) {
+    if ($rs['status']) {
         $user = $rs['data'][0];
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_name'] = $user->full_name;
