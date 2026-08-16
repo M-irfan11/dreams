@@ -48,6 +48,18 @@
 <div class="page-wrapper">
     <div class="content">
 
+        <?php
+            // Session message (set by store.php on failure - was silently lost before)
+            if(isset($_SESSION['message'])){
+                $msg = $_SESSION['message'];
+                $alert_class = $msg['type'] === 'success' ? 'alert-success' : 'alert-danger';
+                echo '<div class="alert ' . $alert_class . '">
+                        <strong>' . $msg['title'] . '</strong> ' . $msg['message'] . '
+                      </div>';
+                unset($_SESSION['message']);
+            }
+        ?>
+
         <div class="page-header">
             <div class="page-title">
                 <h4>Add Sales Return</h4>
