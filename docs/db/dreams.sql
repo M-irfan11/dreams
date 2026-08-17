@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2026 at 03:50 PM
+-- Generation Time: Aug 17, 2026 at 09:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -303,7 +303,11 @@ CREATE TABLE `purchase_returns` (
 --
 
 INSERT INTO `purchase_returns` (`id`, `purchase_id`, `supplier_id`, `return_date`, `total_amount`, `reason`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(1, 17, 1, '2026-08-16', 87500.00, 'fff', 1, '2026-08-16 09:49:32', '2026-08-16 13:49:32', NULL, 7, NULL);
+(1, 17, 1, '2026-08-16', 87500.00, 'fff', 1, '2026-08-16 09:49:32', '2026-08-16 13:49:32', NULL, 7, NULL),
+(2, 17, 1, '2026-08-16', 8250.00, 'g', 1, '2026-08-16 09:51:21', '2026-08-16 13:51:21', NULL, 7, NULL),
+(3, 17, 1, '2026-08-16', 500.00, 'h', 1, '2026-08-16 09:51:51', '2026-08-16 13:51:51', NULL, 7, NULL),
+(4, 17, 1, '2026-08-16', 8750.00, 'hh', 1, '2026-08-16 09:52:49', '2026-08-16 13:52:49', NULL, 7, NULL),
+(5, 17, 1, '2026-08-17', 5000.00, '', 1, '2026-08-17 03:42:45', '2026-08-17 07:42:45', NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -330,7 +334,11 @@ CREATE TABLE `purchase_return_details` (
 --
 
 INSERT INTO `purchase_return_details` (`id`, `purchase_return_id`, `product_id`, `quantity`, `unit_price`, `subtotal`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(1, 1, 12, 350, 250.00, 87500.00, '2026-08-16 09:49:32', '2026-08-16 13:49:32', NULL, 7, NULL);
+(1, 1, 12, 350, 250.00, 87500.00, '2026-08-16 09:49:32', '2026-08-16 13:49:32', NULL, 7, NULL),
+(2, 2, 12, 33, 250.00, 8250.00, '2026-08-16 09:51:21', '2026-08-16 13:51:21', NULL, 7, NULL),
+(3, 3, 12, 2, 250.00, 500.00, '2026-08-16 09:51:51', '2026-08-16 13:51:51', NULL, 7, NULL),
+(4, 4, 12, 35, 250.00, 8750.00, '2026-08-16 09:52:50', '2026-08-16 13:52:50', NULL, 7, NULL),
+(5, 5, 12, 20, 250.00, 5000.00, '2026-08-17 03:42:45', '2026-08-17 07:42:45', NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -552,7 +560,11 @@ INSERT INTO `stocks` (`id`, `stock_date`, `product_id`, `warehouse_id`, `quantit
 (22, '2026-08-04', 12, 7, 1000, 17, NULL, NULL, NULL, NULL, 2026, '2026-08-16 13:19:35', NULL),
 (23, '2026-08-17', 12, 7, -100, NULL, 8, NULL, NULL, NULL, 2026, '2026-08-16 13:20:31', NULL),
 (24, '2026-08-16', 12, 7, 20, NULL, 8, 10, NULL, NULL, 2026, '2026-08-16 13:21:26', NULL),
-(25, '2026-08-16', 12, 7, -350, 17, NULL, NULL, 1, NULL, 2026, '2026-08-16 13:49:32', NULL);
+(25, '2026-08-16', 12, 7, -350, 17, NULL, NULL, 1, NULL, 2026, '2026-08-16 13:49:32', NULL),
+(26, '2026-08-16', 12, 7, -33, 17, NULL, NULL, 2, NULL, 2026, '2026-08-16 13:51:21', NULL),
+(27, '2026-08-16', 12, 7, -2, 17, NULL, NULL, 3, NULL, 2026, '2026-08-16 13:51:51', NULL),
+(28, '2026-08-16', 12, 7, -35, 17, NULL, NULL, 4, NULL, 2026, '2026-08-16 13:52:50', NULL),
+(29, '2026-08-17', 12, 7, -20, 17, NULL, NULL, 5, NULL, 2026, '2026-08-17 07:42:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -659,10 +671,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `full_name`, `email`, `password`, `phone`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
-(1, 1, 'Araf Rahman', 'araf@yahoo.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '01565985', 'Active', '2026-07-26 06:47:39', '2026-08-07 20:50:26', NULL, NULL, 1),
-(2, 2, 'Pritom Hasan', 'pritam@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'Active', '2026-08-05 05:17:34', '2026-08-07 20:48:00', '2026-08-07 16:48:00', NULL, 1),
-(7, 2, 'usama al surafa', 'surafa@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '+9654213', 'Active', '2026-08-05 05:43:45', '2026-08-07 20:51:44', NULL, NULL, 1),
-(9, 1, 'Pritom Hasan', 'pritam@yahoo.com', '$2y$10$Ef8a8DqE2E4vsHIz4dACTO9ExZEtGj70968WYxuKdBVBdIv2ZUtgO', '+880189654', 'Active', '2026-08-07 20:47:44', '2026-08-07 20:50:36', NULL, 1, 1);
+(1, 1, 'Araf Rahman', 'araf@yahoo.com', '$2y$10$kHd0p4.AfhEL5zrk1gp11ew3QkUxuHi6STzAkqkwUti.gaWswifcC', '01565985', 'Active', '2026-07-26 06:47:39', '2026-08-16 20:13:58', NULL, NULL, 1),
+(2, 2, 'Pritom Hasan', 'pritam@gmail.com', '$2y$10$1e2E6KCL4AsbRL4zftF0C.uAuddNqd7by31phuJoi6kKGUqlX4m8K', NULL, 'Active', '2026-08-05 05:17:34', '2026-08-16 20:13:58', '2026-08-07 16:48:00', NULL, 1),
+(7, 2, 'usama al surafa', 'surafa@gmail.com', '$2y$10$8Wwi0fbGJOprBlKuSVFdGuQG/F2xRINpYK4snI1vMNE5lWCs/.6Ey', '+9654213', 'Active', '2026-08-05 05:43:45', '2026-08-16 20:13:58', NULL, NULL, 1),
+(9, 1, 'Pritom Hasan', 'pritam@yahoo.com', '$2y$10$Ef8a8DqE2E4vsHIz4dACTO9ExZEtGj70968WYxuKdBVBdIv2ZUtgO', '+880189654', 'Active', '2026-08-07 20:47:44', '2026-08-07 20:50:36', NULL, 1, 1),
+(10, 2, 'azad', 'azad@idb.com', '$2y$10$3AOE3z.b8mpAisxDTuZgtugVqeDf8oXPO1mtO0DKiGhl7O96rxRiK', '5444', 'Active', '2026-08-16 20:15:41', '2026-08-16 20:46:16', NULL, 7, 10),
+(11, 2, 'samina', 'samina@idb.com', '$2y$10$3wPVayXczcKVkpDx68zMduSjhH7QYgWWCDc2SSdLX3VALo0zAD3gm', '55', 'Active', '2026-08-16 20:51:40', '2026-08-16 21:02:11', NULL, 10, 11);
 
 -- --------------------------------------------------------
 
@@ -882,13 +896,13 @@ ALTER TABLE `purchase_details`
 -- AUTO_INCREMENT for table `purchase_returns`
 --
 ALTER TABLE `purchase_returns`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `purchase_return_details`
 --
 ALTER TABLE `purchase_return_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -924,7 +938,7 @@ ALTER TABLE `sale_details`
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `stock_transfers`
@@ -942,7 +956,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `warehouses`
