@@ -116,8 +116,7 @@
                                         <a class="me-3 confirm-text" href="delete.php?id=<?php echo $sale->sale_id; ?>">
                                             <img src="<?php echo $base_url; ?>assets/img/icons/delete.svg" alt="img">
                                         </a>
-                                        <a href="invoice.php?id=<?php echo $row['id']; ?>"
-                                           class="btn btn-sm btn-primary" target="_blank">Invoice</a>
+                                        <a  class="btn btn-sm btn-primary" href="invoice.php?id=<?php echo $sale->id; ?>">Invoice</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
