@@ -54,7 +54,7 @@
                                 <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="<?php echo $base_url; ?>assets/img/icons/excel.svg" alt="img"></a>
                             </li>
                             <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="<?php echo $base_url; ?>assets/img/icons/printer.svg" alt="img"></a>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="<?php echo $base_url; ?>assets/img/icons/printer.svg" alt="img"></a
                             </li>
                         </ul>
                     </div>
@@ -116,6 +116,8 @@
                                         <a class="me-3 confirm-text" href="delete.php?id=<?php echo $sale->sale_id; ?>">
                                             <img src="<?php echo $base_url; ?>assets/img/icons/delete.svg" alt="img">
                                         </a>
+                                        <a href="invoice.php?id=<?php echo $row['id']; ?>"
+                                           class="btn btn-sm btn-primary" target="_blank">Invoice</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
