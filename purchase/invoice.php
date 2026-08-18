@@ -6,56 +6,39 @@ include_once '../component/connection.php';
 
 $id = $_GET['id'];
 
-// Sale information
-$sale_query = "
-    SELECT sales.*, customers.name AS customer_name
-    FROM sales
-    LEFT JOIN customers ON customers.id = sales.customer_id
-    WHERE sales.id = '$id'
+// Purchase information
+$purchase_query = "
+    SELECT purchases.*, suppliers.supplier_name AS supplier_name
+    FROM purchases
+    LEFT JOIN suppliers ON suppliers.id = purchases.supplier_id
+    WHERE purchases.id = '$id'
 ";
-$sale_result = $crud->common_query($sale_query);
+$purchase_result = $crud->common_query($purchase_query);
 
-if(!$sale_result['status']){
-    echo "Sale not found";
+if(!$purchase_result['status']){
+    echo "Purchase not found";
     exit;
 }
 
-$sale = $sale_result['data'][0];
+$purchase = $purchase_result['data'][0];
 
-// Sale products
+// Purchase products
 $details_query = "
-    SELECT sale_details.*, products.product_name
-    FROM sale_details
-    LEFT JOIN products ON products.id = sale_details.product_id
-    WHERE sale_details.sale_id = '$id'
-    AND sale_details.deleted_at IS NULL
+    SELECT purchase_details.*, products.product_name
+    FROM purchase_details
+    LEFT JOIN products ON products.id = purchase_details.product_id
+    WHERE purchase_details.purchase_id = '$id'
+    AND purchase_details.deleted_at IS NULL
 ";
 $details_result = $crud->common_query($details_query);
 
-// Payment
-$payment_query = "
-    SELECT SUM(amount) AS paid
-    FROM payments
-    WHERE sale_id = '$id'
-    AND deleted_at IS NULL
-";
-$payment_result = $crud->common_query($payment_query);
-
-$paid = 0;
-if($payment_result['status']){
-    $paid = $payment_result['data'][0]->paid ?? 0;
-}
-
-$subtotal = 0;
-foreach($details_result['data'] as $item){
-    $subtotal += $item->subtotal;
-}
-
-$discount = $sale->discount ?? 0;
-$tax = $sale->tax ?? 0;
-
-$grand_total = $subtotal - $discount + $tax;
-$due = $grand_total - $paid;
+// purchases table already stores the final discount/vat/grand total
+// (calculated on the create form), so we just show them as-is - no
+// payments table exists for purchases yet, so there's no Paid/Due here
+$subtotal = $purchase->total_amount ?? 0;
+$discount = $purchase->discount_amount ?? 0;
+$vat = $purchase->vat ?? 0;
+$grand_total = $purchase->grand_total ?? 0;
 ?>
 
 <style>
@@ -122,8 +105,8 @@ $due = $grand_total - $paid;
 
 <div class="page-header">
     <div class="page-title">
-        <h4>Sales Invoice</h4>
-        <h6>View sales invoice</h6>
+        <h4>Purchase Invoice</h4>
+        <h6>View purchase invoice</h6>
     </div>
 </div>
 
@@ -137,21 +120,22 @@ $due = $grand_total - $paid;
         <p>Supershop Management System</p>
     </div>
     <div>
-        <div class="invoice-title">SALES INVOICE</div>
-        <p>Invoice No: INV-<?php echo $sale->id; ?></p>
-        <p>Date: <?php echo $sale->sale_date; ?></p>
+        <div class="invoice-title">PURCHASE INVOICE</div>
+        <p>Invoice No: PUR-<?php echo $purchase->id; ?></p>
+        <p>Date: <?php echo $purchase->purchase_date; ?></p>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-6">
-        <h5>Customer Information</h5>
-        <p><strong>Name:</strong> <?php echo htmlspecialchars($sale->customer_name); ?></p>
+        <h5>Supplier Information</h5>
+        <p><strong>Name:</strong> <?php echo htmlspecialchars($purchase->supplier_name); ?></p>
     </div>
     <div class="col-md-6">
         <h5>Invoice Information</h5>
-        <p><strong>Invoice:</strong> INV-<?php echo $sale->id; ?></p>
-        <p><strong>Date:</strong> <?php echo $sale->sale_date; ?></p>
+        <p><strong>Invoice:</strong> PUR-<?php echo $purchase->id; ?></p>
+        <p><strong>Reference:</strong> <?php echo htmlspecialchars($purchase->ref); ?></p>
+        <p><strong>Date:</strong> <?php echo $purchase->purchase_date; ?></p>
     </div>
 </div>
 
@@ -161,7 +145,7 @@ $due = $grand_total - $paid;
             <th>#</th>
             <th>Product Name</th>
             <th>Quantity</th>
-            <th>Unit Price</th>
+            <th>Purchase Price</th>
             <th>Subtotal</th>
         </tr>
     </thead>
@@ -171,7 +155,7 @@ $due = $grand_total - $paid;
             <td><?php echo $i++; ?></td>
             <td><?php echo htmlspecialchars($item->product_name); ?></td>
             <td><?php echo $item->quantity; ?></td>
-            <td><?php echo number_format($item->unit_price,2); ?></td>
+            <td><?php echo number_format($item->purchase_price,2); ?></td>
             <td><?php echo number_format($item->subtotal,2); ?></td>
         </tr>
         <?php } ?>
@@ -186,29 +170,29 @@ $due = $grand_total - $paid;
         </tr>
         <tr>
             <td><strong>Discount</strong></td>
-            <td class="text-end"><?php echo number_format($discount,2); ?></td>
+            <td class="text-end">
+                <?php
+                    if($purchase->discount_type == 2){
+                        echo number_format($discount,2) . '%';
+                    } else {
+                        echo number_format($discount,2);
+                    }
+                ?>
+            </td>
         </tr>
         <tr>
-            <td><strong>Tax</strong></td>
-            <td class="text-end"><?php echo number_format($tax,2); ?></td>
+            <td><strong>VAT</strong></td>
+            <td class="text-end"><?php echo number_format($vat,2); ?></td>
         </tr>
         <tr>
             <td><strong>Grand Total</strong></td>
             <td class="text-end"><strong><?php echo number_format($grand_total,2); ?></strong></td>
         </tr>
-        <tr>
-            <td><strong>Paid</strong></td>
-            <td class="text-end"><?php echo number_format($paid,2); ?></td>
-        </tr>
-        <tr>
-            <td><strong>Due</strong></td>
-            <td class="text-end"><strong><?php echo number_format($due,2); ?></strong></td>
-        </tr>
     </table>
 </div>
 
 <div class="mt-5">
-    <p><strong>Thank you for your purchase!</strong></p>
+    <p><strong>Thank you for your business!</strong></p>
 </div>
 
 <div class="print-btn">
