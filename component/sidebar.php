@@ -42,6 +42,18 @@
 </ul>
 </li>
 <li class="submenu">
+<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
+<ul>
+<li><a href="<?= $base_url ?>accounts/account_heads.php">Account heads</a></li>
+<li><a href="<?= $base_url ?>accounts/journal_vouchers.php">Journal vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/payment_vouchers.php">Payment vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/receive_vouchers.php">Receive Vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/ledger.php">Ledger </a></li>
+<li><a href="<?= $base_url ?>accounts/profit_loss.php">profit & loss </a></li>
+
+</ul>
+</li>
+<li class="submenu">
 <a href="<?= $base_url ?>expense/list.php"><img src="<?= $base_url ?>assets/img/icons/expense1.svg" alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>expense/list.php">Expense List</a></li>
@@ -73,13 +85,7 @@
 <li><a href="<?= $base_url ?>purchase_return/create.php">Add Purchase Return </a></li>
 </ul>
 </li>
-<li class="submenu">
-<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>accounts/list.php">Accounts List</a></li>
-<li><a href="<?= $base_url ?>accounts/create.php">Add Accounts </a></li>
-</ul>
-</li>
+
 <li class="submenu">
 <a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> People</span> <span class="menu-arrow"></span></a>
 <ul>
