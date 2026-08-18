@@ -113,7 +113,7 @@ class crud_class{
         $columns = implode(", ", array_keys($data));
         $values = implode("', '", array_map([$this->conn, 'real_escape_string'], array_values($data)));
         $sql = "INSERT INTO $table ($columns) VALUES ('$values')";
-        echo $sql; // Debugging line to check the generated SQL query
+        //echo $sql; // Debugging line to check the generated SQL query
         if($this->conn->query($sql)){
             $result["status"] = true;
             $result["data"] = $this->conn->insert_id;
