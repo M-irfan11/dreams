@@ -4,11 +4,11 @@ require_once '../component/connection.php';
 if(isset($_GET['id'])){
 
     $id = $_GET['id'];
-    $result = $crud->common_delete('sales', ["sale_id" => $id]);
+    $result = $crud->common_delete('sales', ["id" => $id]);
 
     if($result['status']){
-        $crud->common_delete('sale_details', ["sale_id" => $id]);
-        $crud->common_delete('stock_transfers', ["sale_id" => $id]);
+        $crud->common_delete('sale_details', ["id" => $id]);
+        $crud->common_delete('stock_transfers', ["id" => $id]);
         $crud->conn->commit();
         $_SESSION['message'] = array(
             "type" => "success",

@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         "account_type"    => $crud->conn->real_escape_string($_POST['account_type']),
         "account_subtype" => $crud->conn->real_escape_string($_POST['account_subtype']),
         "opening_balance" => (float)$_POST['opening_balance'],
+        "current_balance" => (float)$_POST['current_balance'],
         "status"          => $crud->conn->real_escape_string($_POST['status']),
         "description"     => $crud->conn->real_escape_string($_POST['description']),
     ];
@@ -96,6 +97,8 @@ $all_accounts = $crud->common_query("SELECT * FROM account_heads WHERE deleted_a
                 <div class="mb-3">
                     <label class="form-label">Opening Balance</label>
                     <input type="number" step="0.01" name="opening_balance" class="form-control" value="<?= $acc->opening_balance ?>">
+                    <label class="form-label">current Balance</label>
+                    <input type="number" step="0.01" name="current_balance" class="form-control" value="<?= $acc->current_balance ?>">
                 </div>
 
                 <div class="mb-3">
