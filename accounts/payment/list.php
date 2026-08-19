@@ -36,7 +36,7 @@
                         <td><?= $v->status == 1 ? 'Active' : 'Inactive' ?></td>
                         <td>
                             <a href="edit.php?id=<?= $v->id ?>" class="btn btn-sm btn-info">Edit</a>
-                            <a href="voucher_delete.php?id=<?= $v->id ?>&type=payment" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="delete.php?id=<?= $v->id ?>&type=payment" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
                     <?php } ?>

@@ -16,7 +16,7 @@
                     <tr>
                         <th>Voucher No</th>
                         <th>Date</th>
-                        <th>Pay To</th>
+                        <th>Received From</th>
                         <th>Amount</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -24,19 +24,19 @@
                 </thead>
                 <tbody>
                     <?php
-                    $sql = "SELECT * FROM payment_vouchers WHERE deleted_at IS NULL";
+                    $sql = "SELECT * FROM receive_vouchers WHERE deleted_at IS NULL";
                     $result = $crud->common_query($sql);
                     foreach ($result['data'] as $v) {
                     ?>
                     <tr>
                         <td><?= $v->voucher_no ?></td>
                         <td><?= $v->voucher_date ?></td>
-                        <td><?= $v->pay_to ?></td>
+                        <td><?= $v->received_from ?></td>
                         <td><?= number_format($v->cr, 2) ?></td>
                         <td><?= $v->status == 1 ? 'Active' : 'Inactive' ?></td>
                         <td>
                             <a href="edit.php?id=<?= $v->id ?>" class="btn btn-sm btn-info">Edit</a>
-                            <a href="voucher_delete.php?id=<?= $v->id ?>&type=payment" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="delete.php?id=<?= $v->id ?>&type=receive" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
                     <?php } ?>

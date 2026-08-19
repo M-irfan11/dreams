@@ -47,7 +47,7 @@
 <li><a href="<?= $base_url ?>accounts/account_heads.php">Account heads</a></li>
 <li><a href="<?= $base_url ?>accounts/journal/list.php">Journal vouchers </a></li>
 <li><a href="<?= $base_url ?>accounts/payment/list.php">Payment vouchers </a></li>
-<li><a href="<?= $base_url ?>accounts/receive_vouchers.php">Receive Vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/receive/list.php">Receive Vouchers </a></li>
 <li><a href="<?= $base_url ?>accounts/ledger.php">Ledger </a></li>
 <li><a href="<?= $base_url ?>accounts/profit_loss.php">profit & loss </a></li>
 

@@ -21,15 +21,15 @@ if($_POST){
         $data["warehouse_id"] = $_POST['warehouse_id'];
     }
 
-    $result = $crud->common_update('sales', $data, ["sale_id" => $id]);
+    $result = $crud->common_update('sales', $data, ["id" => $id]);
 
     if($result['status']){
         // rebuild sale line items and stock movement for this sale
-        $crud->common_delete('sale_details', ["sale_id" => $id]);
-        $crud->common_delete('stock_transfers', ["sale_id" => $id]);
+        $crud->common_delete('sale_details', ["id" => $id]);
+        $crud->common_delete('stock_transfers', ["id" => $id]);
        foreach($_POST['product_id'] as $index => $product_id){
             $stock_data = [
-                "sale_id" => $id,
+                "id" => $id,
                 "product_id" => $product_id,
                 "quantity" => $_POST['quantity'][$index],
                 "unit_price" => $_POST['unit_price'][$index],
@@ -47,7 +47,7 @@ if($_POST){
                 "quantity" => $_POST['quantity'][$index],
                 "status" => 0,
                 "transfer_date" => $_POST['sale_date'],
-                "sale_id" => $id,
+                "id" => $id,
                 "created_at" => date('Y-m-d H:i:s'),
                 "created_by" => $_SESSION['user_id']
             ]);

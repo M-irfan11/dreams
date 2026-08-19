@@ -110,10 +110,10 @@
                                         ?>
                                     </td>
                                     <td>
-                                        <a class="me-3" href="update.php?id=<?php echo $sale->sale_id; ?>">
+                                        <a class="me-3" href="update.php?id=<?php echo $sale->id; ?>">
                                             <img src="<?php echo $base_url; ?>assets/img/icons/edit.svg" alt="img">
                                         </a>
-                                        <a class="me-3 confirm-text" href="delete.php?id=<?php echo $sale->sale_id; ?>">
+                                        <a class="me-3 confirm-text" href="delete.php?id=<?php echo $sale->id; ?>">
                                             <img src="<?php echo $base_url; ?>assets/img/icons/delete.svg" alt="img">
                                         </a>
                                     </td>

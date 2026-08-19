@@ -1,32 +1,32 @@
 <?php
     require_once "../../component/connection.php";
     $voucher_id = $_POST['voucher_id'];
-    /* get last payment voucher number */
-    $payment_voucher = [
+    /* get last receive voucher number */
+    $receive_voucher = [
         'voucher_date' => $_POST['voucher_date'],
-        'pay_to' => $_POST['pay_to'],
+        'received_from' => $_POST['received_from'],
         'narration' => $_POST['narration'],
         'cr' => $_POST['total_dr'] ?? 0,
         'dr' => $_POST['total_cr'] ?? 0,
         'status' => 1
     ];
 
-    $payment_voucher_result = $crud->common_update("payment_vouchers", $payment_voucher, ['id' => $voucher_id]);
-   $crud->common_delete("payment_voucher_details", ['payment_voucher_id' => $voucher_id]);
-   $crud->common_delete("ledger", ['payment_voucher_id' => $voucher_id]);
+    $receive_voucher_result = $crud->common_update("receive_vouchers", $receive_voucher, ['id' => $voucher_id]);
+   $crud->common_delete("receive_voucher_details", ['receive_voucher_id' => $voucher_id]);
+   $crud->common_delete("ledger", ['receive_voucher_id' => $voucher_id]);
 
     foreach ($_POST['account_head_id'] as $index => $account_head_id) {
         $details_data = [
-            'payment_voucher_id' => $voucher_id,
+            'receive_voucher_id' => $voucher_id,
             'account_head_id' => $account_head_id,
             'cr' => $_POST['dr'][$index] ?? 0,
             'dr' => $_POST['cr'][$index] ?? 0,
             'remarks' => $_POST['remarks'][$index] ?? '',
             'created_by' => $_SESSION['user_id']
         ];
-        $payment_voucher_detail_result = $crud->common_insert("payment_voucher_details", $details_data);
+        $receive_voucher_detail_result = $crud->common_insert("receive_voucher_details", $details_data);
         $ledger_data = [
-            'payment_voucher_id' => $voucher_id,
+            'receive_voucher_id' => $voucher_id,
             'account_head_id' => $account_head_id,
             'cr' => $_POST['dr'][$index] ?? 0,
             'dr' => $_POST['cr'][$index] ?? 0,
@@ -38,9 +38,9 @@
 
 
 // Ledger
-if ($payment_voucher_result['status']) {
+if ($receive_voucher_result['status']) {
     $_SESSION['message'] = ['success', 'Success', 'Voucher updated!'];
 } else {
-    $_SESSION['message'] = ['danger', 'Error', $payment_voucher_result['message']];
+    $_SESSION['message'] = ['danger', 'Error', $receive_voucher_result['message']];
 }
-echo "<script>window.location.href = '" . $base_url . "accounts/payment/list.php';</script>";
+echo "<script>window.location.href = '" . $base_url . "accounts/receive/list.php';</script>";

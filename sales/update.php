@@ -2,9 +2,9 @@
 <?php require_once '../component/sidebar.php'; ?>
 <?php
     $id = $_GET['id'];
-    $result = $crud->common_select('sales', '*', ['sale_id' => $id]);
+    $result = $crud->common_select('sales', '*', ['id' => $id]);
     $sale = $result['data'][0];
-    $sdresult = $crud->common_query("SELECT sale_details.*, products.product_name FROM `sale_details` join products on products.id=sale_details.product_id where sale_details.sale_id=$id");
+    $sdresult = $crud->common_query("SELECT sale_details.*, products.product_name FROM `sale_details` join products on products.id=sale_details.product_id where sale_details.id=$id");
     $sale_details = $sdresult['data'];
 ?>
 
@@ -38,7 +38,7 @@
                                         if($customers['status']){
                                             foreach($customers['data'] as $customer){
                                     ?>
-                                                <option value="<?php echo $customer->customer_id; ?>" <?php echo ($customer->customer_id == $sale->customer_id) ? 'selected' : ''; ?>><?php echo htmlspecialchars($customer->name); ?></option>
+                                                <option value="<?php echo $customer->id; ?>" <?php echo ($customer->id == $sale->id) ? 'selected' : ''; ?>><?php echo htmlspecialchars($customer->name); ?></option>
                                     <?php   }
                                         } else { ?>
                                             <option value="">No customers available</option>
