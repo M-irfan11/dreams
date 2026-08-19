@@ -119,8 +119,11 @@
                                                     <tr>
                                                         <td colspan="3" class="text-end">VAT:</td>
                                                         <td>
-                                                            <input type="text" name="vat" id="vatAmount" class="form-control">
+                                                            <!-- user can type an exact amount here, or leave blank for the default 5% -->
+                                                            <input type="text" id="vatInput" class="form-control">
                                                             <small class="form-text text-muted">Default vat 15% will auto add</small>
+                                                            <!-- the amount actually used (typed or default) is calculated into this hidden field and submitted -->
+                                                            <input type="hidden" name="vat" id="vatAmount">
                                                         </td>
                                                         <td></td>
                                                     </tr>
@@ -179,6 +182,7 @@
         const totalAmountInput = document.getElementById('totalAmount');
         const discountType = document.getElementById('discountType');
         const discountAmountInput = document.getElementById('discountAmount');
+        const vatInput = document.getElementById('vatInput');
         const vatAmountInput = document.getElementById('vatAmount');
         const grandTotalInput = document.getElementById('grandTotal');
 
@@ -259,13 +263,19 @@
             const totalAmount = salesItems.reduce((sum, item) => sum + item.subtotal, 0);
             totalAmountInput.value = totalAmount.toFixed(2);
             const discountAmount = parseFloat(discountAmountInput.value) || 0;
-            const taxAmount = parseFloat(vatAmountInput.value) || (totalAmount * 0.05);
+
+            // taxAmount is recalculated fresh every time from vatInput (or the 5%
+            // default) - the result always goes into the hidden field that actually
+            // gets submitted, so it never goes stale after a quantity/discount change
+            const taxAmount = parseFloat(vatInput.value) || (totalAmount * 0.15);
+            vatAmountInput.value = taxAmount.toFixed(2);
+
             const grandTotal = totalAmount - discountAmount + taxAmount;
             grandTotalInput.value = grandTotal.toFixed(2);
         }
 
         discountAmountInput.addEventListener('input', calculateTotals);
-        vatAmountInput.addEventListener('input', calculateTotals);
+        vatInput.addEventListener('input', calculateTotals);
         discountType.addEventListener('change', calculateTotals);
     });
 </script>

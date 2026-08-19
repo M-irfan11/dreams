@@ -1,5 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/connection.php"; // gives $crud, $base_url, session
+require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/auth.php";
+
+require_role(['Super Admin']); // only Super Admin can manage users now
 
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['error']);
@@ -18,6 +21,14 @@ if ($roles_rs) {
     while ($row = $roles_rs->fetch_object()) {
         $roles[] = $row;
     }
+}
+
+// only a Super Admin should even see "Super Admin" as a role option
+// (create.php also blocks this server-side, this just keeps the dropdown honest)
+if (($_SESSION['user_role'] ?? '') !== 'Super Admin') {
+    $roles = array_filter($roles, function($r) {
+        return $r->role_name !== 'Super Admin';
+    });
 }
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/header.php";
