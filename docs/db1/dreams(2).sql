@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2026 at 03:16 AM
+-- Generation Time: Aug 19, 2026 at 05:52 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.1.25
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -200,7 +200,7 @@ CREATE TABLE `journal_vouchers` (
   `dr` decimal(12,2) DEFAULT 0.00,
   `cr` decimal(12,2) DEFAULT 0.00,
   `created_by` int(11) DEFAULT NULL,
-  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `status` int(11) DEFAULT 0 COMMENT '0 inactive 1 active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -211,10 +211,11 @@ CREATE TABLE `journal_vouchers` (
 --
 
 INSERT INTO `journal_vouchers` (`id`, `voucher_no`, `narration`, `voucher_date`, `source_type`, `source_id`, `dr`, `cr`, `created_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'VCH-20260818-961', 'a/r', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 'Active', '2026-08-18 00:18:20', '2026-08-18 00:18:20', NULL),
-(2, 'VCH-20260818-896', 'a/r', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 'Active', '2026-08-18 00:20:27', '2026-08-18 00:20:27', NULL),
-(3, 'VCH-20260818-750', 'a/r', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 'Active', '2026-08-18 00:23:01', '2026-08-18 00:23:01', NULL),
-(4, 'VCH-20260818-256', 'a/p', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 'Active', '2026-08-18 00:23:38', '2026-08-18 00:23:38', NULL);
+(1, 'VCH-20260818-961', 'a/r', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 1, '2026-08-18 00:18:20', '2026-08-18 00:18:20', NULL),
+(2, 'VCH-20260818-896', 'a/r', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 1, '2026-08-18 00:20:27', '2026-08-18 00:20:27', NULL),
+(3, 'VCH-20260818-750', 'a/r', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 1, '2026-08-18 00:23:01', '2026-08-18 00:23:01', NULL),
+(4, 'VCH-20260818-256', 'a/p', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 1, '2026-08-18 00:23:38', '2026-08-18 00:23:38', NULL),
+(5, 'J000005', 'goods purchase 50000 tk', '2026-08-18', NULL, NULL, 50000.00, 50000.00, 7, 1, '2026-08-19 03:09:48', '2026-08-19 03:09:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,7 +240,9 @@ CREATE TABLE `journal_voucher_details` (
 INSERT INTO `journal_voucher_details` (`id`, `journal_voucher_id`, `account_head_id`, `dr`, `cr`, `remarks`, `created_by`) VALUES
 (1, 2, 3, 150000.00, 150000.00, 'a/r', 7),
 (2, 3, 3, 150000.00, 150000.00, 'a/r', 7),
-(3, 4, 4, 10000.00, 10000.00, 'a/p', 7);
+(3, 4, 4, 10000.00, 10000.00, 'a/p', 7),
+(4, 5, 6, 50000.00, 0.00, '', 7),
+(5, 5, 1, 0.00, 50000.00, '', 7);
 
 -- --------------------------------------------------------
 
@@ -270,7 +273,15 @@ INSERT INTO `ledger` (`id`, `payment_voucher_id`, `receive_voucher_id`, `journal
 (2, NULL, NULL, 4, 4, 10000.00, 10000.00, 'a/p', 7, '2026-08-18 00:23:38', '2026-08-18 00:23:38'),
 (3, 3, NULL, NULL, 4, 10000.00, 10000.00, 'a/p', 7, '2026-08-18 00:30:57', '2026-08-18 00:30:57'),
 (4, NULL, 1, NULL, 4, 100000.00, 100000.00, 'a/p', 7, '2026-08-18 00:39:12', '2026-08-18 00:39:12'),
-(5, NULL, 2, NULL, 3, 50000.00, 50000.00, 'A/R', 7, '2026-08-18 00:39:44', '2026-08-18 00:39:44');
+(5, NULL, 2, NULL, 3, 50000.00, 50000.00, 'A/R', 7, '2026-08-18 00:39:44', '2026-08-18 00:39:44'),
+(6, NULL, NULL, 5, 6, 50000.00, 0.00, '', 7, '2026-08-19 03:09:48', '2026-08-19 03:09:48'),
+(7, NULL, NULL, 5, 1, 0.00, 50000.00, '', 7, '2026-08-19 03:09:48', '2026-08-19 03:09:48'),
+(8, 4, NULL, NULL, 4, 0.00, 0.00, '', 7, '2026-08-19 03:12:09', '2026-08-19 03:12:09'),
+(9, 4, NULL, NULL, 2, 0.00, 0.00, '', 7, '2026-08-19 03:12:10', '2026-08-19 03:12:10'),
+(10, 4, NULL, NULL, 2, 0.00, 0.00, 'payment to kamal 100000', 7, '2026-08-19 03:12:10', '2026-08-19 03:12:10'),
+(14, 5, NULL, NULL, 6, 20000.00, 0.00, '', 7, '2026-08-19 03:14:21', '2026-08-19 03:14:21'),
+(15, 5, NULL, NULL, 1, 0.00, 20000.00, '', 7, '2026-08-19 03:14:21', '2026-08-19 03:14:21'),
+(16, 5, NULL, NULL, 1, 0.00, 0.00, 'payment to jamal 10000', 7, '2026-08-19 03:14:21', '2026-08-19 03:14:21');
 
 -- --------------------------------------------------------
 
@@ -309,7 +320,7 @@ CREATE TABLE `payment_vouchers` (
   `dr` decimal(12,2) DEFAULT 0.00,
   `cr` decimal(12,2) DEFAULT 0.00,
   `created_by` int(11) DEFAULT NULL,
-  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `status` int(11) DEFAULT 0 COMMENT '0 inactive 1 active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -320,7 +331,9 @@ CREATE TABLE `payment_vouchers` (
 --
 
 INSERT INTO `payment_vouchers` (`id`, `voucher_no`, `pay_to`, `narration`, `voucher_date`, `source_type`, `source_id`, `dr`, `cr`, `created_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 'VCH-20260818-827', 'a/p', 'a/p', '2026-08-17', NULL, NULL, 10000.00, 10000.00, 7, 'Active', '2026-08-18 00:30:57', '2026-08-18 00:31:18', '2026-08-17 20:31:18');
+(3, 'VCH-20260818-827', 'a/p', 'a/p', '2026-08-17', NULL, NULL, 10000.00, 10000.00, 7, 1, '2026-08-18 00:30:57', '2026-08-18 00:31:18', '2026-08-17 20:31:18'),
+(4, 'PAY000004', 'kamal', 'payment to kamal 100000', '2026-08-18', NULL, NULL, 0.00, 0.00, 7, 1, '2026-08-19 03:12:09', '2026-08-19 03:12:09', NULL),
+(5, 'PAY000005', 'jamal', 'payment to jamal 20000', '2026-08-18', NULL, NULL, 20000.00, 20000.00, 7, 1, '2026-08-19 03:13:02', '2026-08-19 03:14:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -343,7 +356,13 @@ CREATE TABLE `payment_voucher_details` (
 --
 
 INSERT INTO `payment_voucher_details` (`id`, `payment_voucher_id`, `account_head_id`, `dr`, `cr`, `remarks`, `created_by`) VALUES
-(1, 3, 4, 10000.00, 10000.00, 'a/p', 7);
+(1, 3, 4, 10000.00, 10000.00, 'a/p', 7),
+(2, 4, 4, 0.00, 0.00, '', 7),
+(3, 4, 2, 0.00, 0.00, '', 7),
+(4, 4, 2, 0.00, 0.00, 'payment to kamal 100000', 7),
+(8, 5, 6, 20000.00, 0.00, '', 7),
+(9, 5, 1, 0.00, 20000.00, '', 7),
+(10, 5, 1, 0.00, 0.00, 'payment to jamal 10000', 7);
 
 -- --------------------------------------------------------
 
@@ -528,7 +547,7 @@ CREATE TABLE `receive_vouchers` (
   `dr` decimal(12,2) DEFAULT 0.00,
   `cr` decimal(12,2) DEFAULT 0.00,
   `created_by` int(11) DEFAULT NULL,
-  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `status` int(11) DEFAULT 0 COMMENT '0 inactive 1 active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -539,8 +558,8 @@ CREATE TABLE `receive_vouchers` (
 --
 
 INSERT INTO `receive_vouchers` (`id`, `voucher_no`, `received_from`, `narration`, `voucher_date`, `source_type`, `source_id`, `dr`, `cr`, `created_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'VCH-20260818-855', 'a/p', 'a/p', '2026-08-18', NULL, NULL, 100000.00, 100000.00, 7, 'Active', '2026-08-18 00:39:12', '2026-08-18 00:39:12', NULL),
-(2, 'VCH-20260818-582', 'A/R', 'A/R', '2026-08-17', NULL, NULL, 50000.00, 50000.00, 7, 'Active', '2026-08-18 00:39:43', '2026-08-18 00:39:43', NULL);
+(1, 'VCH-20260818-855', 'a/p', 'a/p', '2026-08-18', NULL, NULL, 100000.00, 100000.00, 7, 1, '2026-08-18 00:39:12', '2026-08-18 00:39:12', NULL),
+(2, 'VCH-20260818-582', 'A/R', 'A/R', '2026-08-17', NULL, NULL, 50000.00, 50000.00, 7, 1, '2026-08-18 00:39:43', '2026-08-18 00:39:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -622,7 +641,8 @@ INSERT INTO `sales` (`id`, `customer_id`, `user_id`, `sale_date`, `total_amount`
 (5, 3, 7, '2026-08-11', 135.00, 0.00, 0.00, 1, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL, 4),
 (6, 2, 7, '2026-08-15', 270.00, 0.00, 0.00, 1, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL, 3),
 (7, 1, 7, '2026-08-15', 6250.00, 0.00, 0.00, 1, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL, 6),
-(8, 3, 1, '2026-08-15', 125000.00, 0.00, 0.00, 1, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL, 6);
+(8, 3, 1, '2026-08-15', 125000.00, 0.00, 0.00, 1, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL, 6),
+(9, 2, 7, '2026-08-17', 125000.00, 0.00, 0.00, 1, '2026-08-18 01:45:54', '2026-08-18 05:45:54', NULL, 7, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -714,7 +734,8 @@ INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_pri
 (13, 5, 18, 1, 135.00, 135.00, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL),
 (14, 6, 18, 2, 135.00, 270.00, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL),
 (15, 7, 3, 5, 1250.00, 6250.00, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL),
-(16, 8, 3, 100, 1250.00, 125000.00, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL);
+(16, 8, 3, 100, 1250.00, 125000.00, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL),
+(17, 9, 3, 100, 1250.00, 125000.00, '2026-08-18 01:45:54', '2026-08-18 05:45:54', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -765,7 +786,8 @@ INSERT INTO `stocks` (`id`, `stock_date`, `product_id`, `warehouse_id`, `quantit
 (25, '2026-08-14', 18, 4, 1000, 19, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-16 15:19:18', NULL, NULL),
 (26, '2026-08-15', 18, 3, 120, 20, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-16 23:50:17', NULL, NULL),
 (27, '2026-08-16', 14, 7, 1000, 21, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-17 06:28:39', NULL, NULL),
-(28, '2026-08-17', 14, 7, -100, 21, 0, NULL, NULL, NULL, 2026, NULL, '2026-08-17 06:39:11', NULL, NULL);
+(28, '2026-08-17', 14, 7, -100, 21, 0, NULL, NULL, NULL, 2026, NULL, '2026-08-17 06:39:11', NULL, NULL),
+(29, '2026-08-17', 3, 6, -100, NULL, NULL, 9, NULL, NULL, 2026, NULL, '2026-08-18 05:45:54', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1102,19 +1124,19 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `journal_vouchers`
 --
 ALTER TABLE `journal_vouchers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `journal_voucher_details`
 --
 ALTER TABLE `journal_voucher_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ledger`
 --
 ALTER TABLE `ledger`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -1126,13 +1148,13 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `payment_vouchers`
 --
 ALTER TABLE `payment_vouchers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payment_voucher_details`
 --
 ALTER TABLE `payment_voucher_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1180,19 +1202,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sale_details`
 --
 ALTER TABLE `sale_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `stock_transfers`
