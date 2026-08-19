@@ -93,14 +93,14 @@
                                     </td>
                                     <td><?php echo htmlspecialchars($ret->full_name); ?></td>
                                     <td>
-                                        <?php // view.php will be added in a later step ?>
-                                        <a class="me-3" href="update.php?id=<?php echo $ret->id; ?>">
-                                            <img src="<?php echo $base_url; ?>assets/img/icons/edit.svg" alt="img">
-                                        </a>
-                                        <a class="me-3 confirm-text" href="delete.php?id=<?php echo $ret->id; ?>">
-                                            <img src="<?php echo $base_url; ?>assets/img/icons/delete.svg" alt="img">
-                                        </a>
-                                    </td>
+    <a  class="btn btn-sm btn-primary" href="invoice.php?id=<?php echo $ret->id; ?>">Invoice</a>
+    <a class="me-3" href="update.php?id=<?php echo $ret->id; ?>">
+        <img src="<?php echo $base_url; ?>assets/img/icons/edit.svg" alt="Edit">
+    </a>
+    <a class="me-3 confirm-text" href="delete.php?id=<?php echo $ret->id; ?>">
+        <img src="<?php echo $base_url; ?>assets/img/icons/delete.svg" alt="Delete">
+    </a>
+</td>
                                 </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
