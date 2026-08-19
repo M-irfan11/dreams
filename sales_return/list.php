@@ -92,7 +92,7 @@
                                         <?php echo $ret->status == 1 ? '<span class="badges bg-lightgreen">Active</span>' : '<span class="badges bg-lightred">Cancelled</span>'; ?>
                                     </td>
                                     <td><?php echo htmlspecialchars($ret->full_name); ?></td>
-                                    <td>
+    <td>
     <a  class="btn btn-sm btn-primary" href="invoice.php?id=<?php echo $ret->id; ?>">Invoice</a>
     <a class="me-3" href="update.php?id=<?php echo $ret->id; ?>">
         <img src="<?php echo $base_url; ?>assets/img/icons/edit.svg" alt="Edit">
