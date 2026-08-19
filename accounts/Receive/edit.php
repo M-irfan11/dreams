@@ -19,11 +19,11 @@
     $voucher_id=$_GET['id'] ?? null;
     $voucherData = [];
     if ($voucher_id) {
-        $voucherResult = $crud->common_query("SELECT * FROM payment_vouchers WHERE id = $voucher_id");
+        $voucherResult = $crud->common_query("SELECT * FROM receive_vouchers WHERE id = $voucher_id");
         if ($voucherResult['status']) {
             $voucherData = $voucherResult['data'][0];
         }
-        $voucherDetailsResult = $crud->common_query("SELECT * FROM payment_voucher_details WHERE payment_voucher_id = $voucher_id");
+        $voucherDetailsResult = $crud->common_query("SELECT * FROM receive_voucher_details WHERE receive_voucher_id = $voucher_id");
         if ($voucherDetailsResult['status']) {
             $voucherDetails = $voucherDetailsResult['data'];
         }
@@ -49,8 +49,8 @@
                     <input type="text" value="<?= $voucherData->narration ?? '' ?>" name="narration" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label>Pay To</label>
-                    <input type="text" value="<?= $voucherData->pay_to ?? '' ?>" name="pay_to" class="form-control" required>
+                    <label>Receive from</label>
+                    <input type="text" value="<?= $voucherData->pay_to ?? '' ?>" name="received_from" class="form-control" required>
                 </div>
             </div>
             <div class="row mt-3">

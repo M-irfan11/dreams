@@ -4,7 +4,7 @@ require_once('../component/connection.php');
 
 $id = $_GET['id'];
 
-$customer = $crud->common_select("customers", "*", ["customer_id"=>$id]);
+$customer = $crud->common_select("customers", "*", ["id"=>$id]);
 
 if($_POST){
     $data = [
@@ -12,7 +12,7 @@ if($_POST){
         "phone" => $_POST['phone']
     ];
 
-    $crud->common_update("customers", $data, ["customer_id"=>$id]);
+    $crud->common_update("customers", $data, ["id"=>$id]);
 
     header("Location: list.php");
 }
