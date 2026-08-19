@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2026 at 06:56 PM
+-- Generation Time: Aug 19, 2026 at 07:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -444,7 +444,8 @@ INSERT INTO `purchases` (`id`, `supplier_id`, `purchase_date`, `total_amount`, `
 (19, 2, '2026-08-14', 128000.00, 0.00, 1, 0.00, 128000.00, '', 1, '2026-08-16 11:19:17', '2026-08-16 15:19:17', NULL, 1, NULL),
 (20, 3, '2026-08-15', 15360.00, 0.00, 1, 0.00, 15360.00, '', 1, '2026-08-16 19:50:17', '2026-08-16 23:50:17', NULL, 7, NULL),
 (21, 1, '2026-08-16', 450000.00, 0.00, 1, 0.00, 450000.00, '', 1, '2026-08-17 02:28:39', '2026-08-17 06:28:39', NULL, 7, NULL),
-(22, 1, '2026-08-19', 45000.00, 0.00, 1, 0.00, 45000.00, 'pritam', 1, '2026-08-19 11:29:23', '2026-08-19 15:29:23', NULL, 7, NULL);
+(22, 1, '2026-08-19', 45000.00, 0.00, 1, 0.00, 45000.00, 'pritam', 1, '2026-08-19 11:29:23', '2026-08-19 15:29:23', NULL, 7, NULL),
+(23, 4, '2026-08-18', 45000.00, 0.00, 1, 0.00, 45000.00, '', 1, '2026-08-19 13:10:29', '2026-08-19 17:10:29', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -480,7 +481,8 @@ INSERT INTO `purchase_details` (`id`, `purchase_id`, `product_id`, `quantity`, `
 (16, 19, 18, 1000, 128.00, 128000.00, '2026-08-16 11:19:17', '2026-08-16 15:19:17', NULL, 1, NULL),
 (17, 20, 18, 120, 128.00, 15360.00, '2026-08-16 19:50:17', '2026-08-16 23:50:17', NULL, 7, NULL),
 (18, 21, 14, 1000, 450.00, 450000.00, '2026-08-17 02:28:39', '2026-08-17 06:28:39', NULL, 7, NULL),
-(19, 22, 14, 100, 450.00, 45000.00, '2026-08-19 11:29:23', '2026-08-19 15:29:23', NULL, 7, NULL);
+(19, 22, 14, 100, 450.00, 45000.00, '2026-08-19 11:29:23', '2026-08-19 15:29:23', NULL, 7, NULL),
+(20, 23, 14, 100, 450.00, 45000.00, '2026-08-19 13:10:29', '2026-08-19 17:10:29', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -509,7 +511,8 @@ CREATE TABLE `purchase_returns` (
 
 INSERT INTO `purchase_returns` (`id`, `purchase_id`, `supplier_id`, `return_date`, `total_amount`, `reason`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
 (1, 17, 1, '2026-08-16', 87500.00, 'fff', 1, '2026-08-16 03:49:32', '2026-08-16 07:49:32', NULL, 7, NULL),
-(0, 21, 1, '2026-08-17', 45000.00, '', 1, '2026-08-17 02:39:11', '2026-08-17 06:39:11', NULL, 7, NULL);
+(0, 21, 1, '2026-08-17', 45000.00, '', 1, '2026-08-17 02:39:11', '2026-08-17 06:39:11', NULL, 7, NULL),
+(0, 23, 4, '2026-08-19', 22500.00, '', 1, '2026-08-19 13:11:09', '2026-08-19 17:11:09', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -534,7 +537,8 @@ CREATE TABLE `purchase_return_details` (
 --
 
 INSERT INTO `purchase_return_details` (`id`, `purchase_return_id`, `product_id`, `quantity`, `unit_price`, `subtotal`, `deleted_at`, `created_at`, `created_by`) VALUES
-(1, 0, 14, 100, 450.00, 45000.00, NULL, '2026-08-17 02:39:11', 7);
+(1, 0, 14, 100, 450.00, 45000.00, NULL, '2026-08-17 02:39:11', 7),
+(2, 0, 14, 50, 450.00, 22500.00, NULL, '2026-08-19 13:11:09', 7);
 
 -- --------------------------------------------------------
 
@@ -645,7 +649,8 @@ INSERT INTO `sales` (`id`, `customer_id`, `user_id`, `sale_date`, `total_amount`
 (4, 4, 7, '2026-08-12', 4200.00, 0.00, 0.00, 2, '2026-08-12 03:24:00', '2026-08-19 10:15:03', NULL, 7, 7, 6),
 (6, 2, 7, '2026-08-15', 270.00, 0.00, 0.00, 1, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL, 3),
 (7, 1, 7, '2026-08-15', 6250.00, 0.00, 0.00, 1, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL, 6),
-(8, 3, 1, '2026-08-15', 125000.00, 0.00, 0.00, 1, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL, 6);
+(8, 3, 1, '2026-08-15', 125000.00, 0.00, 0.00, 1, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL, 6),
+(9, 1, 7, '2026-08-18', 12500.00, 0.00, 1875.00, 1, '2026-08-19 13:09:25', '2026-08-19 17:09:25', NULL, 7, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -736,7 +741,8 @@ INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_pri
 (13, 5, 18, 1, 135.00, 135.00, '2026-08-12 12:53:58', '2026-08-12 16:53:58', NULL, 7, NULL),
 (14, 6, 18, 2, 135.00, 270.00, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL),
 (15, 7, 3, 5, 1250.00, 6250.00, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL),
-(16, 8, 3, 100, 1250.00, 125000.00, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL);
+(16, 8, 3, 100, 1250.00, 125000.00, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL),
+(17, 9, 3, 10, 1250.00, 12500.00, '2026-08-19 13:09:25', '2026-08-19 17:09:25', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -788,7 +794,10 @@ INSERT INTO `stocks` (`id`, `stock_date`, `product_id`, `warehouse_id`, `quantit
 (26, '2026-08-15', 18, 3, 120, 20, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-16 23:50:17', NULL, NULL),
 (27, '2026-08-16', 14, 7, 1000, 21, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-17 06:28:39', NULL, NULL),
 (28, '2026-08-17', 14, 7, -100, 21, 0, NULL, NULL, NULL, 2026, NULL, '2026-08-17 06:39:11', NULL, NULL),
-(29, '2026-08-19', 14, 7, 100, 22, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-19 15:29:23', NULL, NULL);
+(29, '2026-08-19', 14, 7, 100, 22, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-19 15:29:23', NULL, NULL),
+(30, '2026-08-18', 3, 6, -10, NULL, NULL, 9, NULL, NULL, 2026, NULL, '2026-08-19 17:09:25', NULL, NULL),
+(31, '2026-08-18', 14, 7, 100, 23, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-19 17:10:29', NULL, NULL),
+(32, '2026-08-19', 14, 7, -50, 23, 0, NULL, NULL, NULL, 2026, NULL, '2026-08-19 17:11:09', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1168,19 +1177,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `purchase_details`
 --
 ALTER TABLE `purchase_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `purchase_return_details`
 --
 ALTER TABLE `purchase_return_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `receive_vouchers`
@@ -1204,19 +1213,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sale_details`
 --
 ALTER TABLE `sale_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `stock_transfers`
