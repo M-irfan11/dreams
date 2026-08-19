@@ -54,7 +54,7 @@ class crud_class{
 
             // "SELECT * FROM users WHERE id='1' AND name='kamal' ORDER BY name ASC LIMIT 10 OFFSET 5"
         }
-
+        // echo $sql; // Debugging line to check the generated SQL query
         $rs = $this->conn->query($sql);
         if($rs->num_rows > 0){
             $result["status"] = true;
@@ -86,7 +86,7 @@ class crud_class{
             "data"=>[],
             "message"=>""
         ];
-
+   
         $rs = $this->conn->query($sql);
 
         if($rs->num_rows > 0){
@@ -113,7 +113,7 @@ class crud_class{
         $columns = implode(", ", array_keys($data));
         $values = implode("', '", array_map([$this->conn, 'real_escape_string'], array_values($data)));
         $sql = "INSERT INTO $table ($columns) VALUES ('$values')";
-        echo $sql; // Debugging line to check the generated SQL query
+        //echo $sql; // Debugging line to check the generated SQL query
         if($this->conn->query($sql)){
             $result["status"] = true;
             $result["data"] = $this->conn->insert_id;
