@@ -32,20 +32,8 @@ $details_query = "
 ";
 $details_result = $crud->common_query($details_query);
 
-// Payment
-$payment_query = "
-    SELECT SUM(amount) AS paid
-    FROM payments
-    WHERE sale_id = '$id'
-    AND deleted_at IS NULL
-";
-$payment_result = $crud->common_query($payment_query);
-
-$paid = 0;
-if($payment_result['status']){
-    $paid = $payment_result['data'][0]->paid ?? 0;
-}
-
+// Paid/Due - based on sale status, not a payments table (nothing writes to
+// payments yet, and add.php always saves new sales as status = 1 / Paid)
 $subtotal = 0;
 foreach($details_result['data'] as $item){
     $subtotal += $item->subtotal;
@@ -55,7 +43,15 @@ $discount = $sale->discount ?? 0;
 $tax = $sale->tax ?? 0;
 
 $grand_total = $subtotal - $discount + $tax;
-$due = $grand_total - $paid;
+
+// sale status: 1 = Paid, 2 = Pending, 3 = Cancelled
+if((int)$sale->status === 1){
+    $paid = $grand_total;
+    $due = 0;
+} else {
+    $paid = 0;
+    $due = $grand_total;
+}
 ?>
 
 <style>
