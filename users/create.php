@@ -1,10 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/connection.php"; // gives $crud, $base_url, session
+require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/auth.php";
 
-if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
-    header("Location: {$base_url}login.php");
-    exit;
-}
+require_role(['Super Admin']); // only Super Admin can manage users now
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: {$base_url}users/add.php");
@@ -32,6 +30,17 @@ if (empty($errors)) {
     $existing = $crud->common_select('users', 'id', ['email' => $email]);
     if ($existing['status']) {
         $errors[] = 'This email is already registered.';
+    }
+}
+
+// only a Super Admin can create another Super Admin
+if (empty($errors)) {
+    $target_role = $crud->conn->query("SELECT role_name FROM roles WHERE id = " . (int)$role_id);
+    if ($target_role && $target_role->num_rows > 0) {
+        $target_role_name = $target_role->fetch_object()->role_name;
+        if ($target_role_name === 'Super Admin' && ($_SESSION['user_role'] ?? '') !== 'Super Admin') {
+            $errors[] = 'Only a Super Admin can create another Super Admin.';
+        }
     }
 }
 
