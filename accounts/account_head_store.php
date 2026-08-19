@@ -8,7 +8,8 @@ $data = [
     'account_subtype' => $_POST['account_subtype'] ?? null,
     'parent_id' => $_POST['parent_id'] ?? null,
     'opening_balance' => $_POST['opening_balance'] ?? 0,
-    'status' => $_POST['status'] ?? 1,
+    'current_balance' => $_POST['opening_balance'] ?? 0,
+    'status' => $_POST['status'] ?? 'Active',
     'description' => $_POST['description'] ?? null,
     'created_by' => $_SESSION['user_id']
 ];

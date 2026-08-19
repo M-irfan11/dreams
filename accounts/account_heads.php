@@ -33,11 +33,12 @@
                         <td><?= $acc->account_name ?></td>
                         <td><?= $acc->account_type ?></td>
                         <td><?= number_format($acc->current_balance, 2) ?></td>
-                        <td><?= $acc->status == 1 ? 'Active' : 'Inactive' ?></td>
+                        <td><?= $acc->status == 'Active' ? 'Active' : 'Inactive' ?></td>
+                        
                         <td>
                             
                             <a href="ledger.php?account_id=<?= $acc->id ?>" class="btn btn-sm btn-info">
-                                <i class="fa-solid fa-book"></i> Ledger
+                                <i class=""></i> Ledger
                             </a>
                             <a href="account_head_edit.php?id=<?= $acc->id ?>" class="btn btn-sm btn-primary">Edit</a>
                             <a href="account_head_delete.php?id=<?= $acc->id ?>" class="btn btn-sm btn-danger">Delete</a>
