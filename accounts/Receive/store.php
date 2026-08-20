@@ -6,7 +6,7 @@
     $receive_voucher = [
         'voucher_no' => $voucher_no,
         'voucher_date' => $_POST['voucher_date'],
-        'pay_to' => $_POST['pay_to'],
+        'received_from' => $_POST['received_from'],
         'narration' => $_POST['narration'],
         'cr' => $_POST['totalAmount'] ?? 0,
         'dr' => $_POST['totalAmount'] ?? 0,

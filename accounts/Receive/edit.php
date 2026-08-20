@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-md-6">
                     <label>Receive from</label>
-                    <input type="text" value="<?= $voucherData->pay_to ?? '' ?>" name="received_from" class="form-control" required>
+                    <input type="text" value="<?= $voucherData->received_from ?? '' ?>" name="received_from" class="form-control" required>
                 </div>
             </div>
             <div class="row mt-3">
