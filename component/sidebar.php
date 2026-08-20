@@ -91,10 +91,10 @@
 
 <?php endif; ?>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> People</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>customerlist.php">Customer List</a></li>
-<li><a href="<?= $base_url ?>addcustomer.php">Add Customer </a></li>
+<li><a href="<?= $base_url ?>users/list.php">users List</a></li>
+<li><a href="<?= $base_url ?>users/create.php">add user </a></li>
 <li><a href="<?= $base_url ?>supplierlist.php">Supplier List</a></li>
 <li><a href="<?= $base_url ?>addsupplier.php">Add Supplier </a></li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
@@ -109,7 +109,7 @@
 <a href="<?= $base_url ?>warehouse/list.php"><i data-feather="layers"></i><span> warehouse</span> </a>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>table/list.php"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>tables-basic.php">Basic Tables </a></li>
 <li><a href="<?= $base_url ?>data-tables.php">Data Table </a></li>
@@ -117,7 +117,7 @@
 </li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/time.svg" alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>Report/list.php"><img src="<?= $base_url ?>assets/img/icons/time.svg" alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>purchaseorderreport.php">Purchase order report</a></li>
 <li><a href="<?= $base_url ?>inventoryreport.php">Inventory Report</a></li>
@@ -131,7 +131,7 @@
 <?php endif; ?>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
 <ul>
 
 <li><a href="<?= $base_url ?>users/list.php">Users List</a></li>
@@ -139,7 +139,7 @@
 </li>
 <?php endif; ?>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>setting/list.php"><img src="<?= $base_url ?>assets/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>generalsettings.php">General Settings</a></li>
 <li><a href="<?= $base_url ?>emailsettings.php">Email Settings</a></li>
