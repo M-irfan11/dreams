@@ -33,12 +33,23 @@
 
 </ul>
 </li>
+
 <li class="submenu">
 <a href="<?= $base_url ?>stock/list.php"><i data-feather="box"></i> <span>Stocks</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>stock/list.php">Stock list</a></li>
 <li><a href="<?= $base_url ?>stock_transfer/list.php">Stock Transfer</a></li>
-
+</ul>
+</li>
+<li class="submenu">
+<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
+<ul>
+<li><a href="<?= $base_url ?>accounts/account_heads.php">Account heads</a></li>
+<li><a href="<?= $base_url ?>accounts/journal/list.php">Journal vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/payment/list.php">Payment vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/receive/list.php">Receive Vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/ledger.php">Ledger </a></li>
+<li><a href="<?= $base_url ?>accounts/profit_loss.php">profit & loss </a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -76,13 +87,7 @@
 </ul>
 </li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
-<li class="submenu">
-<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Accounts</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>accounts/list.php">Accounts List</a></li>
-<li><a href="<?= $base_url ?>accounts/create.php">Add Accounts </a></li>
-</ul>
-</li>
+
 <?php endif; ?>
 <li class="submenu">
 <a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
@@ -103,15 +108,12 @@
 <a href="<?= $base_url ?>warehouse/list.php"><i data-feather="layers"></i><span> warehouse</span> </a>
 </li>
 <li class="submenu">
-<<<<<<< HEAD
 <a href="<?= $base_url ?>table/list.php"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>tables-basic.php">Basic Tables </a></li>
 <li><a href="<?= $base_url ?>data-tables.php">Data Table </a></li>
 </ul>
-=======
 
->>>>>>> 2b8af99721267d97be5b01bd887cf46d3a06512d
 </li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">

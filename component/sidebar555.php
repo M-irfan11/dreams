@@ -109,7 +109,7 @@
 <a href="<?= $base_url ?>warehouse/list.php"><i data-feather="layers"></i><span> warehouse</span> </a>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>javascript:void(0);"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>tables-basic.php">Basic Tables </a></li>
 <li><a href="<?= $base_url ?>data-tables.php">Data Table </a></li>
@@ -131,11 +131,8 @@
 <?php endif; ?>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
-<a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
-<ul>
+<a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
 
-<li><a href="<?= $base_url ?>users/list.php">Users List</a></li>
-</ul>
 </li>
 <?php endif; ?>
 <li class="submenu">
