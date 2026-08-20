@@ -24,7 +24,7 @@
                                             <div class="row">
                                                 <div class="form-group col-sm-6">
                                                     <label class="form-label">sales Date</label>
-                                                    <input autocomplete="off" name="sale_date" type="date" class="form-control">
+                                                    <input autocomplete="off" name="sale_date" type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label class="form-label">Reference</label>

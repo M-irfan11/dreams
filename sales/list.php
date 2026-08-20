@@ -6,7 +6,7 @@
 
         <?php
             // Session message (set by sales/add.php, edit.php, delete.php)
-            if(isset($_SESSION['message'])){
+            if(isset($_SESSION['message']) && is_array($_SESSION['message'])){
                 $msg = $_SESSION['message'];
                 $alert_class = $msg['type'] === 'success' ? 'alert-success' : 'alert-danger';
                 echo '<div class="alert ' . $alert_class . '">
@@ -54,7 +54,7 @@
                                 <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="<?php echo $base_url; ?>assets/img/icons/excel.svg" alt="img"></a>
                             </li>
                             <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="<?php echo $base_url; ?>assets/img/icons/printer.svg" alt="img"></a
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="<?php echo $base_url; ?>assets/img/icons/printer.svg" alt="img"></a>
                             </li>
                         </ul>
                     </div>
@@ -110,6 +110,9 @@
                                         ?>
                                     </td>
                                     <td>
+                                        <a class="me-3" href="payment.php?id=<?php echo $sale->id; ?>">
+                                            <img src="<?php echo $base_url; ?>assets/img/icons/dollar.svg" alt="img">
+                                        </a>
                                         <a class="me-3" href="update.php?id=<?php echo $sale->id; ?>">
                                             <img src="<?php echo $base_url; ?>assets/img/icons/edit.svg" alt="img">
                                         </a>

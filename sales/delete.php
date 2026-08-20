@@ -9,6 +9,14 @@ if(isset($_GET['id'])){
     if($result['status']){
         $crud->common_delete('sale_details', ["id" => $id]);
         $crud->common_delete('stock_transfers', ["id" => $id]);
+        $vouchers = $crud->common_select('journal_vouchers','*' , ["source_id" => $id, "source_type" => 'Sales']);
+        if($vouchers['status'] && !empty($vouchers['data'])){
+            foreach($vouchers['data'] as $voucher){
+                $crud->common_delete('journal_voucher_details', ["journal_voucher_id" => $voucher->id]);
+                $crud->common_delete('ledger', ["journal_voucher_id" => $voucher->id]);
+            }
+            $crud->common_delete('journal_vouchers', ["source_id" => $id, "source_type" => 'Sales']);
+        }
         $crud->conn->commit();
         $_SESSION['message'] = array(
             "type" => "success",

@@ -3,9 +3,15 @@
 <?php
     $id = $_GET['id'];
     $result = $crud->common_select('sales', '*', ['id' => $id]);
-    $sale = $result['data'][0];
-    $sdresult = $crud->common_query("SELECT sale_details.*, products.product_name FROM `sale_details` join products on products.id=sale_details.product_id where sale_details.id=$id");
-    $sale_details = $sdresult['data'];
+    $sale = $result['data'][0] ?? null;
+
+    if (!$sale) {
+        echo "<script>window.location.href = '{$base_url}sales/list.php';</script>";
+        exit;
+    }
+
+    $sdresult = $crud->common_query("SELECT sale_details.*, products.product_name FROM sale_details JOIN products ON products.id = sale_details.product_id WHERE sale_details.sale_id = $id");
+    $sale_details = $sdresult['data'] ?? [];
 ?>
 
 <div class="page-wrapper">
@@ -38,7 +44,7 @@
                                         if($customers['status']){
                                             foreach($customers['data'] as $customer){
                                     ?>
-                                                <option value="<?php echo $customer->id; ?>" <?php echo ($customer->id == $sale->id) ? 'selected' : ''; ?>><?php echo htmlspecialchars($customer->name); ?></option>
+                                                <option value="<?php echo $customer->id; ?>" <?php echo ($customer->id == $sale->customer_id) ? 'selected' : ''; ?>><?php echo htmlspecialchars($customer->name); ?></option>
                                     <?php   }
                                         } else { ?>
                                             <option value="">No customers available</option>
@@ -117,17 +123,17 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="3" class="text-end">Total:</td>
-                                    <td><input type="text" value="<?= isset($sale->total_amount) ? $sale->total_amount : ''; ?>" name="total_amount" id="totalAmount" class="form-control" readonly></td>
+                                    <td><input type="text" value="<?= isset($sale->total_amount) ? $sale->total_amount : '0'; ?>" name="total_amount" id="totalAmount" class="form-control" readonly></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="text-end">Discount:</td>
-                                    <td><input type="text" value="<?= isset($sale->discount) ? $sale->discount : ''; ?>" name="discount" id="discountAmount" class="form-control"></td>
+                                    <td><input type="text" value="<?= isset($sale->discount) ? $sale->discount : '0'; ?>" name="discount" id="discountAmount" class="form-control"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="text-end">Tax:</td>
-                                    <td><input type="text" name="tax" value="<?= isset($sale->tax) ? $sale->tax : ''; ?>" id="taxAmount" class="form-control"></td>
+                                    <td><input type="text" name="tax" value="<?= isset($sale->tax) ? $sale->tax : '0'; ?>" id="taxAmount" class="form-control"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -162,19 +168,21 @@
         const taxAmountInput = document.getElementById('taxAmount');
         const grandTotalInput = document.getElementById('grandTotal');
 
-        // add existing sale items into saleItems array from database
         let saleItems = [];
         <?php foreach($sale_details as $item): ?>
             saleItems.push({
-                product_id: "<?php echo $item->product_id; ?>",
-                product_name: "<?php echo htmlspecialchars($item->product_name); ?>",
-                quantity: <?php echo $item->quantity; ?>,
-                unit_price: <?php echo $item->unit_price; ?>,
-                subtotal: <?php echo $item->subtotal; ?>
+                product_id: "<?= (int) $item->product_id; ?>",
+                product_name: "<?= addslashes(htmlspecialchars($item->product_name, ENT_QUOTES)); ?>",
+                quantity: <?= (int) $item->quantity; ?>,
+                unit_price: <?= (float) $item->unit_price; ?>,
+                subtotal: <?= (float) $item->subtotal; ?>
             });
-            renderSaleItems();
-                calculateTotals();
         <?php endforeach; ?>
+
+        if (saleItems.length) {
+            renderSaleItems();
+            calculateTotals();
+        }
 
         productSelect.addEventListener('change', function() {
             const selectedOption = this.options[this.selectedIndex];
@@ -251,13 +259,21 @@
         function calculateTotals() {
             const totalAmount = saleItems.reduce((sum, item) => sum + item.subtotal, 0);
             totalAmountInput.value = totalAmount.toFixed(2);
+
             const discountAmount = parseFloat(discountAmountInput.value) || 0;
-            const taxAmount = parseFloat(taxAmountInput.value) || 0;
+            const taxRate = 0.15;
+            const taxAmount = totalAmount * taxRate;
+            taxAmountInput.value = taxAmount.toFixed(2);
+
             const grandTotal = totalAmount - discountAmount + taxAmount;
             grandTotalInput.value = grandTotal.toFixed(2);
         }
 
         discountAmountInput.addEventListener('input', calculateTotals);
-        taxAmountInput.addEventListener('input', calculateTotals);
+        taxAmountInput.addEventListener('input', function() {
+            if (this.value !== '') {
+                calculateTotals();
+            }
+        });
     });
 </script>
