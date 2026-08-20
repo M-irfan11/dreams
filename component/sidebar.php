@@ -42,18 +42,6 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>accounts/account_heads.php">Account heads</a></li>
-<li><a href="<?= $base_url ?>accounts/journal/list.php">Journal vouchers </a></li>
-<li><a href="<?= $base_url ?>accounts/payment/list.php">Payment vouchers </a></li>
-<li><a href="<?= $base_url ?>accounts/receive/list.php">Receive Vouchers </a></li>
-<li><a href="<?= $base_url ?>accounts/ledger.php">Ledger </a></li>
-<li><a href="<?= $base_url ?>accounts/profit_loss.php">profit & loss </a></li>
-
-</ul>
-</li>
-<li class="submenu">
 <a href="<?= $base_url ?>expense/list.php"><img src="<?= $base_url ?>assets/img/icons/expense1.svg" alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>expense/list.php">Expense List</a></li>
@@ -88,7 +76,13 @@
 </ul>
 </li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
-
+<li class="submenu">
+<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Accounts</span> <span class="menu-arrow"></span></a>
+<ul>
+<li><a href="<?= $base_url ?>accounts/list.php">Accounts List</a></li>
+<li><a href="<?= $base_url ?>accounts/create.php">Add Accounts </a></li>
+</ul>
+</li>
 <?php endif; ?>
 <li class="submenu">
 <a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
@@ -109,23 +103,21 @@
 <a href="<?= $base_url ?>warehouse/list.php"><i data-feather="layers"></i><span> warehouse</span> </a>
 </li>
 <li class="submenu">
+<<<<<<< HEAD
 <a href="<?= $base_url ?>table/list.php"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>tables-basic.php">Basic Tables </a></li>
 <li><a href="<?= $base_url ?>data-tables.php">Data Table </a></li>
 </ul>
+=======
+
+>>>>>>> 2b8af99721267d97be5b01bd887cf46d3a06512d
 </li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
 <a href="<?= $base_url ?>Report/list.php"><img src="<?= $base_url ?>assets/img/icons/time.svg" alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>purchaseorderreport.php">Purchase order report</a></li>
-<li><a href="<?= $base_url ?>inventoryreport.php">Inventory Report</a></li>
-<li><a href="<?= $base_url ?>salesreport.php">Sales Report</a></li>
-<li><a href="<?= $base_url ?>invoicereport.php">Invoice Report</a></li>
-<li><a href="<?= $base_url ?>purchasereport.php">Purchase Report</a></li>
-<li><a href="<?= $base_url ?>supplierreport.php">Supplier Report</a></li>
-<li><a href="<?= $base_url ?>customerreport.php">Customer Report</a></li>
+<li><a href="<?= $base_url ?>profitlossreport.php">Profit & Loss Report</a></li>
 </ul>
 </li>
 <?php endif; ?>
