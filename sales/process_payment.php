@@ -73,12 +73,27 @@
         $crud->common_insert("ledger", $ledger_data);
 
 // Ledger
+
 if ($receive_voucher_result['status']) {
-     $crud->conn->commit();
-    $_SESSION['message'] = ['success', 'Success', 'Voucher created!'];
+    $crud->conn->commit();
+    $_SESSION['message'] = [
+        'type' => 'success',
+        'title' => 'Success',
+        'message' => 'Voucher created!'
+    ];
 } else {
     $crud->conn->rollback();
-    $_SESSION['message'] = ['danger', 'Error', $receive_voucher_result['message']];
+    $_SESSION['message'] = [
+        'type' => 'danger',
+        'title' => 'Error',
+        'message' => $receive_voucher_result['message']
+    ];
 }
 
-echo "<script>window.location='list.php'</script>";
+
+
+if ($receive_voucher_result['status']) {
+    echo "<script>window.location='payment_receipt.php?id={$voucher_id}'</script>";
+} else {
+    echo "<script>window.location='list.php'</script>";
+}

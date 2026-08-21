@@ -14,6 +14,7 @@
                       </div>';
                 unset($_SESSION['message']);
             }
+            
 
             // Fetch all sales, joined with customers
             $sales = $crud->common_query('SELECT sales.*, customers.name as customer_name FROM `sales` JOIN customers on customers.id=sales.customer_id ');

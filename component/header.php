@@ -114,10 +114,10 @@
 <a href="activities.html">
 <div class="media d-flex">
 <span class="avatar flex-shrink-0">
-<img alt="" src="<?= $base_url ?>assets/img/profiles/avatar-02.jpg">
+<img alt="" src="<?= $base_url ?>assets/img/profiles/irfan.jfif">
 </span>
 <div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Irfan</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+<p class="noti-details"><span class="noti-title">Irfan</span> added new task <span class="noti-title">"Irfan is currently working on the account module and also looks after the stock section."</span></p>
 <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
 </div>
 </div>
@@ -127,10 +127,10 @@
 <a href="activities.html">
 <div class="media d-flex">
 <span class="avatar flex-shrink-0">
-<img alt="" src="<?= $base_url ?>assets/img/profiles/avatar-03.jpg">
+<img alt="" src="<?= $base_url ?>assets/img/profiles/avatar-17.jpg">
 </span>
 <div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
+<p class="noti-details"><span class="noti-title">Pritom</span> changed the task name <span class="noti-title">pritom is currently working on the sales module and also looks after report section</span></p>
 <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
 </div>
 </div>
@@ -143,7 +143,7 @@
 <img alt="" src="<?= $base_url ?>assets/img/profiles/avatar-06.jpg">
 </span>
 <div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
+<p class="noti-details"><span class="noti-title">Afrin</span> to project <span class="noti-title">afrin is currently working on the purchase module and looks after payment getway system</span></p>
 <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
 </div>
 </div>

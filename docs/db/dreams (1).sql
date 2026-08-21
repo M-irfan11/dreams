@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2026 at 07:32 AM
+-- Generation Time: Aug 21, 2026 at 06:38 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,13 +52,13 @@ CREATE TABLE `account_heads` (
 --
 
 INSERT INTO `account_heads` (`id`, `account_code`, `account_name`, `account_type`, `account_subtype`, `parent_id`, `opening_balance`, `current_balance`, `total_debit`, `total_credit`, `status`, `last_transaction_date`, `description`, `created_at`, `updated_at`, `deleted_at`, `created_by`) VALUES
-(1, 'CASH', 'Cash in Hand', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL, ''),
-(2, 'BANK', 'Bank Account', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL, ''),
-(3, 'AR', 'Accounts Receivable', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL, ''),
+(1, '1110', 'Cash in Hand', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-21 09:17:09', NULL, ''),
+(2, '1120', 'Bank Account', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-21 09:17:22', NULL, ''),
+(3, '1200', 'Accounts Receivable', 'Asset', 'Current Asset', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-21 09:17:35', NULL, ''),
 (4, 'AP', 'Accounts Payable', 'Liability', 'Current Liability', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL, ''),
-(5, 'SALES', 'Sales Income', 'Income', 'Operating Income', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL, ''),
+(5, '4000', 'Sales Income', 'Income', 'Operating Income', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-21 09:17:45', NULL, ''),
 (6, 'PURCHASE', 'Purchase / COGS', 'Expense', 'Cost of Goods Sold', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL, ''),
-(7, 'VAT_OUTPUT', 'VAT Payable (Output VAT)', 'VAT', 'Output VAT', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL, ''),
+(7, '2100', 'VAT Payable (Output VAT)', 'VAT', 'Output VAT', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-21 09:18:15', NULL, ''),
 (8, 'VAT_INPUT', 'VAT Receivable (Input VAT)', 'VAT', 'Input VAT', NULL, 0.00, 0.00, 0.00, 0.00, 'Active', NULL, NULL, '2026-08-16 13:25:20', '2026-08-16 13:25:20', NULL, ''),
 (9, '1234', 'account reciaveable', 'Asset', 'current asset', 3, 3000000.00, 300000.00, 0.00, 0.00, 'Active', NULL, '', '2026-08-17 00:09:02', '2026-08-18 00:55:55', NULL, ''),
 (10, '1232', 'Accounts Receivable', 'Asset', '', 5, 50000.00, 50000.00, 0.00, 0.00, 'Active', NULL, '', '2026-08-20 05:32:16', '2026-08-20 05:32:16', NULL, '9');
@@ -126,8 +126,8 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`id`, `name`, `gender`, `phone`, `email`, `address`, `membership_type`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
 (1, 'Araf Rahman', 'Male', '+8801589756', 'araf0505@yahoo.com', 'Hider Ali Musir Bari, Fatehabed', 'Regular', '2026-08-02 03:50:28', NULL, NULL, NULL, NULL),
 (2, 'Muhammad Al Junayed', 'Male', '+6849213547', 'junayed684@gmail.com', 'Bagdad,iraq', 'Regular', '2026-08-02 04:11:25', NULL, NULL, NULL, NULL),
-(3, 'Sultan ibn Adel', 'Male', '+6483215645', 'SultanAdel@gmail.com', 'al hudayed,yaman', 're', '2026-08-02 04:12:50', NULL, NULL, NULL, NULL),
-(4, 'Belel ibn rabah al habasi', 'Male', '+6478215465', 'BelelRabah@gmail.com', 'Abhi-Siniya(eithopia)', 'R', '2026-08-02 04:14:07', NULL, NULL, NULL, NULL),
+(3, 'Mazhar Pritom', 'Male', '+6483215645', 'SultanAdel@gmail.com', 'al hudayed,yaman', 're', '2026-08-02 04:12:50', NULL, NULL, NULL, NULL),
+(4, 'Abu Hamad', 'Male', '+6478215465', 'BelelRabah@gmail.com', 'Abhi-Siniya(eithopia)', 'R', '2026-08-02 04:14:07', NULL, NULL, NULL, NULL),
 (6, 'shah sultan', 'Male', '0658545', '', 'hathazari', 'regular', '2026-08-14 05:34:46', NULL, NULL, NULL, NULL),
 (7, 'amir hamza', 'Male', '6598', 'hamza@gmail.com', 'sdfjh', 'regular', '2026-08-14 06:03:56', NULL, NULL, NULL, NULL);
 
@@ -217,7 +217,8 @@ INSERT INTO `journal_vouchers` (`id`, `voucher_no`, `narration`, `voucher_date`,
 (2, 'VCH-20260818-896', 'a/r', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 1, '2026-08-18 00:20:27', '2026-08-18 00:20:27', NULL),
 (3, 'VCH-20260818-750', 'a/r', '2026-08-17', NULL, NULL, 0.00, 0.00, 7, 1, '2026-08-18 00:23:01', '2026-08-18 00:23:01', NULL),
 (4, 'VCH-20260818-256', 'a/p', '2026-08-17', NULL, NULL, 20000.00, 20000.00, 7, 1, '2026-08-18 00:23:38', '2026-08-20 05:04:00', NULL),
-(5, 'J000005', 'goods purchase 50000 tk', '2026-08-18', NULL, NULL, 50000.00, 50000.00, 7, 1, '2026-08-19 03:09:48', '2026-08-19 03:09:48', NULL);
+(5, 'J000005', 'goods purchase 50000 tk', '2026-08-18', NULL, NULL, 50000.00, 50000.00, 7, 1, '2026-08-19 03:09:48', '2026-08-19 03:09:48', NULL),
+(6, 'J000006', 'Sale #11', '2026-08-20', 'Sales', 11, 1552.50, 1552.50, 7, 1, '2026-08-21 09:18:27', '2026-08-21 09:18:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -247,7 +248,10 @@ INSERT INTO `journal_voucher_details` (`id`, `journal_voucher_id`, `account_head
 (6, 4, 4, 20000.00, 0.00, 'a/p', 9),
 (7, 4, 1, 0.00, 20000.00, '', 9),
 (8, 1, 1, 50000.00, 0.00, '', 9),
-(9, 1, 1, 0.00, 50000.00, '', 9);
+(9, 1, 1, 0.00, 50000.00, '', 9),
+(10, 6, 3, 1552.50, 0.00, 'Sale #11 - Receivable', 7),
+(11, 6, 5, 0.00, 1350.00, 'Sale #11 - Revenue', 7),
+(12, 6, 7, 0.00, 202.50, 'Sale #11 - VAT Output', 7);
 
 -- --------------------------------------------------------
 
@@ -297,7 +301,48 @@ INSERT INTO `ledger` (`id`, `payment_voucher_id`, `receive_voucher_id`, `journal
 (27, 4, NULL, NULL, NULL, 2, 0.00, 40000.00, '', 9, '2026-08-20 05:05:52', '2026-08-20 05:05:52'),
 (28, 4, NULL, NULL, NULL, 2, 0.00, 0.00, 'payment to kamal 100000', 9, '2026-08-20 05:05:52', '2026-08-20 05:05:52'),
 (29, NULL, 3, NULL, NULL, 1, 0.00, 0.00, '', 9, '2026-08-20 05:15:10', '2026-08-20 05:15:10'),
-(30, NULL, 3, NULL, NULL, 3, 0.00, 80000.00, 'received tk 80000 from abu hamed', 9, '2026-08-20 05:15:10', '2026-08-20 05:15:10');
+(30, NULL, 3, NULL, NULL, 3, 0.00, 80000.00, 'received tk 80000 from abu hamed', 9, '2026-08-20 05:15:10', '2026-08-20 05:15:10'),
+(31, NULL, NULL, 6, NULL, 3, 1552.50, 0.00, 'Sale #11 - Receivable', 7, '2026-08-21 09:18:27', '2026-08-21 09:18:27'),
+(32, NULL, NULL, 6, NULL, 5, 0.00, 1350.00, 'Sale #11 - Revenue', 7, '2026-08-21 09:18:27', '2026-08-21 09:18:27'),
+(33, NULL, NULL, 6, NULL, 7, 0.00, 202.50, 'Sale #11 - VAT Output', 7, '2026-08-21 09:18:27', '2026-08-21 09:18:27'),
+(34, NULL, 4, NULL, NULL, 3, 0.00, 1250.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 09:18:47', '2026-08-21 09:18:47'),
+(35, NULL, 4, NULL, NULL, 2, 1250.00, 0.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 09:18:47', '2026-08-21 09:18:47'),
+(36, NULL, 5, NULL, NULL, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 09:39:11', '2026-08-21 09:39:11'),
+(37, NULL, 5, NULL, NULL, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 09:39:11', '2026-08-21 09:39:11'),
+(38, NULL, NULL, NULL, 26, 6, 45000.00, 0.00, 'Purchase #26 - COGS', 7, '2026-08-21 05:39:44', '2026-08-21 09:39:44'),
+(39, NULL, NULL, NULL, 26, 4, 0.00, 45000.00, 'Purchase #26 - Payable', 7, '2026-08-21 05:39:44', '2026-08-21 09:39:44'),
+(40, NULL, NULL, NULL, 27, 6, 45000.00, 0.00, 'Purchase #27 - COGS', 7, '2026-08-21 05:43:02', '2026-08-21 09:43:02'),
+(41, NULL, NULL, NULL, 27, 4, 0.00, 45000.00, 'Purchase #27 - Payable', 7, '2026-08-21 05:43:02', '2026-08-21 09:43:02'),
+(42, NULL, 6, NULL, NULL, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 09:47:18', '2026-08-21 09:47:18'),
+(43, NULL, 6, NULL, NULL, 2, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 09:47:18', '2026-08-21 09:47:18'),
+(44, NULL, 7, NULL, NULL, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:10:22', '2026-08-21 10:10:22'),
+(45, NULL, 7, NULL, NULL, 2, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:10:22', '2026-08-21 10:10:22'),
+(46, NULL, 8, NULL, NULL, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:19:43', '2026-08-21 10:19:43'),
+(47, NULL, 8, NULL, NULL, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:19:43', '2026-08-21 10:19:43'),
+(48, NULL, 9, NULL, NULL, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:20:40', '2026-08-21 10:20:40'),
+(49, NULL, 9, NULL, NULL, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:20:40', '2026-08-21 10:20:40'),
+(50, NULL, 10, NULL, NULL, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:28:24', '2026-08-21 10:28:24'),
+(51, NULL, 10, NULL, NULL, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:28:24', '2026-08-21 10:28:24'),
+(52, NULL, 11, NULL, NULL, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:52:35', '2026-08-21 10:52:35'),
+(53, NULL, 11, NULL, NULL, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7, '2026-08-21 10:52:35', '2026-08-21 10:52:35'),
+(54, NULL, 12, NULL, NULL, 3, 0.00, 1350.00, 'Sale Payment for Sale ID: 11', 7, '2026-08-21 12:25:50', '2026-08-21 12:25:50'),
+(55, NULL, 12, NULL, NULL, 1, 1350.00, 0.00, 'Sale Payment for Sale ID: 11', 7, '2026-08-21 12:25:50', '2026-08-21 12:25:50'),
+(56, NULL, 13, NULL, NULL, 3, 0.00, 270.00, 'Sale Payment for Sale ID: 6', 7, '2026-08-21 15:27:12', '2026-08-21 15:27:12'),
+(57, NULL, 13, NULL, NULL, 1, 270.00, 0.00, 'Sale Payment for Sale ID: 6', 7, '2026-08-21 15:27:12', '2026-08-21 15:27:12'),
+(58, NULL, NULL, NULL, 28, 6, 1280.00, 0.00, 'Purchase #28 - COGS', 7, '2026-08-21 11:43:05', '2026-08-21 15:43:05'),
+(59, NULL, NULL, NULL, 28, 4, 0.00, 1280.00, 'Purchase #28 - Payable', 7, '2026-08-21 11:43:05', '2026-08-21 15:43:05'),
+(60, 7, NULL, NULL, NULL, 3, 0.00, 256.00, 'purchase received for purchase ID: 5', 7, '2026-08-21 15:58:08', '2026-08-21 15:58:08'),
+(61, 7, NULL, NULL, NULL, 1, 256.00, 0.00, 'purchase received for purchase ID: 5', 7, '2026-08-21 15:58:08', '2026-08-21 15:58:08'),
+(62, 8, NULL, NULL, NULL, 3, 0.00, 100000.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:03:47', '2026-08-21 16:03:47'),
+(63, 8, NULL, NULL, NULL, 1, 100000.00, 0.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:03:47', '2026-08-21 16:03:47'),
+(64, 9, NULL, NULL, NULL, 3, 0.00, 100000.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:06:02', '2026-08-21 16:06:02'),
+(65, 9, NULL, NULL, NULL, 1, 100000.00, 0.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:06:02', '2026-08-21 16:06:02'),
+(66, 10, NULL, NULL, NULL, 3, 0.00, 1000.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:06:57', '2026-08-21 16:06:57'),
+(67, 10, NULL, NULL, NULL, 1, 1000.00, 0.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:06:57', '2026-08-21 16:06:57'),
+(68, 11, NULL, NULL, NULL, 3, 0.00, 1000.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:23:27', '2026-08-21 16:23:27'),
+(69, 11, NULL, NULL, NULL, 1, 1000.00, 0.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:23:27', '2026-08-21 16:23:27'),
+(70, 12, NULL, NULL, NULL, 3, 0.00, 10000.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:32:25', '2026-08-21 16:32:25'),
+(71, 12, NULL, NULL, NULL, 1, 10000.00, 0.00, 'purchase received for purchase ID: 1', 7, '2026-08-21 16:32:25', '2026-08-21 16:32:25');
 
 -- --------------------------------------------------------
 
@@ -350,7 +395,9 @@ INSERT INTO `payment_vouchers` (`id`, `voucher_no`, `pay_to`, `narration`, `vouc
 (3, 'VCH-20260818-827', 'a/p', 'a/p', '2026-08-17', NULL, NULL, 10000.00, 10000.00, 7, 1, '2026-08-18 00:30:57', '2026-08-18 00:31:18', '2026-08-17 20:31:18'),
 (4, 'PAY000004', 'kamal', 'payment to kamal 100000', '2026-08-18', NULL, NULL, 40000.00, 40000.00, 7, 1, '2026-08-19 03:12:09', '2026-08-20 05:05:51', NULL),
 (5, 'PAY000005', 'jamal', 'payment to jamal 20000', '2026-08-18', NULL, NULL, 20000.00, 20000.00, 7, 1, '2026-08-19 03:13:02', '2026-08-19 03:14:20', NULL),
-(6, 'PAY000006', 'abu hamed', 'goods purchase 50000 tk', '2026-08-19', NULL, NULL, 30000.00, 30000.00, 9, 1, '2026-08-20 05:05:18', '2026-08-20 05:05:18', NULL);
+(6, 'PAY000006', 'abu hamed', 'goods purchase 50000 tk', '2026-08-19', NULL, NULL, 30000.00, 30000.00, 9, 1, '2026-08-20 05:05:18', '2026-08-20 05:05:18', NULL),
+(7, 'RCV000007', '', 'purchase received for purchase ID: 5', '2026-08-21', 'purchases', 5, 256.00, 256.00, 7, 1, '2026-08-21 15:58:08', '2026-08-21 15:58:08', NULL),
+(12, 'RCV000008', '', 'purchase received for purchase ID: 1', '2026-08-21', 'purchases', 1, 10000.00, 10000.00, 7, 1, '2026-08-21 16:32:25', '2026-08-21 16:32:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -382,7 +429,19 @@ INSERT INTO `payment_voucher_details` (`id`, `payment_voucher_id`, `account_head
 (13, 6, 1, 0.00, 30000.00, 'goods purchase 50000 tk', 9),
 (14, 4, 4, 40000.00, 0.00, '', 9),
 (15, 4, 2, 0.00, 40000.00, '', 9),
-(16, 4, 2, 0.00, 0.00, 'payment to kamal 100000', 9);
+(16, 4, 2, 0.00, 0.00, 'payment to kamal 100000', 9),
+(17, 7, 3, 0.00, 256.00, 'purchase received for purchase ID: 5', 7),
+(18, 7, 1, 256.00, 0.00, 'purchase received for purchase ID: 5', 7),
+(19, 8, 3, 0.00, 100000.00, 'purchase received for purchase ID: 1', 7),
+(20, 8, 1, 100000.00, 0.00, 'purchase received for purchase ID: 1', 7),
+(21, 9, 3, 0.00, 100000.00, 'purchase received for purchase ID: 1', 7),
+(22, 9, 1, 100000.00, 0.00, 'purchase received for purchase ID: 1', 7),
+(23, 10, 3, 0.00, 1000.00, 'purchase received for purchase ID: 1', 7),
+(24, 10, 1, 1000.00, 0.00, 'purchase received for purchase ID: 1', 7),
+(25, 11, 3, 0.00, 1000.00, 'purchase received for purchase ID: 1', 7),
+(26, 11, 1, 1000.00, 0.00, 'purchase received for purchase ID: 1', 7),
+(27, 12, 3, 0.00, 10000.00, 'purchase received for purchase ID: 1', 7),
+(28, 12, 1, 10000.00, 0.00, 'purchase received for purchase ID: 1', 7);
 
 -- --------------------------------------------------------
 
@@ -459,7 +518,10 @@ INSERT INTO `purchases` (`id`, `supplier_id`, `purchase_date`, `total_amount`, `
 (19, 2, '2026-08-14', 128000.00, 0.00, 1, 0.00, 128000.00, '', 1, '2026-08-16 11:19:17', '2026-08-16 15:19:17', NULL, 1, NULL),
 (20, 3, '2026-08-15', 15360.00, 0.00, 1, 0.00, 15360.00, '', 1, '2026-08-16 19:50:17', '2026-08-16 23:50:17', NULL, 7, NULL),
 (21, 1, '2026-08-16', 450000.00, 0.00, 1, 0.00, 450000.00, '', 1, '2026-08-17 02:28:39', '2026-08-17 06:28:39', NULL, 7, NULL),
-(25, 2, '2026-08-19', 22500.00, 0.00, 1, 0.00, 22500.00, '', 1, '2026-08-20 00:45:40', '2026-08-20 04:45:40', NULL, 9, NULL);
+(25, 2, '2026-08-19', 22500.00, 0.00, 1, 0.00, 22500.00, '', 1, '2026-08-20 00:45:40', '2026-08-20 04:45:40', NULL, 9, NULL),
+(26, 2, '2026-08-20', 45000.00, 0.00, 1, 0.00, 45000.00, '', 1, '2026-08-21 05:39:44', '2026-08-21 09:39:44', NULL, 7, NULL),
+(27, 4, '2026-08-19', 45000.00, 0.00, 1, 0.00, 45000.00, '', 1, '2026-08-21 05:43:02', '2026-08-21 09:43:02', NULL, 7, NULL),
+(28, 2, '2026-08-21', 1280.00, 0.00, 1, 0.00, 1280.00, '', 1, '2026-08-21 11:43:04', '2026-08-21 15:43:04', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -496,7 +558,10 @@ INSERT INTO `purchase_details` (`id`, `purchase_id`, `product_id`, `quantity`, `
 (16, 19, 18, 1000, 128.00, 128000.00, '2026-08-16 11:19:17', '2026-08-16 15:19:17', NULL, 1, NULL),
 (17, 20, 18, 120, 128.00, 15360.00, '2026-08-16 19:50:17', '2026-08-16 23:50:17', NULL, 7, NULL),
 (18, 21, 14, 1000, 450.00, 450000.00, '2026-08-17 02:28:39', '2026-08-17 06:28:39', NULL, 7, NULL),
-(22, 25, 14, 50, 450.00, 22500.00, '2026-08-20 00:45:40', '2026-08-20 04:45:40', NULL, 9, NULL);
+(22, 25, 14, 50, 450.00, 22500.00, '2026-08-20 00:45:40', '2026-08-20 04:45:40', NULL, 9, NULL),
+(23, 26, 14, 100, 450.00, 45000.00, '2026-08-21 05:39:44', '2026-08-21 09:39:44', NULL, 7, NULL),
+(24, 27, 14, 100, 450.00, 45000.00, '2026-08-21 05:43:02', '2026-08-21 09:43:02', NULL, 7, NULL),
+(25, 28, 18, 10, 128.00, 1280.00, '2026-08-21 11:43:04', '2026-08-21 15:43:04', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -584,7 +649,17 @@ CREATE TABLE `receive_vouchers` (
 INSERT INTO `receive_vouchers` (`id`, `voucher_no`, `received_from`, `narration`, `voucher_date`, `source_type`, `source_id`, `dr`, `cr`, `created_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'VCH-20260818-855', 'a/p', 'a/p', '2026-08-18', NULL, NULL, 100000.00, 100000.00, 7, 1, '2026-08-18 00:39:12', '2026-08-18 00:39:12', NULL),
 (2, 'VCH-20260818-582', 'A/R', 'A/R', '2026-08-17', NULL, NULL, 50000.00, 50000.00, 7, 1, '2026-08-18 00:39:43', '2026-08-18 00:39:43', NULL),
-(3, 'PAY000003', '', 'received tk 80000 from abu hamed', '2026-08-19', NULL, NULL, 80000.00, 80000.00, 9, 1, '2026-08-20 05:15:10', '2026-08-20 05:15:10', NULL);
+(3, 'PAY000003', '', 'received tk 80000 from abu hamed', '2026-08-19', NULL, NULL, 80000.00, 80000.00, 9, 1, '2026-08-20 05:15:10', '2026-08-20 05:15:10', NULL),
+(4, 'RCV000004', 'Sultan ibn Adel - +6483215645', 'Sale Payment for Sale ID: 3', '2026-08-21', 'Sales', 3, 1250.00, 1250.00, 7, 1, '2026-08-21 09:18:47', '2026-08-21 09:18:47', NULL),
+(5, 'RCV000005', 'Sultan ibn Adel - +6483215645', 'Sale Payment for Sale ID: 3', '2026-08-21', 'Sales', 3, 12500.00, 12500.00, 7, 1, '2026-08-21 09:39:11', '2026-08-21 09:39:11', NULL),
+(6, 'RCV000006', 'Sultan ibn Adel - +6483215645', 'Sale Payment for Sale ID: 3', '2026-08-21', 'Sales', 3, 12500.00, 12500.00, 7, 1, '2026-08-21 09:47:18', '2026-08-21 09:47:18', NULL),
+(7, 'RCV000007', 'Sultan ibn Adel - +6483215645', 'Sale Payment for Sale ID: 3', '2026-08-21', 'Sales', 3, 12500.00, 12500.00, 7, 1, '2026-08-21 10:10:21', '2026-08-21 10:10:21', NULL),
+(8, 'RCV000008', 'Sultan ibn Adel - +6483215645', 'Sale Payment for Sale ID: 3', '2026-08-21', 'Sales', 3, 12500.00, 12500.00, 7, 1, '2026-08-21 10:19:43', '2026-08-21 10:19:43', NULL),
+(9, 'RCV000009', 'Sultan ibn Adel - +6483215645', 'Sale Payment for Sale ID: 3', '2026-08-21', 'Sales', 3, 12500.00, 12500.00, 7, 1, '2026-08-21 10:20:40', '2026-08-21 10:20:40', NULL),
+(10, 'RCV000010', 'Sultan ibn Adel - +6483215645', 'Sale Payment for Sale ID: 3', '2026-08-21', 'Sales', 3, 12500.00, 12500.00, 7, 1, '2026-08-21 10:28:24', '2026-08-21 10:28:24', NULL),
+(11, 'RCV000011', 'Sultan ibn Adel - +6483215645', 'Sale Payment for Sale ID: 3', '2026-08-21', 'Sales', 3, 12500.00, 12500.00, 7, 1, '2026-08-21 10:52:35', '2026-08-21 10:52:35', NULL),
+(12, 'RCV000012', 'amir hamza - 6598', 'Sale Payment for Sale ID: 11', '2026-08-21', 'Sales', 11, 1350.00, 1350.00, 7, 1, '2026-08-21 12:25:50', '2026-08-21 12:25:50', NULL),
+(13, 'RCV000013', 'Muhammad Al Junayed - +6849213547', 'Sale Payment for Sale ID: 6', '2026-08-21', 'Sales', 6, 270.00, 270.00, 7, 1, '2026-08-21 15:27:12', '2026-08-21 15:27:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -610,7 +685,27 @@ INSERT INTO `receive_voucher_details` (`id`, `receive_voucher_id`, `account_head
 (1, 1, 4, 100000.00, 100000.00, 'a/p', 7),
 (2, 2, 3, 50000.00, 50000.00, 'A/R', 7),
 (3, 3, 1, 0.00, 0.00, '', 9),
-(4, 3, 3, 80000.00, 0.00, 'received tk 80000 from abu hamed', 9);
+(4, 3, 3, 80000.00, 0.00, 'received tk 80000 from abu hamed', 9),
+(5, 4, 3, 0.00, 1250.00, 'Sale Payment for Sale ID: 3', 7),
+(6, 4, 2, 1250.00, 0.00, 'Sale Payment for Sale ID: 3', 7),
+(7, 5, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7),
+(8, 5, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7),
+(9, 6, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7),
+(10, 6, 2, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7),
+(11, 7, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7),
+(12, 7, 2, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7),
+(13, 8, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7),
+(14, 8, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7),
+(15, 9, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7),
+(16, 9, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7),
+(17, 10, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7),
+(18, 10, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7),
+(19, 11, 3, 0.00, 12500.00, 'Sale Payment for Sale ID: 3', 7),
+(20, 11, 1, 12500.00, 0.00, 'Sale Payment for Sale ID: 3', 7),
+(21, 12, 3, 0.00, 1350.00, 'Sale Payment for Sale ID: 11', 7),
+(22, 12, 1, 1350.00, 0.00, 'Sale Payment for Sale ID: 11', 7),
+(23, 13, 3, 0.00, 270.00, 'Sale Payment for Sale ID: 6', 7),
+(24, 13, 1, 270.00, 0.00, 'Sale Payment for Sale ID: 6', 7);
 
 -- --------------------------------------------------------
 
@@ -669,7 +764,9 @@ INSERT INTO `sales` (`id`, `customer_id`, `user_id`, `sale_date`, `total_amount`
 (6, 2, 7, '2026-08-15', 270.00, 0.00, 0.00, 1, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL, 3),
 (7, 1, 7, '2026-08-15', 6250.00, 0.00, 0.00, 1, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL, 6),
 (8, 3, 1, '2026-08-15', 125000.00, 0.00, 0.00, 1, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL, 6),
-(9, 2, 7, '2026-08-17', 125000.00, 0.00, 0.00, 1, '2026-08-18 01:45:54', '2026-08-18 05:45:54', NULL, 7, NULL, 6);
+(9, 2, 7, '2026-08-17', 125000.00, 0.00, 0.00, 1, '2026-08-18 01:45:54', '2026-08-18 05:45:54', NULL, 7, NULL, 6),
+(11, 7, 7, '2026-08-20', 1350.00, 0.00, 202.50, 1, '2026-08-21 05:18:27', '2026-08-21 09:18:27', NULL, 7, NULL, 3),
+(12, 1, 7, '2026-08-21', 80000.00, 0.00, 12000.00, 1, '2026-08-21 05:46:46', '2026-08-21 09:46:46', NULL, 7, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -766,7 +863,9 @@ INSERT INTO `sale_details` (`id`, `sale_id`, `product_id`, `quantity`, `unit_pri
 (14, 6, 18, 2, 135.00, 270.00, '2026-08-15 09:32:11', '2026-08-15 13:32:11', NULL, 7, NULL),
 (15, 7, 3, 5, 1250.00, 6250.00, '2026-08-15 09:42:06', '2026-08-15 13:42:06', NULL, 7, NULL),
 (16, 8, 3, 100, 1250.00, 125000.00, '2026-08-16 11:10:50', '2026-08-16 15:10:50', NULL, 1, NULL),
-(17, 9, 3, 100, 1250.00, 125000.00, '2026-08-18 01:45:54', '2026-08-18 05:45:54', NULL, 7, NULL);
+(17, 9, 3, 100, 1250.00, 125000.00, '2026-08-18 01:45:54', '2026-08-18 05:45:54', NULL, 7, NULL),
+(19, 11, 18, 10, 135.00, 1350.00, '2026-08-21 05:18:27', '2026-08-21 09:18:27', NULL, 7, NULL),
+(20, 12, 14, 100, 800.00, 80000.00, '2026-08-21 05:46:46', '2026-08-21 09:46:46', NULL, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -822,7 +921,12 @@ INSERT INTO `stocks` (`id`, `stock_date`, `product_id`, `warehouse_id`, `quantit
 (33, '2026-08-19', 14, 4, 50, 25, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-20 04:45:40', NULL, NULL),
 (34, '2026-08-19', 3, 6, 2, NULL, NULL, 7, 0, NULL, 2026, NULL, '2026-08-20 04:46:52', NULL, NULL),
 (35, '2026-08-20', 14, 4, -20, 25, 0, NULL, NULL, NULL, 2026, NULL, '2026-08-20 04:47:13', NULL, NULL),
-(36, '2026-08-20', 14, 4, 1, NULL, NULL, 5, 0, NULL, 2026, NULL, '2026-08-20 04:52:15', NULL, NULL);
+(36, '2026-08-20', 14, 4, 1, NULL, NULL, 5, 0, NULL, 2026, NULL, '2026-08-20 04:52:15', NULL, NULL),
+(38, '2026-08-20', 18, 3, -10, NULL, NULL, 11, NULL, NULL, 2026, NULL, '2026-08-21 09:18:27', NULL, NULL),
+(39, '2026-08-20', 14, 3, 100, 26, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-21 09:39:44', NULL, NULL),
+(40, '2026-08-19', 14, 3, 100, 27, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-21 09:43:02', NULL, NULL),
+(41, '2026-08-21', 14, 3, -100, NULL, NULL, 12, NULL, NULL, 2026, NULL, '2026-08-21 09:46:46', NULL, NULL),
+(42, '2026-08-21', 18, 3, 10, 28, NULL, NULL, NULL, NULL, 2026, NULL, '2026-08-21 15:43:04', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -873,7 +977,7 @@ INSERT INTO `stock_transfers` (`id`, `product_id`, `quantity`, `transfer_date`, 
 
 CREATE TABLE `suppliers` (
   `id` int(11) NOT NULL,
-  `supplier_name` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `contact_person` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -892,7 +996,7 @@ CREATE TABLE `suppliers` (
 -- Dumping data for table `suppliers`
 --
 
-INSERT INTO `suppliers` (`id`, `supplier_name`, `contact_person`, `phone`, `email`, `address`, `city`, `country`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
+INSERT INTO `suppliers` (`id`, `name`, `contact_person`, `phone`, `email`, `address`, `city`, `country`, `status`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`) VALUES
 (1, 'Kamal', 'Kamal', '015', 'kamal@yahoo.com', '2no Gate', 'Chattogram', 'BD', 1, '2026-08-03 06:48:44', '2026-08-03 06:48:44', NULL, NULL, NULL),
 (2, 'Usama', 'al surafa', '+965875', 'usama02@gmail.com', 'clifornia,usa', 'california', 'USA', 1, '2026-08-06 22:53:27', '2026-08-07 02:53:27', NULL, NULL, NULL),
 (3, 'Sultan', 'imran', '+6325458755', 'Sultan@yahoo.com', 'dhaka,bd', 'dhaka', 'bd', 1, '2026-08-06 23:01:07', '2026-08-07 03:01:07', NULL, NULL, NULL),
@@ -1160,19 +1264,19 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `journal_vouchers`
 --
 ALTER TABLE `journal_vouchers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `journal_voucher_details`
 --
 ALTER TABLE `journal_voucher_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `ledger`
 --
 ALTER TABLE `ledger`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -1184,13 +1288,13 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `payment_vouchers`
 --
 ALTER TABLE `payment_vouchers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `payment_voucher_details`
 --
 ALTER TABLE `payment_voucher_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1202,13 +1306,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `purchase_details`
 --
 ALTER TABLE `purchase_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `purchase_return_details`
@@ -1220,13 +1324,13 @@ ALTER TABLE `purchase_return_details`
 -- AUTO_INCREMENT for table `receive_vouchers`
 --
 ALTER TABLE `receive_vouchers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `receive_voucher_details`
 --
 ALTER TABLE `receive_voucher_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1238,19 +1342,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `sale_details`
 --
 ALTER TABLE `sale_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `stock_transfers`
