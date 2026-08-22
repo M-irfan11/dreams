@@ -26,7 +26,7 @@ if ($_POST) {
         $_SESSION['access'] = $user->access;
         $_SESSION['is_logged_in'] = true;
 
-        header("Location: dashboard.php");
+        header("Location: index.php");
         exit;
     } else {
         $error = "Invalid email or password.";
