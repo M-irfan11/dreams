@@ -17,7 +17,7 @@
             
 
             // Fetch all sales, joined with customers
-            $sales = $crud->common_query('SELECT sales.*, customers.name as customer_name FROM `sales` JOIN customers on customers.id=sales.customer_id ');
+            $sales = $crud->common_query('SELECT sales.*, customers.name as customer_name, sum(receive_vouchers.dr) as paid FROM `sales` JOIN customers on customers.id=sales.customer_id left join receive_vouchers on receive_vouchers.source_id=sales.id and receive_vouchers.source_type="sales" GROUP BY sales.id');
         ?>
 
         <div class="page-header">
@@ -78,6 +78,7 @@
                                 <th>Discount</th>
                                 <th>Tax</th>
                                 <th>Grand Total</th>
+                                <th>Paid Amount</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -99,6 +100,7 @@
                                     <td>৳<?php echo htmlspecialchars($sale->discount); ?></td>
                                     <td>৳<?php echo htmlspecialchars($sale->tax); ?></td>
                                     <td><?php echo number_format($sale->total_amount - $sale->discount + $sale->tax, 2); ?></td>
+                                    <td>৳<?php echo number_format($sale->paid, 2); ?></td>
                                     <td>
                                         <?php
                                             if($sale->status == 1){

@@ -30,7 +30,7 @@
         SELECT receive_voucher_details.*, account_heads.account_name
         FROM receive_voucher_details
         JOIN account_heads ON account_heads.id = receive_voucher_details.account_head_id
-        WHERE receive_voucher_details.receive_voucher_id = $voucher_id
+        WHERE receive_voucher_details.receive_voucher_id = $voucher_id and receive_voucher_details.dr > 0
     ");
     $details = $detailsResult['data'] ?? [];
 
@@ -99,10 +99,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Amount Received (Sale #<?= (int) $voucher->source_id ?>)</td>
-                                <td class="text-end">৳<?= number_format((float) $voucher->cr, 2) ?></td>
-                            </tr>
                             <?php if ($paidVia): ?>
                             <tr>
                                 <td>Payment Method: <?= htmlspecialchars($paidVia->account_name) ?></td>
@@ -110,12 +106,7 @@
                             </tr>
                             <?php endif; ?>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Total Received</th>
-                                <th class="text-end">৳<?= number_format($totalReceived ?: (float) $voucher->cr, 2) ?></th>
-                            </tr>
-                        </tfoot>
+                        
                     </table>
                 </div>
 

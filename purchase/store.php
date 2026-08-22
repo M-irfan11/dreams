@@ -91,20 +91,20 @@ if ($result['status']) {
     $vat = (float) ($_POST['vat'] ?: 0);
     $purchase_amount = $grand_total - $vat;
 
-    $purchase_acc  = getAccountId($crud, 'PURCHASE');
-    $payable_acc   = getAccountId($crud, 'AP');
-    $vat_input_acc = getAccountId($crud, 'VAT_INPUT');
+    $payable_acc   = getAccountId($crud, '3100');
+    $revenue_acc   = getAccountId($crud, '4100');
+    $vat_output_acc = getAccountId($crud, '2100');
 
-    if (!$purchase_acc || !$payable_acc) {
+    if (!$payable_acc || !$revenue_acc) {
         $error++;
-        $error_messages[] = "Ledger accounts PURCHASE / AP not found in account_heads.";
+        $error_messages[] = "Ledger accounts PAYABLE / REVENUE not found in account_heads.";
     } else {
 
-        $l1 = postLedger($crud, $purchase_acc, $purchase_amount, 0, "Purchase #$purchase_id - COGS", null, $purchase_id);
+        $l1 = postLedger($crud, $revenue_acc, $purchase_amount, 0, "Purchase #$purchase_id - COGS", null, $purchase_id);
         if (!$l1['status']) { $error++; $error_messages[] = "Ledger PURCHASE: " . $l1['message']; }
 
-        if ($vat > 0 && $vat_input_acc) {
-            $l2 = postLedger($crud, $vat_input_acc, $vat, 0, "Purchase #$purchase_id - VAT Input", null, $purchase_id);
+        if ($vat > 0 && $vat_output_acc) {
+            $l2 = postLedger($crud, $vat_output_acc, $vat, 0, "Purchase #$purchase_id - VAT Input", null, $purchase_id);
             if (!$l2['status']) { $error++; $error_messages[] = "Ledger VAT: " . $l2['message']; }
         }
 
