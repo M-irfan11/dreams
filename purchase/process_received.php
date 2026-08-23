@@ -31,20 +31,20 @@
 
     $details_data = [
         'payment_voucher_id' => $voucher_id,
-        'account_head_id' => getAccountId($crud, '1200'),
-        'cr' => $_POST['amount'] ?? 0,
-        'dr' => 0,
-        'remarks' => "purchase received for purchase ID: " . $_POST['purchase_id'],
+        'account_head_id' => getAccountId($crud, '3100'),
+        'dr' => $_POST['amount'] ?? 0,
+        'cr' => 0,
+        'remarks' => "payment for purchase ID: " . $_POST['purchase_id'],
         'created_by' => $_SESSION['user_id']
     ];
     $payment_voucher_detail_result = $crud->common_insert("payment_voucher_details", $details_data);
     
     $ledger_data = [
         'payment_voucher_id' => $voucher_id,
-        'account_head_id' => getAccountId($crud, '1200'),
-        'cr' => $_POST['amount'] ?? 0,
-        'dr' => 0,
-        'remarks' => "purchase received for purchase ID: " . $_POST['purchase_id'],
+        'account_head_id' => getAccountId($crud, '3100'),
+        'dr' => $_POST['amount'] ?? 0,
+        'cr' => 0,
+        'remarks' => "payment for purchase ID: " . $_POST['purchase_id'],
         'created_by' => $_SESSION['user_id']
     ];
     $crud->common_insert("ledger", $ledger_data);
@@ -54,9 +54,9 @@
     $details_data = [
         'payment_voucher_id' => $voucher_id,
         'account_head_id' => $_POST['account_head_id'],
-        'cr' => 0,
-        'dr' => $_POST['amount'] ?? 0,
-        'remarks' => "purchase received for purchase ID: " . $_POST['purchase_id'],
+        'dr' => 0,
+        'cr' => $_POST['amount'] ?? 0,
+        'remarks' => "payment for purchase ID: " . $_POST['purchase_id'],
         'created_by' => $_SESSION['user_id']
     ];
     $payment_voucher_detail_result = $crud->common_insert("payment_voucher_details", $details_data);
@@ -65,9 +65,9 @@
         $ledger_data = [
             'payment_voucher_id' => $voucher_id,
             'account_head_id' =>  $_POST['account_head_id'],
-            'cr' => 0,
-            'dr' => $_POST['amount'] ?? 0,
-            'remarks' => "purchase received for purchase ID: " . $_POST['purchase_id'],
+            'dr' => 0,
+            'cr' => $_POST['amount'] ?? 0,
+            'remarks' => "payment for purchase ID: " . $_POST['purchase_id'],
             'created_by' => $_SESSION['user_id']
         ];
         $crud->common_insert("ledger", $ledger_data);

@@ -2,8 +2,17 @@
 <?php require_once '../component/sidebar.php'; ?>
 <?php
     $id = $_GET['id'];
-    $result = $crud->common_query("SELECT sales.*,customers.name,customers.phone FROM `sales` JOIN customers on customers.id=sales.customer_id
-WHERE sales.id=$id");
+    $result = $crud->common_query("
+                                SELECT sales.*,
+                                customers.name,
+                                customers.phone,
+                                sum(receive_vouchers.dr) as paid
+                                FROM `sales`
+                                JOIN customers on customers.id=sales.customer_id
+                                left join receive_vouchers on receive_vouchers.source_id=sales.id and receive_vouchers.source_type='sales'
+                                WHERE sales.id=$id
+                                GROUP BY sales.id
+                                ");
     $sale = $result['data'][0] ?? null;
 
     if (!$sale) {
@@ -68,7 +77,7 @@ WHERE sales.id=$id");
             <div class="page-title">
                 <h4>Payment</h4>
                 <h6>Process payment for sale #<?php echo $sale->id; ?>, Customer: <?= htmlspecialchars($sale->name) ?> - <?= htmlspecialchars($sale->phone) ?></h6>
-                <h2>Sales amount: ৳<?php echo number_format($sale->total_amount, 2); ?></h2>
+                <h2>Sales amount: ৳ <?php echo number_format($sale->total_amount - $sale->paid, 2); ?></h2>
             </div>
         </div>
 

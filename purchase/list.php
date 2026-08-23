@@ -16,7 +16,7 @@
             }
 
             // Fetch all purchases, joined with suppliers
-            $purchase = $crud->common_query('SELECT purchases.*, suppliers.name AS supplier_name FROM `purchases` JOIN suppliers on suppliers.id=purchases.supplier_id ');
+            $purchase = $crud->common_query('SELECT purchases.*, suppliers.name AS supplier_name, sum(payment_vouchers.dr) as paid FROM `purchases` JOIN suppliers on suppliers.id=purchases.supplier_id left JOIN payment_vouchers on payment_vouchers.source_id=purchases.id and payment_vouchers.source_type="purchases" GROUP BY purchases.id');
             
         ?>
 
@@ -79,6 +79,7 @@
                                 <th>Discount</th>
                                 <th>Vat</th>
                                 <th>Grand Total</th>
+                                <th>Paid</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -108,6 +109,7 @@
                                     </td>
                                     <td><?php echo htmlspecialchars($pur->vat); ?></td>
                                     <td><?php echo htmlspecialchars($pur->grand_total); ?></td>
+                                    <td><?php echo htmlspecialchars($pur->paid); ?></td>
                                     <td>
                                         <a class="me-3" href="received.php?id=<?php echo $pur->id; ?>">
                                             <img src="<?php echo $base_url; ?>assets/img/icons/dollar.svg" alt="img">

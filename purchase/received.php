@@ -2,8 +2,12 @@
 <?php require_once '../component/sidebar.php'; ?>
 <?php
     $id = $_GET['id'];
-    $result = $crud->common_query("SELECT purchases.*,suppliers.name,suppliers.phone FROM `purchases` JOIN suppliers on suppliers.id=purchases.supplier_id
-WHERE purchases.id=$id");
+    $result = $crud->common_query("SELECT purchases.*,suppliers.name,suppliers.phone,sum(payment_vouchers.dr) as paid
+                                    FROM `purchases`
+                                    JOIN suppliers on suppliers.id=purchases.supplier_id
+                                    LEFT JOIN payment_vouchers on payment_vouchers.source_id=purchases.id and payment_vouchers.source_type='purchases'
+                                    WHERE purchases.id=$id
+                                    GROUP BY purchases.id");
     $purchase = $result['data'][0] ?? null;
 
     if (!$purchase) {
@@ -68,7 +72,7 @@ WHERE purchases.id=$id");
             <div class="page-title">
                 <h4>Received</h4>
                 <h6>Process received form purchase #<?php echo $purchase->id; ?>, Supplier: <?= htmlspecialchars($purchase->name) ?> - <?= htmlspecialchars($purchase->phone) ?></h6>
-                <h2>purchases amount: ৳<?php echo number_format($purchase->total_amount, 2); ?></h2>
+                <h2>purchases amount: ৳<?php echo number_format($purchase->total_amount - $purchase->paid, 2); ?></h2>
             </div>
         </div>
 

@@ -107,7 +107,7 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table datanew">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
