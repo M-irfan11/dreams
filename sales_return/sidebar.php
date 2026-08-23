@@ -29,8 +29,6 @@
 <li><a href="<?= $base_url ?>purchase/list.php">Purchase List</a></li>
 <li><a href="<?= $base_url ?>purchase/create.php">Add Purchase</a></li>
 <li><a href="<?= $base_url ?>supplier/list.php">Supplier</a></li>
-
-
 </ul>
 </li>
 <li class="submenu">
@@ -38,16 +36,21 @@
 <ul>
 <li><a href="<?= $base_url ?>stock/list.php">Stock list</a></li>
 <li><a href="<?= $base_url ?>stock_transfer/list.php">Stock Transfer</a></li>
-
 </ul>
 </li>
-
+<li class="submenu">
+<a href="<?= $base_url ?>expense/list.php"><img src="<?= $base_url ?>assets/img/icons/expense1.svg" alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
+<ul>
+<li><a href="<?= $base_url ?>expense/list.php">Expense List</a></li>
+<li><a href="<?= $base_url ?>expense/create.php">Add Expense</a></li>
+<li><a href="<?= $base_url ?>expense_categories/list.php">Expense Category</a></li>
+</ul>
+</li>
 <li class="submenu">
 <a href="<?= $base_url ?>customer/list.php"><img src="<?= $base_url ?>assets/img/icons/quotation1.svg" alt="img"><span> Customer</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>customer/list.php">Customer List</a></li>
- 
-</ul>
+ </ul>
 </li>
 <li class="submenu">
 <a href="<?= $base_url ?>transfer/list.php"><img src="<?= $base_url ?>assets/img/icons/transfer1.svg" alt="img"><span> Transfer</span> <span class="menu-arrow"></span></a>
