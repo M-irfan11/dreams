@@ -2,11 +2,11 @@
     require_once "../../component/connection.php";
     /* get last payment voucher number */
     $voucher_no = $crud->common_query("SELECT max(id) as max_id FROM receive_vouchers");
-    $voucher_no = 'PAY' . str_pad($voucher_no['data'][0]->max_id + 1, 6, '0', STR_PAD_LEFT);
+    $voucher_no = 'RCV' . str_pad($voucher_no['data'][0]->max_id + 1, 6, '0', STR_PAD_LEFT);
     $receive_voucher = [
         'voucher_no' => $voucher_no,
         'voucher_date' => $_POST['voucher_date'],
-        'pay_to' => $_POST['pay_to'],
+        'received_from' => $_POST['received_from'],
         'narration' => $_POST['narration'],
         'cr' => $_POST['totalAmount'] ?? 0,
         'dr' => $_POST['totalAmount'] ?? 0,

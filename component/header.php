@@ -1,5 +1,14 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/connection.php";
+     
+    // Define a list of known local environments
+    $local_hosts = ['localhost', '127.0.0.1', '::1'];
+
+    if (in_array($_SERVER['HTTP_HOST'], $local_hosts) || in_array($_SERVER['REMOTE_ADDR'], $local_hosts)) {
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/connection.php";
+    } else {
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/component/connection.php";
+    }
+    
     if(!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']){
         echo "<script>window.location='{$base_url}login.php'</script>";
         exit;
@@ -114,10 +123,10 @@
 <a href="activities.html">
 <div class="media d-flex">
 <span class="avatar flex-shrink-0">
-<img alt="" src="<?= $base_url ?>assets/img/profiles/avatar-02.jpg">
+<img alt="" src="<?= $base_url ?>assets/img/profiles/irfan.jfif">
 </span>
 <div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Irfan</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+<p class="noti-details"><span class="noti-title">Irfan</span> added new task <span class="noti-title">"Irfan is currently working on the account module and also looks after the stock section."</span></p>
 <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
 </div>
 </div>
@@ -127,10 +136,10 @@
 <a href="activities.html">
 <div class="media d-flex">
 <span class="avatar flex-shrink-0">
-<img alt="" src="<?= $base_url ?>assets/img/profiles/avatar-03.jpg">
+<img alt="" src="<?= $base_url ?>assets/img/profiles/avatar-17.jpg">
 </span>
 <div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
+<p class="noti-details"><span class="noti-title">Pritom</span> changed the task name <span class="noti-title">pritom is currently working on the sales module and also looks after report section</span></p>
 <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
 </div>
 </div>
@@ -143,7 +152,7 @@
 <img alt="" src="<?= $base_url ?>assets/img/profiles/avatar-06.jpg">
 </span>
 <div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
+<p class="noti-details"><span class="noti-title">Afrin</span> to project <span class="noti-title">afrin is currently working on the purchase module and looks after payment getway system</span></p>
 <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
 </div>
 </div>
@@ -194,12 +203,13 @@
 <span class="user-img"><img src="<?= $base_url ?>assets/img/profiles/avator1.jpg" alt="">
 <span class="status online"></span></span>
 <div class="profilesets">
-<h6>Irfan</h6>
-<h5>Admin</h5>
+<h6>User</h6>
+<h5>Super Admin</h5>
 </div>
 </div>
 <hr class="m-0">
-<a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My Profile</a>
+<a class="dropdown-item" href="<?= $base_url ?>users/list.php"> <i class="me-2" data-feather="user"></i> My Profile</a>
+
 <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
 <hr class="m-0">
 <a class="dropdown-item logout pb-0" href="<?= $base_url ?>logout.php"><img src="<?= $base_url ?>assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>

@@ -45,11 +45,11 @@
                     <input type="text" name="narration" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label>Pay To</label>
+                    <label>Received From</label>
                     <input type="text" name="pay_to" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label>Pay From</label>
+                    <label>Received From</label>
                     <select name="pay_dr" class="form-control" required>
                         <?php foreach ($accheadsDatadr as $head): ?>
                             <option value="<?= $head['id'] ?>"><?= $head['name'] ?></option>

@@ -1,28 +1,45 @@
 <?php
 require_once '../component/connection.php';
 
-// account_code diye account_id ber kora
+// account_code diye account_heads.id ber kora
+// NOTE: primary key column name is `id`, not `account_id`
 function getAccountId($crud, $code) {
     $r = $crud->common_select('account_heads', '*', ["account_code" => $code]);
-    return $r['status'] ? $r['data'][0]->account_id : null;
+    return $r['status'] ? $r['data'][0]->id : null;
+}
+
+// ekta ledger row insert kore, sale_id/purchase_id soho
+function postLedger($crud, $account_head_id, $dr, $cr, $remarks, $sale_id = null, $purchase_id = null) {
+    $ledger_data = [
+        "account_head_id" => $account_head_id,
+        "dr"              => $dr,
+        "cr"              => $cr,
+        "remarks"         => $remarks,
+        "created_by"      => $_SESSION['user_id'],
+        "created_at"      => date('Y-m-d H:i:s')
+    ];
+    if ($sale_id)     $ledger_data["sale_id"] = $sale_id;
+    if ($purchase_id) $ledger_data["purchase_id"] = $purchase_id;
+
+    return $crud->common_insert('ledger', $ledger_data);
 }
 
 $crud->conn->begin_transaction();
 $error = 0;
-$error_messages = []; // collect the REAL reason for any failure, instead of reusing $result['message']
+$error_messages = [];
 
 $data = [
-    "supplier_id" => $_POST['supplier_id'],
-    "purchase_date" => $_POST['purchase_date'],
-    "total_amount" => $_POST['total_amount'],
-    "discount_amount" => $_POST['discount_amount'],
-    "discount_type" => $_POST['discount_type'],
-    "vat" => $_POST['vat'],
-    "grand_total" => $_POST['grand_total'],
-    "ref" => $_POST['ref'],
-    "status" => 1,
-    "created_at" => date('Y-m-d H:i:s'),
-    "created_by" => $_SESSION['user_id']
+    "supplier_id"      => $_POST['supplier_id'],
+    "purchase_date"    => $_POST['purchase_date'],
+    "total_amount"     => $_POST['total_amount'],
+    "discount_amount"  => $_POST['discount_amount'],
+    "discount_type"    => $_POST['discount_type'],
+    "vat"              => $_POST['vat'],
+    "grand_total"      => $_POST['grand_total'],
+    "ref"              => $_POST['ref'],
+    "status"           => 1,
+    "created_at"       => date('Y-m-d H:i:s'),
+    "created_by"       => $_SESSION['user_id']
 ];
 
 $result = $crud->common_insert('purchases', $data);
@@ -31,31 +48,32 @@ if ($result['status']) {
 
     $purchase_id = $result['data'];
 
-    // set opening balance for the product in stock_transfers table
-    // <!-- `id`, `purchase_id`, `product_id`, `quantity`, `purchase_price`, `subtotal`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by` -->
+    // -------------------------
+    // PURCHASE DETAILS + STOCK IN
+    // -------------------------
     foreach ($_POST['product_id'] as $index => $product_id) {
-        $stock_data = [
-            "purchase_id" => $purchase_id,
-            "product_id" => $product_id,
-            "quantity" => $_POST['quantity'][$index],
+        $pd_data = [
+            "purchase_id"    => $purchase_id,
+            "product_id"     => $product_id,
+            "quantity"       => $_POST['quantity'][$index],
             "purchase_price" => $_POST['purchase_price'][$index],
-            "subtotal" => $_POST['subtotal'][$index],
-            "created_at" => date('Y-m-d H:i:s'),
-            "created_by" => $_SESSION['user_id']
+            "subtotal"       => $_POST['subtotal'][$index],
+            "created_at"     => date('Y-m-d H:i:s'),
+            "created_by"     => $_SESSION['user_id']
         ];
-        $pd = $crud->common_insert('purchase_details', $stock_data);
+        $pd = $crud->common_insert('purchase_details', $pd_data);
         if (!$pd['status']) {
             $error++;
             $error_messages[] = "Purchase detail: " . $pd['message'];
         }
-        // add stock in stocks table
+
         $st = $crud->common_insert('stocks', [
-            "product_id" => $product_id,
-            "quantity" => $_POST['quantity'][$index],
+            "product_id"   => $product_id,
+            "quantity"     => $_POST['quantity'][$index],
             "warehouse_id" => $_POST['warehouse_id'],
-            "stock_date" => $_POST['purchase_date'],
-            "purchase_id" => $purchase_id,
-            "created_at" => date('Y-m-d H:i:s')
+            "stock_date"   => $_POST['purchase_date'],
+            "purchase_id"  => $purchase_id,
+            "created_at"   => date('Y-m-d H:i:s')
         ]);
         if (!$st['status']) {
             $error++;
@@ -64,98 +82,58 @@ if ($result['status']) {
     }
 
     // -------------------------
-    // JOURNAL ENTRIES (accounting posting) - OPTIONAL
-    // Dr Inventory  = grand_total - vat
-    // Dr VAT Input  = vat
+    // LEDGER POSTING (accounting)
+    // Dr Purchase/COGS   = grand_total - vat
+    // Dr VAT Receivable  = vat (if any)
     // Cr Accounts Payable = grand_total
-    //
-    // If the Accounts module (chart_of_accounts) isn't set up yet,
-    // we simply SKIP posting journal entries - the purchase itself
-    // must still save successfully. This does NOT count as an error.
     // -------------------------
-
     $grand_total = (float) $_POST['grand_total'];
     $vat = (float) ($_POST['vat'] ?: 0);
-    $inventory_amount = $grand_total - $vat;
+    $purchase_amount = $grand_total - $vat;
 
-    $inventory_acc = getAccountId($crud, '1300');
-    $vat_input_acc = getAccountId($crud, '2200');
-    $payable_acc   = getAccountId($crud, '2000');
+    $payable_acc   = getAccountId($crud, '3100');
+    $revenue_acc   = getAccountId($crud, '4100');
+    $vat_output_acc = getAccountId($crud, '2100');
 
-    if ($inventory_acc && $payable_acc) {
+    if (!$payable_acc || !$revenue_acc) {
+        $error++;
+        $error_messages[] = "Ledger accounts PAYABLE / REVENUE not found in account_heads.";
+    } else {
 
-        $je1 = $crud->common_insert('journal_entries', [
-            "entry_date" => $_POST['purchase_date'],
-            "reference_type" => "Purchase",
-            "reference_id" => $purchase_id,
-            "account_id" => $inventory_acc,
-            "debit" => $inventory_amount,
-            "credit" => 0,
-            "description" => "Purchase #$purchase_id - Inventory",
-            "created_by" => $_SESSION['user_id']
-        ]);
-        if (!$je1['status']) {
-            $error++;
-            $error_messages[] = "Journal (Inventory): " . $je1['message'];
+        $l1 = postLedger($crud, $revenue_acc, $purchase_amount, 0, "Purchase #$purchase_id - COGS", null, $purchase_id);
+        if (!$l1['status']) { $error++; $error_messages[] = "Ledger PURCHASE: " . $l1['message']; }
+
+        if ($vat > 0 && $vat_output_acc) {
+            $l2 = postLedger($crud, $vat_output_acc, $vat, 0, "Purchase #$purchase_id - VAT Input", null, $purchase_id);
+            if (!$l2['status']) { $error++; $error_messages[] = "Ledger VAT: " . $l2['message']; }
         }
 
-        if ($vat > 0 && $vat_input_acc) {
-            $je2 = $crud->common_insert('journal_entries', [
-                "entry_date" => $_POST['purchase_date'],
-                "reference_type" => "Purchase",
-                "reference_id" => $purchase_id,
-                "account_id" => $vat_input_acc,
-                "debit" => $vat,
-                "credit" => 0,
-                "description" => "Purchase #$purchase_id - VAT Input",
-                "created_by" => $_SESSION['user_id']
-            ]);
-            if (!$je2['status']) {
-                $error++;
-                $error_messages[] = "Journal (VAT): " . $je2['message'];
-            }
-        }
-
-        $je3 = $crud->common_insert('journal_entries', [
-            "entry_date" => $_POST['purchase_date'],
-            "reference_type" => "Purchase",
-            "reference_id" => $purchase_id,
-            "account_id" => $payable_acc,
-            "debit" => 0,
-            "credit" => $grand_total,
-            "description" => "Purchase #$purchase_id - Payable",
-            "created_by" => $_SESSION['user_id']
-        ]);
-        if (!$je3['status']) {
-            $error++;
-            $error_messages[] = "Journal (Payable): " . $je3['message'];
-        }
-
+        $l3 = postLedger($crud, $payable_acc, 0, $grand_total, "Purchase #$purchase_id - Payable", null, $purchase_id);
+        if (!$l3['status']) { $error++; $error_messages[] = "Ledger AP: " . $l3['message']; }
     }
-    // else: chart_of_accounts not set up yet - journal entries skipped, purchase still proceeds
 
     if ($error == 0) {
         $crud->conn->commit();
-        $_SESSION['message'] = array(
-            "type" => "success",
-            "title" => "Success",
+        $_SESSION['message'] = [
+            "type"    => "success",
+            "title"   => "Success",
             "message" => "Purchase added successfully."
-        );
+        ];
     } else {
         $crud->conn->rollback();
-        $_SESSION['message'] = array(
-            "type" => "danger",
-            "title" => "Error",
+        $_SESSION['message'] = [
+            "type"    => "danger",
+            "title"   => "Error",
             "message" => implode(" | ", $error_messages)
-        );
+        ];
     }
 
 } else {
-    $_SESSION['message'] = array(
-        "type" => "danger",
-        "title" => "Error",
+    $_SESSION['message'] = [
+        "type"    => "danger",
+        "title"   => "Error",
         "message" => $result['message']
-    );
+    ];
 }
 
 echo "<script>window.location='list.php'</script>";

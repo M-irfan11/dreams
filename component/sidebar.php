@@ -3,7 +3,7 @@
 <div id="sidebar-menu" class="sidebar-menu">
 <ul>
 <li class="active">
-<a href="<?= $base_url ?>dashboard.php"><img src="<?= $base_url ?>assets/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
+<a href="<?= $base_url ?>index.php"><img src="<?= $base_url ?>assets/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
 </li>
 <li class="submenu">
     
@@ -33,12 +33,23 @@
 
 </ul>
 </li>
+
 <li class="submenu">
 <a href="<?= $base_url ?>stock/list.php"><i data-feather="box"></i> <span>Stocks</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>stock/list.php">Stock list</a></li>
 <li><a href="<?= $base_url ?>stock_transfer/list.php">Stock Transfer</a></li>
-
+</ul>
+</li>
+<li class="submenu">
+<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
+<ul>
+<li><a href="<?= $base_url ?>accounts/account_heads.php">Account heads</a></li>
+<li><a href="<?= $base_url ?>accounts/journal/list.php">Journal vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/payment/list.php">Payment vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/receive/list.php">Receive Vouchers </a></li>
+<li><a href="<?= $base_url ?>accounts/ledger.php">Ledger </a></li>
+<li><a href="<?= $base_url ?>accounts/profit_loss.php">profit & loss </a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -76,24 +87,18 @@
 </ul>
 </li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
-<li class="submenu">
-<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Accounts</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>accounts/list.php">Accounts List</a></li>
-<li><a href="<?= $base_url ?>accounts/create.php">Add Accounts </a></li>
-</ul>
-</li>
+
 <?php endif; ?>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> People</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>customerlist.php">Customer List</a></li>
-<li><a href="<?= $base_url ?>addcustomer.php">Add Customer </a></li>
+<li><a href="<?= $base_url ?>users/list.php">users List</a></li>
+<li><a href="<?= $base_url ?>users/create.php">add user </a></li>
 <li><a href="<?= $base_url ?>supplierlist.php">Supplier List</a></li>
 <li><a href="<?= $base_url ?>addsupplier.php">Add Supplier </a></li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li><a href="<?= $base_url ?>users/list.php">User List</a></li>
-<li><a href="<?= $base_url ?>users/add.php">Add User</a></li>
+<li><a href="<?= $base_url ?>users/create.php">Add User</a></li>
 <?php endif; ?>
 <li><a href="<?= $base_url ?>storelist.php">Store List</a></li>
 <li><a href="<?= $base_url ?>addstore.php">Add Store</a></li>
@@ -103,11 +108,16 @@
 <a href="<?= $base_url ?>warehouse/list.php"><i data-feather="layers"></i><span> warehouse</span> </a>
 </li>
 <li class="submenu">
+<a href="<?= $base_url ?>table/list.php"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
+<ul>
+<li><a href="<?= $base_url ?>tables-basic.php">Basic Tables </a></li>
+<li><a href="<?= $base_url ?>data-tables.php">Data Table </a></li>
+</ul>
 
 </li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/time.svg" alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>Report/list.php"><img src="<?= $base_url ?>assets/img/icons/time.svg" alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>profitlossreport.php">Profit & Loss Report</a></li>
 </ul>
@@ -115,7 +125,7 @@
 <?php endif; ?>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
 <ul>
 
 <li><a href="<?= $base_url ?>users/list.php">Users List</a></li>
@@ -123,7 +133,7 @@
 </li>
 <?php endif; ?>
 <li class="submenu">
-<a href="<?= $base_url ?>javascript:void(0);"><img src="<?= $base_url ?>assets/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>setting/list.php"><img src="<?= $base_url ?>assets/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>generalsettings.php">General Settings</a></li>
 <li><a href="<?= $base_url ?>emailsettings.php">Email Settings</a></li>
