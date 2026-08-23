@@ -194,12 +194,13 @@
 <span class="user-img"><img src="<?= $base_url ?>assets/img/profiles/avator1.jpg" alt="">
 <span class="status online"></span></span>
 <div class="profilesets">
-<h6>Irfan</h6>
-<h5>Admin</h5>
+<h6>User</h6>
+<h5>Super Admin</h5>
 </div>
 </div>
 <hr class="m-0">
-<a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My Profile</a>
+<a class="dropdown-item" href="<?= $base_url ?>users/list.php"> <i class="me-2" data-feather="user"></i> My Profile</a>
+
 <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
 <hr class="m-0">
 <a class="dropdown-item logout pb-0" href="<?= $base_url ?>logout.php"><img src="<?= $base_url ?>assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>

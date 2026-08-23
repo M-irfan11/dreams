@@ -98,7 +98,7 @@
 <li><a href="<?= $base_url ?>addsupplier.php">Add Supplier </a></li>
 <?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
 <li><a href="<?= $base_url ?>users/list.php">User List</a></li>
-<li><a href="<?= $base_url ?>users/add.php">Add User</a></li>
+<li><a href="<?= $base_url ?>users/create.php">Add User</a></li>
 <?php endif; ?>
 <li><a href="<?= $base_url ?>storelist.php">Store List</a></li>
 <li><a href="<?= $base_url ?>addstore.php">Add Store</a></li>
