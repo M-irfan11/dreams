@@ -90,22 +90,21 @@
 
 <?php endif; ?>
 <li class="submenu">
-<a href="<?= $base_url ?>users/list.php"><img src="<?= $base_url ?>assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Accounts</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="<?= $base_url ?>users/list.php">users List</a></li>
-<li><a href="<?= $base_url ?>users/create.php">add user </a></li>
-<li><a href="<?= $base_url ?>supplierlist.php">Supplier List</a></li>
-<li><a href="<?= $base_url ?>addsupplier.php">Add Supplier </a></li>
-<?php if(($_SESSION['user_role'] ?? '') === 'Super Admin'): ?>
-<li><a href="<?= $base_url ?>users/list.php">User List</a></li>
-<li><a href="<?= $base_url ?>users/add.php">Add User</a></li>
-<?php endif; ?>
-<li><a href="<?= $base_url ?>storelist.php">Store List</a></li>
-<li><a href="<?= $base_url ?>addstore.php">Add Store</a></li>
+<li><a href="<?= $base_url ?>accounts/list.php">Accounts List</a></li>
+<li><a href="<?= $base_url ?>accounts/create.php">Add accounts </a></li>
+
 </ul>
 </li>
 <li>
 <a href="<?= $base_url ?>warehouse/list.php"><i data-feather="layers"></i><span> warehouse</span> </a>
+</li>
+<li>
+<a href="<?= $base_url ?>blankpage.php"><i data-feather="file"></i><span> Blank Page</span> </a>
+</li>
+<li>
+<a href="<?= $base_url ?>payment/list.php"><i data-feather="layers"></i><span> payment</span> </a>
 </li>
 <li class="submenu">
 <a href="<?= $base_url ?>table/list.php"><i data-feather="layout"></i> <span> Table </span> <span class="menu-arrow"></span></a>
