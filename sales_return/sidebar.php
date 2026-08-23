@@ -41,14 +41,7 @@
 
 </ul>
 </li>
-<li class="submenu">
-<a href="<?= $base_url ?>expense/list.php"><img src="<?= $base_url ?>assets/img/icons/expense1.svg" alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="<?= $base_url ?>expense/list.php">Expense List</a></li>
-<li><a href="<?= $base_url ?>expense/create.php">Add Expense</a></li>
-<li><a href="<?= $base_url ?>expense_categories/list.php">Expense Category</a></li>
-</ul>
-</li>
+
 <li class="submenu">
 <a href="<?= $base_url ?>customer/list.php"><img src="<?= $base_url ?>assets/img/icons/quotation1.svg" alt="img"><span> Customer</span> <span class="menu-arrow"></span></a>
 <ul>
