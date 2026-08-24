@@ -16,7 +16,7 @@
             }
 
             // Fetch all purchase returns, joined with suppliers and users (created by)
-            $returns = $crud->common_query('SELECT purchase_returns.*, suppliers.supplier_name, users.full_name FROM `purchase_returns`
+            $returns = $crud->common_query('SELECT purchase_returns.*, suppliers.name, users.full_name FROM `purchase_returns`
                 JOIN suppliers on suppliers.id=purchase_returns.supplier_id
                 LEFT JOIN users on users.id=purchase_returns.created_by
                 WHERE purchase_returns.deleted_at IS NULL
@@ -84,7 +84,7 @@
                                     </td>
                                     <td><?php echo $ret->id; ?></td>
                                     <td><?php echo $ret->purchase_id; ?></td>
-                                    <td class="text-bolds"><?php echo htmlspecialchars($ret->supplier_name); ?></td>
+                                    <td class="text-bolds"><?php echo htmlspecialchars($ret->name); ?></td>
                                     <td><?php echo htmlspecialchars($ret->return_date); ?></td>
                                     <td><?php echo htmlspecialchars($ret->total_amount); ?></td>
                                     <td><?php echo htmlspecialchars($ret->reason); ?></td>

@@ -47,7 +47,7 @@
                                         if($suppliers['status']){
                                             foreach($suppliers['data'] as $supplier){
                                     ?>
-                                                <option value="<?php echo $supplier->id; ?>" <?php echo ($supplier->id == $purchase->supplier_id) ? 'selected' : ''; ?>><?php echo htmlspecialchars($supplier->supplier_name); ?></option>
+                                                <option value="<?php echo $supplier->id; ?>" <?php echo ($supplier->id == $purchase->supplier_id) ? 'selected' : ''; ?>><?php echo htmlspecialchars($supplier->name); ?></option>
                                     <?php   }
                                         } else { ?>
                                             <option value="">No suppliers available</option>

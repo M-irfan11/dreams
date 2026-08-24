@@ -95,22 +95,11 @@ if ($result['status']) {
     $revenue_acc   = getAccountId($crud, '4100');
     $vat_output_acc = getAccountId($crud, '2100');
 
-    if (!$payable_acc || !$revenue_acc) {
-        $error++;
-        $error_messages[] = "Ledger accounts PAYABLE / REVENUE not found in account_heads.";
-    } else {
-
-        $l1 = postLedger($crud, $revenue_acc, $purchase_amount, 0, "Purchase #$purchase_id - COGS", null, $purchase_id);
-        if (!$l1['status']) { $error++; $error_messages[] = "Ledger PURCHASE: " . $l1['message']; }
-
-        if ($vat > 0 && $vat_output_acc) {
-            $l2 = postLedger($crud, $vat_output_acc, $vat, 0, "Purchase #$purchase_id - VAT Input", null, $purchase_id);
-            if (!$l2['status']) { $error++; $error_messages[] = "Ledger VAT: " . $l2['message']; }
-        }
-
-        $l3 = postLedger($crud, $payable_acc, 0, $grand_total, "Purchase #$purchase_id - Payable", null, $purchase_id);
-        if (!$l3['status']) { $error++; $error_messages[] = "Ledger AP: " . $l3['message']; }
-    }
+     $journal_voucher_id = add_journal_voucher($crud, $purchase_id, [
+            ['account_id' => $revenue_acc, 'cr' => 0, 'dr' => $purchase_amount, 'remarks' => "Purchase #$purchase_id - Revenue"],
+            ['account_id' => $vat_output_acc, 'cr' => 0, 'dr' => $vat, 'remarks' => "Purchase #$purchase_id - VAT Output"],
+            ['account_id' => $payable_acc, 'cr' => $grand_total, 'dr' => 0, 'remarks' => "Purchase #$purchase_id - Receivable"]
+            ], $grand_total, "Purchase #$purchase_id", $_POST['purchase_date']);
 
     if ($error == 0) {
         $crud->conn->commit();
@@ -135,5 +124,47 @@ if ($result['status']) {
         "message" => $result['message']
     ];
 }
+
+function add_journal_voucher($crud, $purchase_id, $account_ids, $grand_total, $description,$purchase_date) {
+        $voucher_no = $crud->common_query("SELECT max(id) as max_id FROM journal_vouchers");
+        $voucher_no = 'J' . str_pad($voucher_no['data'][0]->max_id + 1, 6, '0', STR_PAD_LEFT);
+        $journal_voucher = [
+            'voucher_no' => $voucher_no,
+            'voucher_date' => $purchase_date,
+            'source_type' => 'Purchase',
+            'source_id' => $purchase_id,
+            'narration' => $description ?? 'Purchase Voucher',
+            'dr' => $grand_total ?? 0,
+            'cr' => $grand_total ?? 0,
+            'created_by' => $_SESSION['user_id'],
+            'status' => 1
+        ];
+
+        $journal_voucher_result = $crud->common_insert("journal_vouchers", $journal_voucher);
+        $voucher_id = $journal_voucher_result['data'];
+
+        foreach ($account_ids as $account_head_id) {
+            $details_data = [
+                'journal_voucher_id' => $voucher_id,
+                'account_head_id' => $account_head_id['account_id'],
+                'dr' => $account_head_id['dr'] ?? 0,
+                'cr' => $account_head_id['cr'] ?? 0,
+                'remarks' => $account_head_id['remarks'] ?? '',
+                'created_by' => $_SESSION['user_id']
+            ];
+            $journal_voucher_detail_result = $crud->common_insert("journal_voucher_details", $details_data);
+            $ledger_data = [
+                'journal_voucher_id' => $voucher_id,
+                'account_head_id' => $account_head_id['account_id'],
+                'dr' => $account_head_id['dr'] ?? 0,
+                'cr' => $account_head_id['cr'] ?? 0,
+                'remarks' => $account_head_id['remarks'] ?? '',
+                'created_by' => $_SESSION['user_id']
+            ];
+            $crud->common_insert("ledger", $ledger_data);
+        }
+
+        return  $voucher_id;
+    }
 
 echo "<script>window.location='list.php'</script>";

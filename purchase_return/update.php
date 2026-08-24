@@ -3,7 +3,7 @@
 <?php
     $id = (int)$_GET['id'];
 
-    $return_result = $crud->common_query("SELECT purchase_returns.*, suppliers.supplier_name FROM purchase_returns
+    $return_result = $crud->common_query("SELECT purchase_returns.*, suppliers.name FROM purchase_returns
         JOIN suppliers on suppliers.id = purchase_returns.supplier_id
         WHERE purchase_returns.id = $id AND purchase_returns.deleted_at IS NULL");
     $purchase_return = $return_result['status'] ? $return_result['data'][0] : null;
@@ -42,7 +42,7 @@
                             <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Supplier</label>
-                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($purchase_return->supplier_name); ?>" readonly>
+                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($purchase_return->name); ?>" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6 col-12">
