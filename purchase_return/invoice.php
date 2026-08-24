@@ -6,7 +6,7 @@ $id = (int)$_GET['id'];
 
 // Purchase return information
 $return_query = "
-    SELECT purchase_returns.*, suppliers.supplier_name AS supplier_name
+    SELECT purchase_returns.*, suppliers.name AS name
     FROM purchase_returns
     LEFT JOIN suppliers ON suppliers.id = purchase_returns.supplier_id
     WHERE purchase_returns.id = '$id'
@@ -128,7 +128,7 @@ $grand_total = $purchase_return->total_amount ?? 0;
 <div class="row">
     <div class="col-md-6">
         <h5>Supplier Information</h5>
-        <p><strong>Name:</strong> <?php echo htmlspecialchars($purchase_return->supplier_name); ?></p>
+        <p><strong>Name:</strong> <?php echo htmlspecialchars($purchase_return->name); ?></p>
     </div>
     <div class="col-md-6">
         <h5>Return Information</h5>
