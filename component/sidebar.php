@@ -20,7 +20,6 @@
 <ul>
 <li><a href="<?= $base_url ?>sales/list.php">Sales List</a></li>
 <li><a href="<?= $base_url ?>sales/create.php">Add Sale</a></li>
-<li><a href="<?= $base_url ?>sales_return/list.php">Sales Return List</a></li>
 </ul>
 </li>
 <li class="submenu">
