@@ -12,7 +12,7 @@
         // get purchase + supplier + warehouse info
         // (purchases has no warehouse_id column - the warehouse lives on the stocks rows
         // that were created when the purchase was saved, so we pull it from there)
-        $purchase_result = $crud->common_query("SELECT purchases.*, suppliers.supplier_name, stocks.warehouse_id, warehouses.warehouse_name FROM purchases
+        $purchase_result = $crud->common_query("SELECT purchases.*, suppliers.name, stocks.warehouse_id, warehouses.warehouse_name FROM purchases
             JOIN suppliers on suppliers.id = purchases.supplier_id
             LEFT JOIN stocks on stocks.purchase_id = purchases.id AND stocks.purchase_return_id IS NULL
             LEFT JOIN warehouses on warehouses.id = stocks.warehouse_id
@@ -82,14 +82,14 @@
                                     <select name="purchase_id" class="select form-control" required>
                                         <option value="">Select Purchase</option>
                                         <?php
-                                            $purchases_list = $crud->common_query("SELECT purchases.*, suppliers.supplier_name FROM purchases
+                                            $purchases_list = $crud->common_query("SELECT purchases.*, suppliers.name FROM purchases
                                                 JOIN suppliers on suppliers.id = purchases.supplier_id
                                                 WHERE purchases.deleted_at IS NULL ORDER BY purchases.id DESC");
                                             if($purchases_list['status']){
                                                 foreach($purchases_list['data'] as $p){
                                         ?>
                                                 <option value="<?php echo $p->id; ?>">
-                                                    #<?php echo $p->id; ?> - <?php echo htmlspecialchars($p->supplier_name); ?> (<?php echo htmlspecialchars($p->purchase_date); ?>)
+                                                    #<?php echo $p->id; ?> - <?php echo htmlspecialchars($p->name); ?> (<?php echo htmlspecialchars($p->purchase_date); ?>)
                                                 </option>
                                         <?php   }
                                             } else { ?>
@@ -137,7 +137,7 @@
                             <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Supplier</label>
-                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($purchase->supplier_name); ?>" readonly>
+                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($purchase->name); ?>" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6 col-12">

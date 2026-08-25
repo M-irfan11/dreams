@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/header.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/dreams/component/sidebar.php";
+ require_once '../component/header.php';
+ require_once '../component/sidebar.php';
 
 // -----------------------------------------------------------------
 // Fetch stock list joined with product & warehouse names
