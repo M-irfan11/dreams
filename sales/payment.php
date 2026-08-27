@@ -67,7 +67,21 @@
 
     $accountHeads = getSelectableAccountHeads($crud);
 
-    print_r($accountHeads);
+    // ---- Due amount calculation ----
+    // Some older sale rows may not have grand_total populated (NULL),
+    // so fall back to computing it from total_amount, discount and tax.
+    if ($sale->grand_total !== null) {
+        $grand_total = (float) $sale->grand_total;
+    } else {
+        $grand_total = (float) $sale->total_amount - (float) $sale->discount + (float) $sale->tax;
+    }
+
+    $paid = (float) ($sale->paid ?? 0);
+
+    $due = $grand_total - $paid;
+    if ($due < 0) {
+        $due = 0; // already fully paid (or overpaid) — don't show a negative amount
+    }
 ?>
 
 <div class="page-wrapper">
@@ -77,7 +91,7 @@
             <div class="page-title">
                 <h4>Payment</h4>
                 <h6>Process payment for sale #<?php echo $sale->id; ?>, Customer: <?= htmlspecialchars($sale->name) ?> - <?= htmlspecialchars($sale->phone) ?></h6>
-                <h2>Sales amount: ৳ <?php echo number_format($sale->total_amount - $sale->paid, 2); ?></h2>
+                <h2>Sales amount: ৳ <?php echo number_format($due, 2); ?></h2>
             </div>
         </div>
 
@@ -121,4 +135,3 @@
 </div>
 
 <?php require_once '../component/footer.php'; ?>
-

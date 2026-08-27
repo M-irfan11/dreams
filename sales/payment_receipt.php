@@ -34,15 +34,53 @@
     ");
     $details = $detailsResult['data'] ?? [];
 
-    // The "paid via" line is whichever detail row is on the debit side
+    // ---- Due calculation ----
+    $sales_id      = (int) $voucher->source_id;
+    $grand_total   = 0;
+    $totalReceived = 0;
+
+    if ($sales_id) {
+        // sale-এর grand total বের করা
+        $salesResult = $crud->common_query("SELECT total_amount, discount, tax, grand_total FROM sales WHERE id = $sales_id");
+        if ($salesResult['status'] && !empty($salesResult['data'])) {
+            $row = $salesResult['data'][0];
+
+            // Some older sale rows may not have grand_total populated (NULL),
+            // so fall back to computing it from total_amount, discount and tax.
+            if ($row->grand_total !== null) {
+                $grand_total = (float) $row->grand_total;
+            } else {
+                $grand_total = (float) $row->total_amount - (float) $row->discount + (float) $row->tax;
+            }
+        }
+
+        // এই sale_id-এর জন্য যত voucher তৈরি হয়েছে, তার সবগুলোর dr মিলিয়ে
+        // মোট কত টাকা এ পর্যন্ত রিসিভ হয়েছে সেটা বের করা (শুধু এই voucher না)
+        $paidResult = $crud->common_query("
+            SELECT SUM(rvd.dr) as total_paid
+            FROM receive_voucher_details rvd
+            JOIN receive_vouchers rv ON rv.id = rvd.receive_voucher_id
+            WHERE rv.source_type = 'Sales' AND rv.source_id = $sales_id AND rvd.dr > 0
+        ");
+        if ($paidResult['status'] && !empty($paidResult['data']) && $paidResult['data'][0]->total_paid !== null) {
+            $totalReceived = (float) $paidResult['data'][0]->total_paid;
+        }
+    }
+
+    // The "paid via" line (for display only) is whichever detail row on THIS
+    // voucher is on the debit side
     // (see process_payment.php: the customer's chosen payment method is posted as dr)
     $paidVia = null;
-    $totalReceived = 0;
     foreach ($details as $d) {
         if ((float) $d->dr > 0) {
             $paidVia = $d;
-            $totalReceived += (float) $d->dr;
         }
+    }
+
+    // Due calculate করুন
+    $due = $grand_total - $totalReceived;
+    if ($due < 0) {
+        $due = 0; // negative due দেখাতে না চাইলে
     }
 ?>
 
@@ -104,7 +142,14 @@
                                 <td>Payment Method: <?= htmlspecialchars($paidVia->account_name) ?></td>
                                 <td class="text-end">৳<?= number_format((float) $paidVia->dr, 2) ?></td>
                             </tr>
+                           
                             <?php endif; ?>
+                             <tr>
+                                <td>Due</td>
+                                <td class="text-end" style="<?= $due > 0 ? 'color:#dc3545;' : 'color:#28a745;' ?>">
+                                    ৳<?= number_format($due, 2) ?>
+                                 </td>
+                            </tr>
                         </tbody>
                         
                     </table>

@@ -41,7 +41,7 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="<?= $base_url ?>accounts/list.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
+<a href="<?= $base_url ?>accounts/account_heads.php"><i data-feather="book"></i><span> Account Heads</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="<?= $base_url ?>accounts/account_heads.php">Account heads</a></li>
 <li><a href="<?= $base_url ?>accounts/journal/list.php">Journal vouchers </a></li>

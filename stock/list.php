@@ -56,7 +56,7 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
                                 <th>Warehouse</th>
                                 <th>Quantity</th>
                                 <th>Last Updated</th>
-                                <!-- <th class="text-end">Action</th> -->
+                                <th class="text-end">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,15 +68,23 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
                                         <td><?= htmlspecialchars($row->warehouse_name) ?></td>
                                         <td><?= (int)$row->quantity ?></td>
                                         <td><?= htmlspecialchars($row->updated_at) ?></td>
-                                        <!-- <td class="text-end">
-                                            <a href="<?= $base_url ?>stock/edit.php?id=<?= (int)$row->id ?>" class="me-2">
-                                                <i data-feather="edit" class="feather-edit"></i>
+                                         <td class="text-end">
+                                            
+
+                                            <a class="me-3"
+                                                 href="edit.php?id=<?= (int)$row->id ?>&warehouse_id=<?= (int)$row->warehouse_id ?>"
+                                                     title="Edit">
+
+                                                <img src="<?= $base_url ?>assets/img/icons/edit.svg"
+                                                    alt="Edit"
+                                                    style="width:20px; height:30px; object-fit:contain;">
                                             </a>
-                                            <a href="<?= $base_url ?>stock/delete.php?id=<?= (int)$row->id ?>"
-                                               onclick="return confirm('Are you sure you want to delete this stock record?');">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </td> -->
+                                        <a class="me-3 confirm-text" 
+                                            href="delete.php?product_id=<?php echo $row->product_id; ?>&warehouse_id=<?php echo $row->warehouse_id; ?>" 
+                                            onclick="return confirm('Are you sure you want to delete this stock record?');">
+                                            <img src="<?php echo $base_url; ?>assets/img/icons/delete.svg" alt="img" style="width:30px; height:35px;">
+                                        </a>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>

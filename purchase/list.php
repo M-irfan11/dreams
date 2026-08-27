@@ -112,15 +112,14 @@
                                     <td><?php echo htmlspecialchars($pur->paid); ?></td>
                                     <td>
                                         <a class="me-3" href="received.php?id=<?php echo $pur->id; ?>">
-                                            <img src="<?php echo $base_url; ?>assets/img/icons/dollar.svg" alt="img">
+                                            <img src="<?php echo $base_url; ?>assets/img/icons/Voucher-d.png" alt="img" style="width:40px; height:35px; object-fit:contain;">
                                         </a>
                                         <a class="me-3" href="update.php?id=<?php echo $pur->id; ?>">
-                                            <img src="<?php echo $base_url; ?>assets/img/icons/edit.svg" alt="img">
+                                            <img src="<?php echo $base_url; ?>assets/img/icons/edit.svg" alt="img" style="width:20px; height:30px; object-fit:contain;">
                                         </a>
                                         <a class="me-3 confirm-text" href="delete.php?id=<?php echo $pur->id; ?>">
-                                            <img src="<?php echo $base_url; ?>assets/img/icons/delete.svg" alt="img">
+                                            <img src="<?php echo $base_url; ?>assets/img/icons/delete.svg" alt="img" style="width:30px; height:35px;">
                                         </a>
-                                        <a  class="btn btn-sm btn-primary" href="invoice.php?id=<?php echo $pur->id; ?>">Invoice</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

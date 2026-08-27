@@ -134,6 +134,38 @@ class crud_class{
         }
     }
 
+    //new common_insert function that handles null values and empty strings
+//     public function common_insert($table, $data){
+//     $result=[
+//         "status"=>false,
+//         "data"=>[],
+//         "message"=>""
+//     ];
+
+//     $columns = implode(", ", array_keys($data));
+//     $values = [];
+//     foreach($data as $value){
+//         if($value === null || $value === ''){
+//             $values[] = "NULL";
+//         } else {
+//             $values[] = "'" . $this->conn->real_escape_string($value) . "'";
+//         }
+//     }
+//     $values_str = implode(", ", $values);
+
+//     $sql = "INSERT INTO $table ($columns) VALUES ($values_str)";
+//     // echo $sql; // Debugging line to check the generated SQL query
+//     if($this->conn->query($sql)){
+//         $result["status"] = true;
+//         $result["data"] = $this->conn->insert_id;
+//         $result["message"] = "Record inserted successfully";
+//         return $result;
+//     } else {
+//         $result["message"] = "Error: " . $this->conn->error;
+//         return $result;
+//     }
+// }
+
 
     public function common_update($table, $data, $where = [], $where_condition = "AND"){
         $result=[
